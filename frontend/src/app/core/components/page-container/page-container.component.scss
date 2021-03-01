@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.content-wrapper {
+  width: 100%;
+  padding: 0 30px;
+}
+
+// ---
+// primeng style overrides
+// ---
+:host ::ng-deep {
+  .p-button {
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}
