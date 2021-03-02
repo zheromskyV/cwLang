@@ -3,7 +3,6 @@ import { Router, RoutesRecognized, Event as RouterEvent } from '@angular/router'
 import { PrimeIcons } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-
 import { dictionary } from '../../../constants/dictionary';
 import { navigation } from '../../../constants/navigation';
 import { Roles } from '../../../constants/roles.enum';

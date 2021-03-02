@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { routerPaths } from '../../constants/router-paths';
 
 @Injectable({

@@ -1,5 +1,4 @@
 import { PrimeIcons } from 'primeng/api';
-
 import { NavigationLinkModel } from '../models/navigation-link';
 import { dictionary } from './dictionary';
 import { routerPaths } from './router-paths';
