@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select } from '@ngrx/store';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { concatMap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, withLatestFrom } from 'rxjs/operators';
 import { SESSION_EXPIRATION_TIME } from 'src/app/constants/auth';
 import { RootState } from '../root.state';
 import { StoreFeature } from '../store.enum';
@@ -68,9 +68,7 @@ export class AuthEffects {
       }),
       switchMap((userInfo) =>
         _.compact([
-          _.isEmpty(userInfo)
-            ? null
-            : AuthActions.logIn({ email: userInfo.email || '', password: userInfo.password || '' }),
+          _.isEmpty(userInfo) ? null : AuthActions.logIn({ email: userInfo.email!, password: userInfo.password! }),
         ])
       )
     )
