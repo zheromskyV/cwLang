@@ -1,0 +1,28 @@
+<nav class="navigation p-d-flex p-flex-column p-jc-between">
+  <div class="user-nav p-d-flex p-flex-column p-jc-start">
+    <p-button 
+      [label]="dictionary.cwLang"
+      [icon]="icons.logo"
+      styleClass="nav-link logo p-button-text p-button-warning"
+    ></p-button>
+    <p-divider></p-divider>
+
+    <p-button 
+      *ngFor="let link of navigation"
+      [label]="link.name"
+      [icon]="link.icon"
+      (click)="navigateTo(link.url)"
+      styleClass="{{ getStyleClass(link.url) }}"
+    ></p-button>
+  </div>
+
+  <div>
+    <p-divider></p-divider>
+    <p-button 
+      [label]="dictionary.logOut"
+      [icon]="icons.signOut"
+      (click)="logOut()"
+      styleClass="nav-link p-button-text p-button-secondary"
+    ></p-button>
+  </div>
+</nav>
