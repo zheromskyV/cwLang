@@ -1,5 +1,6 @@
 import { AuthState } from './auth/auth.state';
+import { StoreFeature } from './store.enum';
 
 export interface RootState {
-  auth: AuthState;
+  [StoreFeature.Auth]: AuthState;
 }

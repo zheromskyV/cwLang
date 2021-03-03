@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { select } from '@ngrx/store';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
 import { SESSION_EXPIRATION_TIME } from 'src/app/constants/auth';
 import { RootState } from '../root.state';
-import { StoreFeature } from '../store.enum';
 import * as AuthActions from './auth.actions';
+import * as fromAuth from './auth.selector';
 import { UserInfo } from './auth.state';
 import _ from 'lodash';
 
@@ -28,9 +27,9 @@ export class AuthEffects {
   checkSession$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.checkSession),
-      withLatestFrom(this.store$.pipe(select(StoreFeature.Auth))),
-      switchMap(([_, store]) => [
-        AuthActions.setUserLoggedIn({ isUserLoggedIn: this.isSessionValid(store.loginTimestamp) }),
+      withLatestFrom(this.store$.select(fromAuth.getLoginTimestamp)),
+      switchMap(([_, loginTimestamp]) => [
+        AuthActions.setUserLoggedIn({ isUserLoggedIn: this.isSessionValid(loginTimestamp) }),
       ])
     )
   );
