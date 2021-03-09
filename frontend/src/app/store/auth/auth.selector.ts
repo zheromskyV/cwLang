@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector, State } from '@ngrx/store';
+
 import { StoreFeature } from '../store.enum';
 import { AuthState, UserInfo } from './auth.state';
 

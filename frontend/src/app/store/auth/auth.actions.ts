@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { UserInfo } from './auth.state';
 
 export const setUserLoggedIn = createAction('[AUTH] SET_USER_LOGGED_IN', props<{ isUserLoggedIn: boolean }>());

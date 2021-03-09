@@ -1,14 +1,15 @@
+import _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
-import { SESSION_EXPIRATION_TIME } from 'src/app/constants/auth';
+
+import { SESSION_EXPIRATION_TIME } from '../../constants/auth';
 import { RootState } from '../root.state';
+import { UserInfo } from './auth.state';
 import * as AuthActions from './auth.actions';
 import * as fromAuth from './auth.selector';
-import { UserInfo } from './auth.state';
-import _ from 'lodash';
 
 @Injectable()
 export class AuthEffects {
