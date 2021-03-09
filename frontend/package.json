@@ -22,6 +22,8 @@
     "@ngrx/router-store": "^11.0.0",
     "@ngrx/store": "^11.0.0",
     "@ngrx/store-devtools": "^11.0.0",
+    "@types/lodash": "^4.14.168",
+    "lodash": "^4.17.21",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.2.1",
