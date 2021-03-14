@@ -13,7 +13,7 @@ const resolvers = {
 
         return createdUser;
       } catch (e) {
-        console.log(e);
+        console.error(e);
         throw e;
       }
     },

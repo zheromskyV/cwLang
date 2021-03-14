@@ -7,7 +7,6 @@ export default {
     login: async (_: void, { email, password }: { email: string; password: string }): Promise<boolean> => {
       const user = await User.findOne({ email });
 
-      console.log(user);
       if (user) {
         const isCorrectPassword = await compare(password, user.password);
 
