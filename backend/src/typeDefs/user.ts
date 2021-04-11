@@ -7,7 +7,7 @@ type UserType {
   role: String!
   name: String!
   surname: String!
-  birthdate: Date
+  birthday: Date
   nativeLanguage: String
   info: String
   debt: Float
