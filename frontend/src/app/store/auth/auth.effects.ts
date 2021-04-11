@@ -10,10 +10,11 @@ import { RootState } from '../root.state';
 import { UserInfo } from './auth.state';
 import * as AuthActions from './auth.actions';
 import * as fromAuth from './auth.selector';
+import * as UiActions from '../ui/ui.actions';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private readonly actions$: Actions, private readonly store$: Store<RootState>) {}
+  constructor(private readonly actions$: Actions, private readonly store: Store<RootState>) {}
 
   initSession$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -21,6 +22,7 @@ export class AuthEffects {
       switchMap(() => [
         AuthActions.setLoginTimestamp({ loginTimestamp: Date.now() }),
         AuthActions.setUserLoggedIn({ isUserLoggedIn: true }),
+        UiActions.showNavigation(),
       ])
     )
   );
@@ -28,10 +30,8 @@ export class AuthEffects {
   checkSession$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.checkSession),
-      withLatestFrom(this.store$.select(fromAuth.getLoginTimestamp)),
-      switchMap(([_, loginTimestamp]) => [
-        AuthActions.setUserLoggedIn({ isUserLoggedIn: this.isSessionValid(loginTimestamp) }),
-      ])
+      withLatestFrom(this.store.select(fromAuth.getLoginTimestamp)),
+      switchMap(([_, loginTimestamp]) => (this.isSessionValid(loginTimestamp) ? [] : [AuthActions.logOut()]))
     )
   );
 
@@ -55,6 +55,7 @@ export class AuthEffects {
         AuthActions.setUserLoggedIn({ isUserLoggedIn: false }),
         AuthActions.setUserInfo({ userInfo: {} }),
         AuthActions.setLoginTimestamp({ loginTimestamp: 0 }),
+        UiActions.hideNavigation(),
       ])
     )
   );

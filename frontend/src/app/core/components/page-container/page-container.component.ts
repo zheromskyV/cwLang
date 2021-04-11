@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { RootState } from 'src/app/store/root.state';
+import * as fromUi from 'src/app/store/ui/ui.selector';
 
 @Component({
   selector: 'cwl-page-container',
@@ -6,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-container.component.scss'],
 })
 export class PageContainerComponent implements OnInit {
-  constructor() {}
+  isNavigationShown$: Observable<boolean>;
 
-  ngOnInit(): void {}
+  constructor(private readonly store: Store<RootState>) {}
+
+  ngOnInit(): void {
+    this.isNavigationShown$ = this.store.pipe(select(fromUi.getNavigationShown));
+  }
 }
