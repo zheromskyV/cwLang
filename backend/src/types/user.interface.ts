@@ -1,5 +1,7 @@
 import { Document, Types } from 'mongoose';
 
+import { IProfile } from './profile.interface';
+
 export interface IUser extends Document {
   _id: Types.ObjectId;
   email: string;
@@ -7,10 +9,6 @@ export interface IUser extends Document {
   password: string;
   name: string;
   surname: string;
-  birthdate?: Date;
-  nativeLanguage?: string;
-  info?: string;
-  debt?: number;
-  discount?: number;
-  rating?: number;
+  birthday: Date;
+  profile: IProfile;
 }

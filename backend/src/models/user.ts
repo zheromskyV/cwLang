@@ -1,7 +1,6 @@
-import { ObjectID } from 'mongodb';
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-import { IUser } from '../types/user.interface';
+import { IUser } from '../types';
 
 export const UserSchema = new Schema(
   {
@@ -10,16 +9,15 @@ export const UserSchema = new Schema(
     role: { type: String, required: true },
     name: { type: String, required: true },
     surname: { type: String, required: true },
-    birthdate: Date,
-    nativeLanguage: String,
-    info: String,
-    debt: Number,
-    discount: Number,
-    rating: Number,
+    birthday: Date,
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile',
+    },
   },
   {
     versionKey: false,
-  }
+  },
 );
 
 export const User = model<IUser>('User', UserSchema);
