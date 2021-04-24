@@ -4,11 +4,11 @@ import { User } from 'src/app/models/user';
 export interface AuthState {
   isUserLoggedIn: boolean;
   loginTimestamp: number;
-  user: User;
+  user: User | null;
 }
 
 export const initialAuthState: AuthState = {
   isUserLoggedIn: false,
-  user: DEFAULT_USER,
+  user: null,
   loginTimestamp: 0,
 };

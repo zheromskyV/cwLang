@@ -16,6 +16,6 @@ export interface User {
   role: Roles;
   name: string;
   surname: string;
-  birthday: Date;
+  birthday: number;
   profile?: UserProfile;
 }

@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user';
 
 export const setUserLoggedIn = createAction('[AUTH] SET_USER_LOGGED_IN', props<{ isUserLoggedIn: boolean }>());
 
-export const setUser = createAction('[AUTH] SET_USER', props<{ user: User }>());
+export const setUser = createAction('[AUTH] SET_USER', props<{ user: User | null }>());
 
 export const setLoginTimestamp = createAction('[AUTH] SET_LOGIN_TIMESTAMP', props<{ loginTimestamp: number }>());
 

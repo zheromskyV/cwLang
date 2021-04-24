@@ -10,10 +10,15 @@ import { RootState } from '../root.state';
 import * as AuthActions from './auth.actions';
 import * as fromAuth from './auth.selector';
 import * as UiActions from '../ui/ui.actions';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private readonly actions$: Actions, private readonly store: Store<RootState>) {}
+  constructor(
+    private readonly actions$: Actions,
+    private readonly store: Store<RootState>,
+    private readonly authService: AuthService
+  ) {}
 
   initSession$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -37,10 +42,7 @@ export class AuthEffects {
   logIn$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logIn),
-      switchMap((action) => {
-        // AuthService returns user data if success and {} if not
-        return of(DEFAULT_USER);
-      }),
+      switchMap(({ email, password }) => this.authService.login(email, password)),
       switchMap((user) =>
         _.compact([AuthActions.setUser({ user }), _.isEmpty(user) ? null : AuthActions.initSession()])
       )
@@ -57,12 +59,9 @@ export class AuthEffects {
   signUp$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.signUp),
-      switchMap((action) => {
-        // AuthService returns user data if success and {} if not
-        return of(DEFAULT_USER);
-      }),
+      switchMap(({ user }) => this.authService.signUp(user)),
       switchMap((user) =>
-        _.compact([_.isEmpty(user) ? null : AuthActions.logIn({ email: user.email, password: user.password })])
+        _.compact([_.isEmpty(user) ? null : AuthActions.logIn({ email: user!.email, password: user!.password })])
       )
     )
   );

@@ -22,26 +22,26 @@
       />
     </div>
 
-    <div class="field p-grid p-formgrid">
+    <div class="field dropdowns p-grid p-formgrid">
       <p-dropdown 
-        class="p-col-12 p-md-4" 
+        class="role p-col-12 p-md-4" 
         [options]="roles" 
         optionLabel="label" 
         [placeholder]="dictionary.role"
       ></p-dropdown>
 
-      <p-calendar
-        class="p-col-12 p-md-4" 
-        dateFormat="dd-mm-yy"
-        [placeholder]="dictionary.birthday"
-      ></p-calendar>
-
       <p-dropdown 
-        class="p-col-12 p-md-4" 
+        class="nativeLang p-col-12 p-md-4" 
         [options]="languages" 
         optionLabel="label" 
         [placeholder]="dictionary.nativeLang"
       ></p-dropdown>
+
+      <p-calendar
+        class="birthday p-col-12 p-md-4" 
+        dateFormat="dd-mm-yy"
+        [placeholder]="dictionary.birthday"
+      ></p-calendar>
     </div>
 
     <div class="field p-inputgroup">

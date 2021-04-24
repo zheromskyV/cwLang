@@ -41,7 +41,7 @@ export const DEFAULT_USER: User = {
   password: '',
   name: '',
   surname: '',
-  birthday: new Date(),
+  birthday: 0,
   role: Roles.Undefined,
   profile: {
     nativeLang: Languages.UN,
