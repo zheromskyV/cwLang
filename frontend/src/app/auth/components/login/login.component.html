@@ -1,1 +1,41 @@
-<p>login works!</p>
+<form class="form p-d-flex p-flex-column p-jc-start">
+  <div class="field p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i [class]="icons.login"></i>
+    </span>
+    <input
+      pInputText
+      type="text"
+      id="login"
+      [placeholder]="dictionary.login"
+    />
+  </div>
+
+  <div class="field p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i [class]="icons.password"></i>
+    </span>
+    <input
+      pPassword
+      type="password"
+      id="password" 
+      [placeholder]="dictionary.password"
+    />
+  </div>
+
+  <div class="buttons-container p-d-flex p-jc-between">
+    <p-button 
+      [label]="dictionary.signIn"
+      [icon]="icons.signIn"
+      (click)="signIn()"
+      styleClass="button p-button-success"
+    ></p-button>
+
+    <p-button 
+      [label]="dictionary.signUp"
+      [icon]="icons.signUp"
+      (click)="signUp()"
+      styleClass="button p-button-info"
+    ></p-button>
+  </div>
+</form>

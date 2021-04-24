@@ -18,6 +18,14 @@ export class NavigationService {
   }
 
   navigateToLoginPage(): void {
-    this.navigateTo(routerPaths.login);
+    this.navigateTo(this.getAuthPage(routerPaths.login));
+  }
+
+  navigateToSignUpPage(): void {
+    this.navigateTo(this.getAuthPage(routerPaths.registration));
+  }
+
+  private getAuthPage(subPage: string): string {
+    return `${routerPaths.auth}/${subPage}`;
   }
 }

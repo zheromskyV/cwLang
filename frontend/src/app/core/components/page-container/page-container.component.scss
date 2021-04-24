@@ -9,7 +9,7 @@
 
 .content-wrapper {
   width: 100%;
-  padding: 0 30px;
+  padding: 2rem;
 }
 
 // ---
@@ -20,5 +20,12 @@
     &:focus {
       box-shadow: none !important;
     }
+  }
+
+  input {
+    border: 1px solid #ced4da;
+    outline: none;
+    padding: 0.4rem;
+    width: 100%;
   }
 }

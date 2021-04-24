@@ -1,5 +1,21 @@
 @import '~src/styles/style-import';
 
 :host {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 50rem;
+  height: 30rem;
+  padding: 2rem;
+  margin-top: 2rem;
+
+  @extend %std-tile;
+}
+
+.header {
+  text-align: center;
+  color: $text-color;
 }

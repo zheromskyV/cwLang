@@ -19,10 +19,11 @@ export const dictionary: CommonModel = {
   logOut: 'Выйти',
 
   // auth
-  logIn: 'Войти',
-  register: 'Зарегистрироваться',
-  email: 'Почта',
+  auth: 'Авторизация',
+  login: 'Логин (почта)',
   password: 'Пароль',
+  signIn: 'Войти',
+  signUp: 'Зарегистрироваться',
 
   // registration
   name: 'Имя',

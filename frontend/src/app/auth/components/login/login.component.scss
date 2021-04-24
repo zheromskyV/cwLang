@@ -3,3 +3,29 @@
 :host {
   display: block;
 }
+
+.form {
+  margin: 2rem 5rem;
+}
+
+.field {
+  margin: 1rem 0;
+
+  input {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.buttons-container {
+  margin: 1.5rem 0;
+  padding: 0 3rem;
+}
+
+:host ::ng-deep {
+  .p-button {
+    &.button {
+      width: 14rem;
+    }
+  }
+}

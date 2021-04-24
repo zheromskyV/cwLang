@@ -60,9 +60,9 @@ export class AuthEffects {
     )
   );
 
-  register$: Observable<Action> = createEffect(() =>
+  signUp$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.register),
+      ofType(AuthActions.signUp),
       switchMap((action) => {
         // AuthService returns user data if success and {} if not
         return of({} as UserInfo);

@@ -16,4 +16,4 @@ export const logIn = createAction('[AUTH] LOG_IN', props<{ email: string; passwo
 
 export const logOut = createAction('[AUTH] LOG_OUT');
 
-export const register = createAction('[AUTH] REGISTER', props<{ userInfo: UserInfo }>());
+export const signUp = createAction('[AUTH] SIGN_UP', props<{ userInfo: UserInfo }>());
