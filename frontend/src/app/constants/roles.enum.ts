@@ -1,5 +1,6 @@
 export enum Roles {
-  Admin = 'администратор',
-  Student = 'студент',
-  Teacher = 'преподаватель',
+  Undefined = '-',
+  Admin = 'admin',
+  Student = 'student',
+  Teacher = 'teacher',
 }

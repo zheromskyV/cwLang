@@ -10,7 +10,7 @@ export class NavigationService {
   constructor(private readonly router: Router) {}
 
   navigateTo(route: string): void {
-    this.router.navigate([route]);
+    this.router.navigate([route], { replaceUrl: true });
   }
 
   navigateToHomePage(): void {

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   icons = {
     login: PrimeIcons.USER,
     password: PrimeIcons.EYE_SLASH,
-    signIn: PrimeIcons.UNLOCK,
+    signIn: PrimeIcons.SIGN_IN,
     signUp: PrimeIcons.PLUS,
   };
 

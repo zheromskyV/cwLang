@@ -1,1 +1,101 @@
-<p>registration works!</p>
+<form class="form p-d-flex p-flex-column p-jc-start">
+  <div class="info-section">
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.email"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.login"
+      />
+    </div>
+  
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.password"></i>
+      </span>
+      <input
+        pPassword
+        type="password"
+        [placeholder]="dictionary.password"
+      />
+    </div>
+
+    <div class="field p-grid p-formgrid">
+      <p-dropdown 
+        class="p-col-12 p-md-4" 
+        [options]="roles" 
+        optionLabel="label" 
+        [placeholder]="dictionary.role"
+      ></p-dropdown>
+
+      <p-calendar
+        class="p-col-12 p-md-4" 
+        dateFormat="dd-mm-yy"
+        [placeholder]="dictionary.birthday"
+      ></p-calendar>
+
+      <p-dropdown 
+        class="p-col-12 p-md-4" 
+        [options]="languages" 
+        optionLabel="label" 
+        [placeholder]="dictionary.nativeLang"
+      ></p-dropdown>
+    </div>
+
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.name"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.name"
+      />
+    </div>
+
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.surname"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.surname"
+      />
+    </div>
+
+    <div class="field about-field">
+      <p>{{ dictionary.about }}</p>
+      <textarea pInputTextarea id="" cols="60" rows="5"></textarea>
+    </div>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="lang-section p-grid p-formgrid p-text-center" *ngIf="user.profile">
+    <div *ngFor="let lang of user.profile.languages" class="lang p-field p-col-12 p-md-4">
+      <span>{{ dictionary[lang.name] }}</span>
+      <p-knob [min]="0" [max]="100"></p-knob>
+    </div>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="buttons-container p-d-flex p-jc-end">
+    <p-button 
+      [label]="dictionary.signUp"
+      [icon]="icons.signUp"
+      (click)="submit()"
+      styleClass="button p-button-success"
+    ></p-button>
+
+    <p-button 
+      [label]="dictionary.back"
+      [icon]="icons.back"
+      (click)="back()"
+      styleClass="button p-button-secondary"
+    ></p-button>
+  </div>
+</form>

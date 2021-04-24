@@ -16,7 +16,9 @@
 // primeng style overrides
 // ---
 :host ::ng-deep {
-  .p-button {
+  .p-button,
+  .p-dropdown,
+  .p-inputtextarea {
     &:focus {
       box-shadow: none !important;
     }

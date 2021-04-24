@@ -26,6 +26,8 @@ export const dictionary: CommonModel = {
   signUp: 'Зарегистрироваться',
 
   // registration
+  registration: 'Регистрация',
+  back: 'Назад',
   name: 'Имя',
   surname: 'Фамилия',
   role: 'Роль',
@@ -42,7 +44,7 @@ export const dictionary: CommonModel = {
   ch: 'Китайский',
   sw: 'Шведский',
   it: 'Итальянский',
-  age: 'Возраст',
+  birthday: 'Дата рождения',
   nativeLang: 'Родной язык',
   about: 'О себе',
 

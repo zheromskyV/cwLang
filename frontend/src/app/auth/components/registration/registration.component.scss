@@ -3,3 +3,50 @@
 :host {
   display: block;
 }
+
+.form {
+  margin: 2rem 4rem;
+}
+
+.field {
+  margin: 1rem 0;
+
+  input {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.about-field {
+  p {
+    margin: 0 0 0.5rem;
+  }
+
+  textarea {
+    resize: none;
+  }
+}
+
+.lang-section {
+  margin: 1rem 0;
+}
+
+.buttons-container {
+  margin: 1.5rem 0;
+
+  p-button {
+    margin: 0 1rem;
+  }
+}
+
+:host ::ng-deep {
+  .p-button {
+    &.button {
+      width: 14rem;
+    }
+  }
+
+  .p-dropdown {
+    margin: 0 -0.5rem;
+  }
+}

@@ -1,22 +1,14 @@
-import { Roles } from 'src/app/constants/roles.enum';
+import { DEFAULT_USER } from 'src/app/constants/auth';
+import { User } from 'src/app/models/user';
 
 export interface AuthState {
   isUserLoggedIn: boolean;
-  userInfo: UserInfo;
   loginTimestamp: number;
-}
-
-// TODO: replace with real user data model
-export interface UserInfo {
-  role?: Roles;
-  email?: string;
-  password?: string;
-  name?: string;
-  surname?: string;
+  user: User;
 }
 
 export const initialAuthState: AuthState = {
   isUserLoggedIn: false,
-  userInfo: {},
+  user: DEFAULT_USER,
   loginTimestamp: 0,
 };
