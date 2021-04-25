@@ -2,8 +2,8 @@ import _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { SESSION_EXPIRATION_TIME } from '../../constants/auth';
 import { RootState } from '../root.state';
@@ -11,13 +11,15 @@ import * as AuthActions from './auth.actions';
 import * as fromAuth from './auth.selector';
 import * as UiActions from '../ui/ui.actions';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { NavigationService } from 'src/app/core/services/navigation.service';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly store: Store<RootState>,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly navigationService: NavigationService
   ) {}
 
   initSession$: Observable<Action> = createEffect(() =>
@@ -52,7 +54,13 @@ export class AuthEffects {
   logOut$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logOut),
-      switchMap(() => [UiActions.hideNavigation()])
+      switchMap(() => [
+        UiActions.hideNavigation(),
+        AuthActions.setUserLoggedIn({ isUserLoggedIn: false }),
+        AuthActions.setUserInfo({ userInfo: null }),
+        AuthActions.setLoginTimestamp({ loginTimestamp: 0 }),
+      ]),
+      tap(() => this.navigationService.navigateToLoginPage())
     )
   );
 
@@ -69,6 +77,6 @@ export class AuthEffects {
   );
 
   private isSessionValid(loginTimestamp: number): boolean {
-    return loginTimestamp + SESSION_EXPIRATION_TIME < Date.now();
+    return loginTimestamp + SESSION_EXPIRATION_TIME > Date.now();
   }
 }

@@ -79,7 +79,7 @@ export class RegistrationComponent implements OnInit {
       [this.formFields.birthday]: [null, [Validators.required, this.birthdayValidator]],
       [this.formFields.name]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
       [this.formFields.surname]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.about]: ['', [Validators.required, Validators.minLength(MIN_ABOUT_LENGTH)]],
+      [this.formFields.about]: ['', [Validators.minLength(MIN_ABOUT_LENGTH)]],
       [this.formFields.langs[Languages.Be]]: [0, []],
       [this.formFields.langs[Languages.Ch]]: [0, []],
       [this.formFields.langs[Languages.En]]: [0, []],
@@ -143,6 +143,7 @@ export class RegistrationComponent implements OnInit {
     }
 
     const user: User = {
+      _id: '',
       email: this.getFieldValue(this.formFields.login),
       password: this.getFieldValue(this.formFields.password),
       role: this.getFieldValue(this.formFields.role).value as Roles,
