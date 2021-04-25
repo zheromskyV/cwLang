@@ -12,6 +12,10 @@ const User = `{
     debt
     info
     rating
+    languages {
+      name
+      value
+    }
   }
 }`;
 
