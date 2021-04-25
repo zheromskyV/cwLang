@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { routerPaths } from './constants/router-paths';
-import { UtilsService } from './utils/utils.service';
 
 const routes: Routes = [
-  UtilsService.defaultRedirect(routerPaths.auth),
+  {
+    path: routerPaths.home,
+    loadChildren: () => import('./profile/profile.module').then(({ ProfileModule }) => ProfileModule),
+  },
   {
     path: routerPaths.auth,
     loadChildren: () => import('./auth/auth.module').then(({ AuthModule }) => AuthModule),
