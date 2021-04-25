@@ -1,0 +1,11 @@
+<div class="container p-d-flex p-flex-column p-ai-center">
+  <img class="not-found-img" src="assets/ghost.svg" alt="ghost">
+
+  <h2 class="header">{{ dictionary.pageNotFound }}</h2>
+
+  <p-button 
+    [label]="dictionary.goToHome"
+    (click)="goToHomePage()"
+    styleClass="button"
+  ></p-button>
+</div>
