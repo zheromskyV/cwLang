@@ -6,7 +6,7 @@
     <input
       pInputText
       type="text"
-      autocomplete="false"
+      autocomplete="off"
       class="p-inputtext"
       [placeholder]="dictionary.login"
       [id]="formFields.login"
@@ -21,7 +21,7 @@
     <input
       pPassword
       type="password"
-      autocomplete="false"
+      autocomplete="off"
       [placeholder]="dictionary.password"
       [id]="formFields.password"
       [formControlName]="formFields.password"
@@ -32,8 +32,8 @@
     <p-button 
       [label]="dictionary.signIn"
       [icon]="icons.signIn"
-      (click)="signIn()"
       [disabled]="!isFormValid"
+      (click)="signIn()"
       styleClass="button p-button-success"
     ></p-button>
 

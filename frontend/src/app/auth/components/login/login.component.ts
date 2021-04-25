@@ -46,13 +46,19 @@ export class LoginComponent implements OnInit {
     return this.formGroup.valid;
   }
 
-  signIn(): void {
-    const email = this.formGroup.controls[this.formFields.login].value;
-    const password = this.formGroup.controls[this.formFields.password].value;
+  getFieldValue(field: string): any {
+    return this.formGroup.controls[field].value;
+  }
 
-    if (this.isFormValid) {
-      this.store.dispatch(AuthActions.logIn({ email, password }));
+  signIn(): void {
+    if (!this.isFormValid) {
+      return;
     }
+
+    const email = this.getFieldValue(this.formFields.login);
+    const password = this.getFieldValue(this.formFields.password);
+
+    this.store.dispatch(AuthActions.logIn({ email, password }));
   }
 
   signUp(): void {

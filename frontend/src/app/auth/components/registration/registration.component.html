@@ -1,4 +1,4 @@
-<form class="form p-d-flex p-flex-column p-jc-start">
+<form class="form p-d-flex p-flex-column p-jc-start" [formGroup]="formGroup" novalidate>
   <div class="info-section">
     <div class="field p-inputgroup">
       <span class="p-inputgroup-addon">
@@ -8,6 +8,10 @@
         pInputText
         type="text"
         [placeholder]="dictionary.login"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.login"
+        [formControlName]="formFields.login"
       />
     </div>
   
@@ -18,7 +22,10 @@
       <input
         pPassword
         type="password"
+        autocomplete="off"
         [placeholder]="dictionary.password"
+        [id]="formFields.password"
+        [formControlName]="formFields.password"
       />
     </div>
 
@@ -28,6 +35,8 @@
         [options]="roles" 
         optionLabel="label" 
         [placeholder]="dictionary.role"
+        [id]="formFields.role"
+        [formControlName]="formFields.role"
       ></p-dropdown>
 
       <p-dropdown 
@@ -35,12 +44,16 @@
         [options]="languages" 
         optionLabel="label" 
         [placeholder]="dictionary.nativeLang"
+        [id]="formFields.nativeLang"
+        [formControlName]="formFields.nativeLang"
       ></p-dropdown>
 
       <p-calendar
         class="birthday p-col-12 p-md-4" 
         dateFormat="dd-mm-yy"
         [placeholder]="dictionary.birthday"
+        [id]="formFields.birthday"
+        [formControlName]="formFields.birthday"
       ></p-calendar>
     </div>
 
@@ -52,6 +65,10 @@
         pInputText
         type="text"
         [placeholder]="dictionary.name"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.name"
+        [formControlName]="formFields.name"
       />
     </div>
 
@@ -63,30 +80,46 @@
         pInputText
         type="text"
         [placeholder]="dictionary.surname"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.surname"
+        [formControlName]="formFields.surname"
       />
     </div>
 
-    <div class="field about-field">
+    <div class="field about-field" *ngIf="isAboutSectionShown">
       <p>{{ dictionary.about }}</p>
-      <textarea pInputTextarea id="" cols="60" rows="5"></textarea>
+      <textarea 
+        pInputTextarea         
+        [id]="formFields.about"
+        [formControlName]="formFields.about"
+        rows="5"
+      ></textarea>
     </div>
   </div>
 
-  <p-divider></p-divider>
-
-  <div class="lang-section p-grid p-formgrid p-text-center" *ngIf="user.profile">
-    <div *ngFor="let lang of user.profile.languages" class="lang p-field p-col-12 p-md-4">
-      <span>{{ dictionary[lang.name] }}</span>
-      <p-knob [min]="0" [max]="100"></p-knob>
+  <ng-container *ngIf="isLanguageSectionShown">
+    <p-divider></p-divider>
+    <div class="lang-section p-grid p-formgrid p-text-center">
+      <div *ngFor="let lang of languages" class="lang p-field p-col-12 p-md-4">
+        <span>{{ lang.label }}</span>
+        <p-knob
+        [id]="formFields.langs[lang.value]"
+        [formControlName]="formFields.langs[lang.value]"
+        [min]="0"
+        [max]="100"
+        [step]="1"
+        ></p-knob>
+      </div>
     </div>
-  </div>
-
-  <p-divider></p-divider>
+    <p-divider></p-divider>
+  </ng-container>
 
   <div class="buttons-container p-d-flex p-jc-end">
     <p-button 
       [label]="dictionary.signUp"
       [icon]="icons.signUp"
+      [disabled]="!isFormValid"
       (click)="submit()"
       styleClass="button p-button-success"
     ></p-button>

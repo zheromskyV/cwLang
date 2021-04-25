@@ -1,5 +1,3 @@
-import { Language } from '../models/language';
-import { User } from '../models/user';
 import { dictionary } from './dictionary';
 import { Languages } from './languages.enum';
 import { Roles } from './roles.enum';
@@ -7,18 +5,8 @@ import { Roles } from './roles.enum';
 export const SESSION_EXPIRATION_TIME = 3600; // 1 hour
 
 export const MIN_PASSWORD_LENGTH = 8;
-
-export const DEFAULT_LANGUAGES: Language[] = [
-  { name: Languages.Be, value: 0 },
-  { name: Languages.Ch, value: 0 },
-  { name: Languages.En, value: 0 },
-  { name: Languages.Fr, value: 0 },
-  { name: Languages.Ge, value: 0 },
-  { name: Languages.It, value: 0 },
-  { name: Languages.Ru, value: 0 },
-  { name: Languages.Sp, value: 0 },
-  { name: Languages.Sw, value: 0 },
-];
+export const MIN_NAME_LENGTH = 2;
+export const MIN_ABOUT_LENGTH = 10;
 
 export const ROLE_OPTIONS = [
   { value: Roles.Admin, label: dictionary[Roles.Admin] },
@@ -37,16 +25,3 @@ export const LANGUAGE_OPTIONS = [
   { value: Languages.Sp, label: dictionary[Languages.Sp] },
   { value: Languages.Sw, label: dictionary[Languages.Sw] },
 ];
-
-export const DEFAULT_USER: User = {
-  email: '',
-  password: '',
-  name: '',
-  surname: '',
-  birthday: 0,
-  role: Roles.Undefined,
-  profile: {
-    nativeLang: Languages.UN,
-    languages: DEFAULT_LANGUAGES,
-  },
-};
