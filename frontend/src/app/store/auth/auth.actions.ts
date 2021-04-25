@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User } from 'src/app/models/user';
+import { User, UserInfo } from 'src/app/models/user';
 
 export const setUserLoggedIn = createAction('[AUTH] SET_USER_LOGGED_IN', props<{ isUserLoggedIn: boolean }>());
 
-export const setUser = createAction('[AUTH] SET_USER', props<{ user: User | null }>());
+export const setUserInfo = createAction('[AUTH] SET_USER_INFO', props<{ userInfo: UserInfo }>());
 
 export const setLoginTimestamp = createAction('[AUTH] SET_LOGIN_TIMESTAMP', props<{ loginTimestamp: number }>());
 

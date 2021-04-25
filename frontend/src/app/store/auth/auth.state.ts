@@ -1,14 +1,13 @@
-import { DEFAULT_USER } from 'src/app/constants/auth';
-import { User } from 'src/app/models/user';
+import { UserInfo } from 'src/app/models/user';
 
 export interface AuthState {
   isUserLoggedIn: boolean;
   loginTimestamp: number;
-  user: User | null;
+  userInfo: UserInfo;
 }
 
 export const initialAuthState: AuthState = {
   isUserLoggedIn: false,
-  user: null,
+  userInfo: null,
   loginTimestamp: 0,
 };

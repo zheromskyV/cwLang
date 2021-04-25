@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { PrimeIcons } from 'primeng/api';
 
+import { MIN_PASSWORD_LENGTH } from 'src/app/constants/auth';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 import { RootState } from 'src/app/store/root.state';
 import { dictionary } from '../../../constants/dictionary';
@@ -20,21 +22,37 @@ export class LoginComponent implements OnInit {
     signIn: PrimeIcons.SIGN_IN,
     signUp: PrimeIcons.PLUS,
   };
+  formFields = {
+    login: 'login',
+    password: 'password',
+  };
 
-  login = '';
-  password = '';
+  formGroup: FormGroup;
 
-  constructor(private readonly store: Store<RootState>, private readonly navigationService: NavigationService) {}
+  constructor(
+    private readonly store: Store<RootState>,
+    private readonly formBuilder: FormBuilder,
+    private readonly navigationService: NavigationService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      [this.formFields.login]: ['', [Validators.required, Validators.email]],
+      [this.formFields.password]: ['', [Validators.required, Validators.minLength(MIN_PASSWORD_LENGTH)]],
+    });
+  }
+
+  get isFormValid(): boolean {
+    return this.formGroup.valid;
+  }
 
   signIn(): void {
-    this.store.dispatch(
-      AuthActions.logIn({
-        email: this.login,
-        password: this.password,
-      })
-    );
+    const email = this.formGroup.controls[this.formFields.login].value;
+    const password = this.formGroup.controls[this.formFields.password].value;
+
+    if (this.isFormValid) {
+      this.store.dispatch(AuthActions.logIn({ email, password }));
+    }
   }
 
   signUp(): void {

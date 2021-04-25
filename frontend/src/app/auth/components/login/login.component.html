@@ -1,4 +1,4 @@
-<form class="form p-d-flex p-flex-column p-jc-start">
+<form class="form p-d-flex p-flex-column p-jc-start" [formGroup]="formGroup" novalidate>
   <div class="field p-inputgroup">
     <span class="p-inputgroup-addon">
       <i [class]="icons.login"></i>
@@ -6,9 +6,11 @@
     <input
       pInputText
       type="text"
-      name="login"
+      autocomplete="false"
+      class="p-inputtext"
       [placeholder]="dictionary.login"
-      [(ngModel)]="login"
+      [id]="formFields.login"
+      [formControlName]="formFields.login"
     />
   </div>
 
@@ -19,9 +21,10 @@
     <input
       pPassword
       type="password"
-      name="password"
+      autocomplete="false"
       [placeholder]="dictionary.password"
-      [(ngModel)]="password"
+      [id]="formFields.password"
+      [formControlName]="formFields.password"
     />
   </div>
 
@@ -30,6 +33,7 @@
       [label]="dictionary.signIn"
       [icon]="icons.signIn"
       (click)="signIn()"
+      [disabled]="!isFormValid"
       styleClass="button p-button-success"
     ></p-button>
 

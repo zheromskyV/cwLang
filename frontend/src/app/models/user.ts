@@ -19,3 +19,5 @@ export interface User {
   birthday: number;
   profile?: UserProfile;
 }
+
+export type UserInfo = User | null | undefined;

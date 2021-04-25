@@ -5,7 +5,7 @@ import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
 
-import { DEFAULT_USER, SESSION_EXPIRATION_TIME } from '../../constants/auth';
+import { SESSION_EXPIRATION_TIME } from '../../constants/auth';
 import { RootState } from '../root.state';
 import * as AuthActions from './auth.actions';
 import * as fromAuth from './auth.selector';
@@ -43,8 +43,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.logIn),
       switchMap(({ email, password }) => this.authService.login(email, password)),
-      switchMap((user) =>
-        _.compact([AuthActions.setUser({ user }), _.isEmpty(user) ? null : AuthActions.initSession()])
+      switchMap((userInfo) =>
+        _.compact([AuthActions.setUserInfo({ userInfo }), _.isEmpty(userInfo) ? null : AuthActions.initSession()])
       )
     )
   );
@@ -60,8 +60,10 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signUp),
       switchMap(({ user }) => this.authService.signUp(user)),
-      switchMap((user) =>
-        _.compact([_.isEmpty(user) ? null : AuthActions.logIn({ email: user!.email, password: user!.password })])
+      switchMap((userInfo) =>
+        _.compact([
+          _.isEmpty(userInfo) ? null : AuthActions.logIn({ email: userInfo!.email, password: userInfo!.password }),
+        ])
       )
     )
   );

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
@@ -22,6 +22,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthRoutingModule,
     PasswordModule,
     ButtonModule,

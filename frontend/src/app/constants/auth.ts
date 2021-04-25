@@ -6,6 +6,8 @@ import { Roles } from './roles.enum';
 
 export const SESSION_EXPIRATION_TIME = 3600; // 1 hour
 
+export const MIN_PASSWORD_LENGTH = 8;
+
 export const DEFAULT_LANGUAGES: Language[] = [
   { name: Languages.Be, value: 0 },
   { name: Languages.Ch, value: 0 },
