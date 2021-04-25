@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { routerPaths } from './constants/router-paths';
+import { UtilsService } from './utils/utils.service';
+
+const routes: Routes = [
+  UtilsService.defaultRedirect(routerPaths.auth),
+  {
+    path: routerPaths.auth,
+    loadChildren: () => import('./auth/auth.module').then(({ AuthModule }) => AuthModule),
+  },
+];
 
 @NgModule({
   imports: [

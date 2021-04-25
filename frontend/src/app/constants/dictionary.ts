@@ -19,12 +19,15 @@ export const dictionary: CommonModel = {
   logOut: 'Выйти',
 
   // auth
-  logIn: 'Войти',
-  register: 'Зарегистрироваться',
-  email: 'Почта',
+  auth: 'Авторизация',
+  login: 'Логин (почта)',
   password: 'Пароль',
+  signIn: 'Войти',
+  signUp: 'Зарегистрироваться',
 
   // registration
+  registration: 'Регистрация',
+  back: 'Назад',
   name: 'Имя',
   surname: 'Фамилия',
   role: 'Роль',
@@ -41,7 +44,7 @@ export const dictionary: CommonModel = {
   ch: 'Китайский',
   sw: 'Шведский',
   it: 'Итальянский',
-  age: 'Возраст',
+  birthday: 'Дата рождения',
   nativeLang: 'Родной язык',
   about: 'О себе',
 

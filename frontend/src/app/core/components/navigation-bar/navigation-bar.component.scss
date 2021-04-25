@@ -5,13 +5,12 @@
 }
 
 .navigation {
-  background-color: $background-color;
   min-height: 100%;
   height: 100vh;
   width: 16rem;
   padding: 0.5rem 0;
 
-  @extend %std-shadow;
+  @extend %std-tile;
 }
 
 :host ::ng-deep {

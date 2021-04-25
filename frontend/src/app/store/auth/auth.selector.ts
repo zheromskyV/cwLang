@@ -1,7 +1,8 @@
-import { createFeatureSelector, createSelector, State } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { UserInfo } from 'src/app/models/user';
 import { StoreFeature } from '../store.enum';
-import { AuthState, UserInfo } from './auth.state';
+import { AuthState } from './auth.state';
 
 const rootSelector = createFeatureSelector<AuthState>(StoreFeature.Auth);
 

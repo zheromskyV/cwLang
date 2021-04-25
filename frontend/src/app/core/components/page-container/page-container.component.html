@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <main class="p-d-flex p-flex-row">
-    <aside>
+    <aside *ngIf="isNavigationShown$ | async">
       <cwl-navigation-bar></cwl-navigation-bar>
     </aside>
     

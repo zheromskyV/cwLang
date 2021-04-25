@@ -9,16 +9,40 @@
 
 .content-wrapper {
   width: 100%;
-  padding: 0 30px;
+  padding: 2rem;
 }
 
 // ---
 // primeng style overrides
 // ---
 :host ::ng-deep {
-  .p-button {
-    &:focus {
+  input,
+  .p-button,
+  .p-dropdown,
+  .p-calendar,
+  .p-inputtextarea {
+    &:focus,
+    &:active {
       box-shadow: none !important;
     }
+  }
+
+  .p-focus {
+    box-shadow: none !important;
+  }
+
+  input {
+    border: 1px solid #ced4da;
+    outline: none;
+    padding: 0.4rem;
+    width: 100%;
+
+    &:focus {
+      border: 1px solid #2196f3;
+    }
+  }
+
+  .p-md-4 {
+    padding: 0;
   }
 }

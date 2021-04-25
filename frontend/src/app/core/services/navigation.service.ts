@@ -10,7 +10,7 @@ export class NavigationService {
   constructor(private readonly router: Router) {}
 
   navigateTo(route: string): void {
-    this.router.navigate([route]);
+    this.router.navigate([route], { replaceUrl: true });
   }
 
   navigateToHomePage(): void {
@@ -18,6 +18,14 @@ export class NavigationService {
   }
 
   navigateToLoginPage(): void {
-    this.navigateTo(routerPaths.login);
+    this.navigateTo(this.getAuthPage(routerPaths.login));
+  }
+
+  navigateToSignUpPage(): void {
+    this.navigateTo(this.getAuthPage(routerPaths.registration));
+  }
+
+  private getAuthPage(subPage: string): string {
+    return `${routerPaths.auth}/${subPage}`;
   }
 }

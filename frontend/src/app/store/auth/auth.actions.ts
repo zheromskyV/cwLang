@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { UserInfo } from './auth.state';
+import { User, UserInfo } from 'src/app/models/user';
 
 export const setUserLoggedIn = createAction('[AUTH] SET_USER_LOGGED_IN', props<{ isUserLoggedIn: boolean }>());
 
@@ -16,4 +16,4 @@ export const logIn = createAction('[AUTH] LOG_IN', props<{ email: string; passwo
 
 export const logOut = createAction('[AUTH] LOG_OUT');
 
-export const register = createAction('[AUTH] REGISTER', props<{ userInfo: UserInfo }>());
+export const signUp = createAction('[AUTH] SIGN_UP', props<{ user: User }>());
