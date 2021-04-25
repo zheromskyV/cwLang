@@ -12,4 +12,4 @@ const LanguageSchema = new Schema(
   },
 );
 
-export const Language = model<ILanguage>('Mark', LanguageSchema);
+export const Language = model<ILanguage>('Language', LanguageSchema);
