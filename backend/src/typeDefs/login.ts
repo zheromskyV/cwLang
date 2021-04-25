@@ -1,5 +1,5 @@
 export default `
 extend type Mutation {
-  login(email: String!, password: String!): Boolean
+  login(email: String!, password: String!): UserType!
 }
 `;

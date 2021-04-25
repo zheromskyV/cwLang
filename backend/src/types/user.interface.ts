@@ -9,6 +9,6 @@ export interface IUser extends Document {
   password: string;
   name: string;
   surname: string;
-  birthday: Date;
+  birthday: number;
   profile: IProfile;
 }

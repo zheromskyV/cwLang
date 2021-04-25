@@ -9,7 +9,7 @@ export const UserSchema = new Schema(
     role: { type: String, required: true },
     name: { type: String, required: true },
     surname: { type: String, required: true },
-    birthday: Date,
+    birthday: Number,
     profile: {
       type: Schema.Types.ObjectId,
       ref: 'Profile',
