@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
     signIn: PrimeIcons.SIGN_IN,
     signUp: PrimeIcons.PLUS,
   };
+
+  formGroup: FormGroup;
   formFields = {
     login: 'login',
     password: 'password',
   };
-
-  formGroup: FormGroup;
 
   constructor(
     private readonly store: Store<RootState>,

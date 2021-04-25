@@ -40,6 +40,7 @@ export class RegistrationComponent implements OnInit {
   roles = ROLE_OPTIONS;
   languages = LANGUAGE_OPTIONS;
 
+  formGroup: FormGroup;
   formFields = {
     login: 'login',
     password: 'password',
@@ -62,8 +63,6 @@ export class RegistrationComponent implements OnInit {
       [Languages.UN]: '-',
     },
   };
-
-  formGroup: FormGroup;
 
   constructor(
     private readonly store: Store<RootState>,
