@@ -2,8 +2,8 @@ import { Languages } from '../constants/languages.enum';
 import { Roles } from '../constants/roles.enum';
 import { Language } from './language';
 
-export interface UserProfile {
-  nativeLang: Languages;
+export interface Profile {
+  nativeLanguage: Languages;
   debt?: number;
   info?: string;
   rating?: number;
@@ -17,7 +17,7 @@ export interface User {
   name: string;
   surname: string;
   birthday: number;
-  profile?: UserProfile;
+  profile?: Profile;
 }
 
 export type UserInfo = User | null | undefined;

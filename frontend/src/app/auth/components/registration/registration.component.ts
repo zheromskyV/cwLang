@@ -151,13 +151,11 @@ export class RegistrationComponent implements OnInit {
       surname: this.getFieldValue(this.formFields.surname),
       birthday: new Date(this.getFieldValue(this.formFields.birthday)).getTime(),
       profile: {
-        nativeLang: this.getFieldValue(this.formFields.nativeLang).value as Languages,
+        nativeLanguage: this.getFieldValue(this.formFields.nativeLang).value as Languages,
         languages: this.getLanguages(),
         info: this.getFieldValue(this.formFields.about) || null,
       },
     };
-
-    console.log(user);
 
     this.store.dispatch(AuthActions.signUp({ user }));
   }

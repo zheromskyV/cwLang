@@ -8,7 +8,7 @@ const User = `{
   surname
   birthday
   profile {
-    nativeLang
+    nativeLanguage
     debt
     info
     rating
