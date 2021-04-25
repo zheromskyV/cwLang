@@ -18,4 +18,5 @@ export const routerPaths: CommonModel = {
   testing: 'testing',
   game: 'game',
   connect: 'connect',
+  notFound: 'not-found',
 };
