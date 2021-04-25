@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { LOGIN, SIGN_UP } from 'src/app/api/auth';
+import { CREATE_USER, LOGIN } from 'src/app/api/auth';
 import { User, UserInfo } from 'src/app/models/user';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class AuthService {
   signUp(user: User): Observable<UserInfo> {
     return this.apollo
       .mutate<{ user: User }>({
-        mutation: SIGN_UP,
+        mutation: CREATE_USER,
         variables: { user },
       })
       .pipe(

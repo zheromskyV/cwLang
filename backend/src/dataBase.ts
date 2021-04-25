@@ -1,7 +1,7 @@
 import { connect, connection } from 'mongoose';
 
 const MONGO_CONNECTION_STRING =
-  'mongodb+srv://user:user@cluster0.qqtfy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+  'mongodb+srv://user:user@cluster0.qqtfy.mongodb.net/coursework?retryWrites=true&w=majority';
 
 export const connectToDB = () => {
   connect(MONGO_CONNECTION_STRING, {

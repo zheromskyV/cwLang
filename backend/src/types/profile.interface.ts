@@ -8,6 +8,7 @@ import { IWord } from './word.interface';
 export interface IProfile extends Document {
   _id: Types.ObjectId;
   nativeLanguage: string;
+  languages: ILanguage[];
   info?: string;
   debt?: number;
   discount?: number;
@@ -15,5 +16,4 @@ export interface IProfile extends Document {
   groups?: IGroup[];
   marks?: IMark[];
   favoriteWords?: IWord[];
-  languages?: ILanguage[];
 }
