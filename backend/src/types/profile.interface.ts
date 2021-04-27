@@ -7,7 +7,6 @@ import { IWord } from './word.interface';
 
 export interface IProfile extends Document {
   _id: Types.ObjectId;
-  nativeLanguage: string;
   languages: ILanguage[];
   info?: string;
   debt?: number;

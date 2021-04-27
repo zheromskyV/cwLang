@@ -10,5 +10,6 @@ export interface IUser extends Document {
   name: string;
   surname: string;
   birthday: number;
+  nativeLanguage: string;
   profile: IProfile;
 }

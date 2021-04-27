@@ -4,7 +4,6 @@ import { IProfile } from '../types';
 
 const ProfileSchema = new Schema(
   {
-    nativeLanguage: { type: String, required: true },
     info: String,
     debt: Number,
     discount: { type: Number, default: 0 },

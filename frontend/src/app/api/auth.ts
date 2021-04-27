@@ -8,8 +8,8 @@ const USER = `{
   name
   surname
   birthday
+  nativeLanguage
   profile {
-    nativeLanguage
     debt
     info
     rating
