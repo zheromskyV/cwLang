@@ -15,14 +15,13 @@ const resolvers = {
     },
   },
   Query: {
-    listWords: async ( _: void, { targetLang, initialLang }: { targetLang: string, initialLang: string }): Promise<IWord[]> => {
+    getWords: async ( _: void, { targetLang }: { targetLang: string }): Promise<IWord[]> => {
       try {
-        const listWords = await Word.find({
+        const words = await Word.find({
           targetLang,
-          initialLang,
         });
 
-        return listWords;
+        return words;
       } catch(e) {
         console.error(e);
         throw e;

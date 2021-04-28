@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
-export const LIST_WORDS = gql`
-  query Word($targetLang: String!, $initialLang: String!) {
-    listWords(targetLang: $targetLang, initialLang: $initialLang) {
+export const GET_WORDS = gql`
+  query Word($targetLang: String!) {
+    getWords(targetLang: $targetLang) {
       _id,
       target,
       initial,
@@ -13,7 +13,7 @@ export const LIST_WORDS = gql`
 `;
 
 export const CREATE_WORD = gql`
-  mutation Word($word: WordInput) {
+  mutation Word($word: WordInput!) {
     createWord(word: $word) {
       _id,
       target,
