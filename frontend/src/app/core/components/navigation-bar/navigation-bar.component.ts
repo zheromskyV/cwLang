@@ -1,14 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RoutesRecognized, Event as RouterEvent } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { PrimeIcons } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
+import { RootState } from 'src/app/store/root.state';
 import { dictionary } from '../../../constants/dictionary';
 import { navigation } from '../../../constants/navigation';
 import { Roles } from '../../../constants/roles.enum';
 import { NavigationModel } from '../../../models/navigation';
 import { NavigationService } from '../../services/navigation.service';
+import * as AuthActions from '../../../store/auth/auth.actions';
+import * as fromAuth from '../../../store/auth/auth.selector';
 
 @Component({
   selector: 'cwl-navigation-bar',
@@ -28,12 +32,22 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   private readonly subscriptions = new Subscription();
 
-  constructor(private readonly router: Router, private readonly navigationService: NavigationService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store<RootState>,
+    private readonly navigationService: NavigationService
+  ) {}
 
   ngOnInit(): void {
-    // TODO: select current user data from store
-    this.role = Roles.Admin;
-    this.navigation = navigation[this.role];
+    this.subscriptions.add(
+      this.store.select(fromAuth.getUserRole).subscribe((role) => {
+        this.role = role;
+
+        if (this.role !== Roles.Undefined) {
+          this.navigation = navigation[this.role];
+        }
+      })
+    );
 
     this.subscriptions.add(
       this.router.events
@@ -56,8 +70,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
   logOut(): void {
-    // TODO: dispatch logout
-    this.navigationService.navigateToLoginPage();
+    this.store.dispatch(AuthActions.logOut());
   }
 
   ngOnDestroy(): void {

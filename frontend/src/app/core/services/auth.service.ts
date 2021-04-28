@@ -14,12 +14,12 @@ export class AuthService {
 
   login(email: string, password: string): Observable<UserInfo> {
     return this.apollo
-      .mutate<{ user: User }>({
+      .mutate<{ login: UserInfo }>({
         mutation: LOGIN,
         variables: { email, password },
       })
       .pipe(
-        map(({ data }) => data?.user),
+        map(({ data }) => data?.login),
         catchError(() => of(null))
       );
   }
