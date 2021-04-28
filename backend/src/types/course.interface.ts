@@ -9,5 +9,4 @@ export interface ICourse extends Document {
   info: string;
   words: IWord[];
   price: number;
-  rating: number;
 }
