@@ -7,8 +7,7 @@ const CourseSchema = new Schema(
     title: { type: String, required: true },
     info: { type: String, required: true },
     language: { type: String, required: true },
-    discount: { type: Number, required: true },
-    rating: Number,
+    price: { type: String, required: true },
     words: [
       {
         type: Schema.Types.ObjectId,
