@@ -16,7 +16,7 @@ input WordInput {
 }
 
 extend type Query {
-  getWords(targetLang: String!): [WordType!]!
+  getWords(targetLang: String!, initialLang: String!): [WordType!]!
 }
 
 extend type Mutation {

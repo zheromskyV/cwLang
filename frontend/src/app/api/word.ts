@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
 export const GET_WORDS = gql`
-  query Word($targetLang: String!) {
-    getWords(targetLang: $targetLang) {
+  query Word($targetLang: String!, $initialLang: String!) {
+    getWords(targetLang: $targetLang, initialLang: $initialLang) {
       _id,
       target,
       initial,
