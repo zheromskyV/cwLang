@@ -4,6 +4,7 @@ import { Language } from './language';
 
 export interface Profile {
   debt?: number;
+  discount?: number;
   info?: string;
   rating?: number;
   languages: Language[];

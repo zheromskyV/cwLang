@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { Roles } from 'src/app/constants/roles.enum';
-import { UserInfo } from 'src/app/models/user';
+import { Profile, UserInfo } from 'src/app/models/user';
 import { StoreFeature } from '../store.enum';
 import { AuthState } from './auth.state';
 
@@ -16,4 +16,9 @@ export const getLoginTimestamp = createSelector(rootSelector, (state: AuthState)
 export const getUserRole = createSelector(
   getUserInfo,
   (userInfo: UserInfo): Roles => userInfo?.role ?? Roles.Undefined
+);
+
+export const getUserProfile = createSelector(
+  getUserInfo,
+  (userInfo: UserInfo): Profile | undefined => userInfo?.profile
 );

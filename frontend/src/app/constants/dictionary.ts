@@ -54,7 +54,7 @@ export const dictionary: CommonModel = {
   status: 'Статус',
   paid: 'Оплачено',
   debt: 'Долг',
-  disc: 'Скидка',
+  discount: 'Скидка',
 
   // not-found
   pageNotFound: 'Страница не найдена',
