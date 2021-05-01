@@ -1,3 +1,5 @@
+@import '~src/styles/style-import';
+
 :host {
   display: block;
 }
@@ -32,13 +34,17 @@
   }
 
   input {
-    border: 1px solid #ced4da;
+    border: 1px solid $border-color;
     outline: none;
     padding: 0.4rem;
     width: 100%;
 
     &:focus {
-      border: 1px solid #2196f3;
+      border: 1px solid $border-focus-color;
+    }
+
+    &:disabled {
+      color: $disabled-text-color;
     }
   }
 

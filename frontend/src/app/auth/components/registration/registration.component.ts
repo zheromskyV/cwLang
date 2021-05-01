@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { PrimeIcons } from 'primeng/api';
@@ -17,7 +17,7 @@ import { Languages } from 'src/app/constants/languages.enum';
 import { Roles } from 'src/app/constants/roles.enum';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 import { Language } from 'src/app/models/language';
-import { User } from 'src/app/models/user';
+import { User, UserInfo } from 'src/app/models/user';
 import { RootState } from 'src/app/store/root.state';
 import { dictionary } from '../../../constants/dictionary';
 import * as AuthActions from '../../../store/auth/auth.actions';
@@ -30,6 +30,12 @@ import * as fromUi from '../../../store/ui/ui.selectors';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
+  @Input() isProfilePage: boolean = false;
+  @Input() isEditable: boolean = true;
+  @Input() userInfo: UserInfo = null;
+
+  @Output() cancel = new EventEmitter();
+
   dictionary = dictionary;
   icons = {
     email: PrimeIcons.ENVELOPE,
@@ -40,6 +46,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     birthday: PrimeIcons.CALENDAR,
     signUp: PrimeIcons.CHECK,
     back: PrimeIcons.ANGLE_LEFT,
+    save: PrimeIcons.CHECK,
+    cancel: PrimeIcons.TIMES,
   };
   roles = ROLE_OPTIONS;
   languages = LANGUAGE_OPTIONS;
@@ -78,24 +86,32 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    const disabled = this.isProfilePage;
+
     this.formGroup = this.formBuilder.group({
-      [this.formFields.login]: ['', [Validators.required, Validators.email]],
-      [this.formFields.password]: ['', [Validators.required, Validators.minLength(MIN_PASSWORD_LENGTH)]],
-      [this.formFields.role]: [null, [Validators.required]],
-      [this.formFields.nativeLang]: [null, [Validators.required]],
-      [this.formFields.birthday]: [null, [Validators.required, this.birthdayValidator]],
-      [this.formFields.name]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.surname]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.about]: ['', [Validators.minLength(MIN_ABOUT_LENGTH)]],
-      [this.formFields.langs[Languages.Be]]: [0, []],
-      [this.formFields.langs[Languages.Ch]]: [0, []],
-      [this.formFields.langs[Languages.En]]: [0, []],
-      [this.formFields.langs[Languages.Fr]]: [0, []],
-      [this.formFields.langs[Languages.Ge]]: [0, []],
-      [this.formFields.langs[Languages.It]]: [0, []],
-      [this.formFields.langs[Languages.Ru]]: [0, []],
-      [this.formFields.langs[Languages.Sp]]: [0, []],
-      [this.formFields.langs[Languages.Sw]]: [0, []],
+      [this.formFields.login]: [{ value: this.userInfo?.email, disabled }, [Validators.required, Validators.email]],
+      [this.formFields.password]: [
+        { value: this.userInfo?.password, disabled },
+        [(Validators.required, Validators.minLength(MIN_PASSWORD_LENGTH))],
+      ],
+      [this.formFields.role]: [{ value: this.userInfo?.role, disabled }, [Validators.required]],
+      [this.formFields.nativeLang]: [{ value: this.userInfo?.nativeLanguage, disabled }, [Validators.required]],
+      [this.formFields.birthday]: [
+        { value: new Date(this.userInfo?.birthday || 0), disabled },
+        [(Validators.required, this.birthdayValidator)],
+      ],
+      [this.formFields.name]: [this.userInfo?.name, [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
+      [this.formFields.surname]: [this.userInfo?.surname, [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
+      [this.formFields.about]: [this.userInfo?.profile?.info, [Validators.minLength(MIN_ABOUT_LENGTH)]],
+      [this.formFields.langs[Languages.Be]]: [this.getLangValueFromUser(Languages.Be), []],
+      [this.formFields.langs[Languages.Ch]]: [this.getLangValueFromUser(Languages.Ch), []],
+      [this.formFields.langs[Languages.En]]: [this.getLangValueFromUser(Languages.En), []],
+      [this.formFields.langs[Languages.Fr]]: [this.getLangValueFromUser(Languages.Fr), []],
+      [this.formFields.langs[Languages.Ge]]: [this.getLangValueFromUser(Languages.Ge), []],
+      [this.formFields.langs[Languages.It]]: [this.getLangValueFromUser(Languages.It), []],
+      [this.formFields.langs[Languages.Ru]]: [this.getLangValueFromUser(Languages.Ru), []],
+      [this.formFields.langs[Languages.Sp]]: [this.getLangValueFromUser(Languages.Sp), []],
+      [this.formFields.langs[Languages.Sw]]: [this.getLangValueFromUser(Languages.Sw), []],
     });
 
     this.subscriptions.add(
@@ -109,6 +125,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.store.dispatch(UiActions.setRegistrationError({ isRegistrationError: false }));
       })
     );
+  }
+
+  private getLangValueFromUser(langName: Languages): number {
+    return this.userInfo?.profile?.languages.find(({ name }) => name === langName)?.value || 0;
   }
 
   get isFormValid(): boolean {
@@ -126,7 +146,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    const role = selectedRole.value as Roles;
+    const role: Roles = selectedRole.value ?? selectedRole;
 
     return role !== Roles.Admin;
   }
@@ -138,7 +158,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    const role = selectedRole.value as Roles;
+    const role: Roles = selectedRole.value ?? selectedRole;
 
     return role === Roles.Teacher;
   }
@@ -156,11 +176,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     );
   }
 
-  submit(): void {
-    if (!this.isFormValid) {
-      return;
-    }
-
+  private signUp(): void {
     const user: User = {
       _id: '',
       email: this.getFieldValue(this.formFields.login),
@@ -179,8 +195,30 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.store.dispatch(AuthActions.signUp({ user }));
   }
 
+  private updateUser(): void {
+    const user: User = {
+      ...this.userInfo!,
+      name: this.getFieldValue(this.formFields.name),
+      surname: this.getFieldValue(this.formFields.surname),
+      profile: {
+        languages: this.getLanguages(),
+        info: this.getFieldValue(this.formFields.about) || null,
+      },
+    };
+
+    console.log(user);
+  }
+
+  submit(): void {
+    if (!this.isFormValid) {
+      return;
+    }
+
+    this.isProfilePage ? this.updateUser() : this.signUp();
+  }
+
   back(): void {
-    this.navigationService.navigateToLoginPage();
+    this.isProfilePage ? this.cancel.emit() : this.navigationService.navigateToLoginPage();
   }
 
   private birthdayValidator({ value }: FormControl): ValidationErrors | null {
