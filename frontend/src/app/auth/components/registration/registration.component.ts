@@ -168,9 +168,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       role: this.getFieldValue(this.formFields.role).value as Roles,
       name: this.getFieldValue(this.formFields.name),
       surname: this.getFieldValue(this.formFields.surname),
+      nativeLanguage: this.getFieldValue(this.formFields.nativeLang).value as Languages,
       birthday: new Date(this.getFieldValue(this.formFields.birthday)).getTime(),
       profile: {
-        nativeLanguage: this.getFieldValue(this.formFields.nativeLang).value as Languages,
         languages: this.getLanguages(),
         info: this.getFieldValue(this.formFields.about) || null,
       },

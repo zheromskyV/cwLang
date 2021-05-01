@@ -3,7 +3,6 @@ import { Roles } from '../constants/roles.enum';
 import { Language } from './language';
 
 export interface Profile {
-  nativeLanguage: Languages;
   debt?: number;
   info?: string;
   rating?: number;
@@ -18,6 +17,7 @@ export interface User {
   name: string;
   surname: string;
   birthday: number;
+  nativeLanguage: Languages;
   profile?: Profile;
 }
 
