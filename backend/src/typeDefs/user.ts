@@ -42,6 +42,7 @@ input ProfileInput {
 }
 
 input UserInput {
+  _id: String
   email: String!
   password: String
   role: String!
