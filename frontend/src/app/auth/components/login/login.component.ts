@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { PrimeIcons } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 
 import { MIN_PASSWORD_LENGTH } from 'src/app/constants/auth';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 import { RootState } from 'src/app/store/root.state';
 import { dictionary } from '../../../constants/dictionary';
 import * as AuthActions from '../../../store/auth/auth.actions';
+import * as UiActions from '../../../store/ui/ui.actions';
+import * as fromUi from '../../../store/ui/ui.selectors';
 
 @Component({
   selector: 'cwl-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   dictionary = dictionary;
   icons = {
     login: PrimeIcons.USER,
@@ -29,6 +33,9 @@ export class LoginComponent implements OnInit {
     password: 'password',
   };
 
+  private readonly subscriptions = new Subscription();
+  isLoginError: boolean;
+
   constructor(
     private readonly store: Store<RootState>,
     private readonly formBuilder: FormBuilder,
@@ -40,6 +47,18 @@ export class LoginComponent implements OnInit {
       [this.formFields.login]: ['', [Validators.required, Validators.email]],
       [this.formFields.password]: ['', [Validators.required, Validators.minLength(MIN_PASSWORD_LENGTH)]],
     });
+
+    this.subscriptions.add(
+      this.store.select(fromUi.getLoginError).subscribe((isError) => {
+        this.isLoginError = isError;
+      })
+    );
+
+    this.subscriptions.add(
+      this.formGroup.valueChanges.pipe(filter(() => this.isLoginError)).subscribe(() => {
+        this.store.dispatch(UiActions.setLoginError({ isLoginError: false }));
+      })
+    );
   }
 
   get isFormValid(): boolean {
@@ -63,5 +82,9 @@ export class LoginComponent implements OnInit {
 
   signUp(): void {
     this.navigationService.navigateToSignUpPage();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

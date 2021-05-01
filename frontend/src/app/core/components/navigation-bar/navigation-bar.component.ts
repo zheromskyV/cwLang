@@ -12,7 +12,7 @@ import { Roles } from '../../../constants/roles.enum';
 import { NavigationModel } from '../../../models/navigation';
 import { NavigationService } from '../../services/navigation.service';
 import * as AuthActions from '../../../store/auth/auth.actions';
-import * as fromAuth from '../../../store/auth/auth.selector';
+import * as fromAuth from '../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'cwl-navigation-bar',
@@ -42,10 +42,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.store.select(fromAuth.getUserRole).subscribe((role) => {
         this.role = role;
-
-        if (this.role !== Roles.Undefined) {
-          this.navigation = navigation[this.role];
-        }
+        this.navigation = navigation[this.role];
       })
     );
 

@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { RootState } from 'src/app/store/root.state';
-import * as fromUi from 'src/app/store/ui/ui.selector';
+import * as fromUi from 'src/app/store/ui/ui.selectors';
 
 @Component({
   selector: 'cwl-page-container',
