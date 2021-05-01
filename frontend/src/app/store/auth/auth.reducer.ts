@@ -13,12 +13,6 @@ const reducer = createReducer(
     ...state,
     userInfo,
   })),
-  on(AuthActions.logOut, (state) => ({
-    ...state,
-    isUserLoggedIn: initialAuthState.isUserLoggedIn,
-    user: initialAuthState.userInfo,
-    loginTimestamp: initialAuthState.loginTimestamp,
-  })),
   on(AuthActions.setLoginTimestamp, (state, { loginTimestamp }) => ({
     ...state,
     loginTimestamp,

@@ -24,6 +24,7 @@ export const dictionary: CommonModel = {
   password: 'Пароль',
   signIn: 'Войти',
   signUp: 'Зарегистрироваться',
+  loginError: 'Ошибка входа. Неправильный логин или пароль.',
 
   // registration
   registration: 'Регистрация',
@@ -47,6 +48,7 @@ export const dictionary: CommonModel = {
   birthday: 'Дата рождения',
   nativeLang: 'Родной язык',
   about: 'О себе',
+  registrationError: 'Ошибка регистрации',
 
   // profile
   status: 'Статус',

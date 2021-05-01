@@ -8,6 +8,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { KnobModule } from 'primeng/knob';
 import { CalendarModule } from 'primeng/calendar';
+import { MessageModule } from 'primeng/message';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -29,6 +30,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     DropdownModule,
     KnobModule,
     CalendarModule,
+    MessageModule,
   ],
   exports: [
     RegistrationComponent,

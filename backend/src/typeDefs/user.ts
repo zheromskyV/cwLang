@@ -9,7 +9,6 @@ type LanguageType {
 
 type ProfileType {
   _id: String
-  nativeLanguage: String!
   debt: Float
   info: String
   discount: Float
@@ -24,7 +23,8 @@ type UserType {
   role: String!
   name: String!
   surname: String!
-  birthday: Int!
+  birthday: Float!
+  nativeLanguage: String!
   profile: ProfileType!
 }
 
@@ -34,7 +34,6 @@ input LanguageInput {
 }
 
 input ProfileInput {
-  nativeLanguage: String!
   debt: Float
   info: String
   discount: Float
@@ -48,10 +47,10 @@ input UserInput {
   role: String!
   name: String!
   surname: String!
-  birthday: Int!
+  birthday: Float!
+  nativeLanguage: String!
   profile: ProfileInput!
 }
-
 
 extend type Mutation {
   createUser(user: UserInput!): UserType!

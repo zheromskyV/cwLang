@@ -1,8 +1,10 @@
 import _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { PrimeIcons } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import {
   LANGUAGE_OPTIONS,
@@ -19,13 +21,15 @@ import { User } from 'src/app/models/user';
 import { RootState } from 'src/app/store/root.state';
 import { dictionary } from '../../../constants/dictionary';
 import * as AuthActions from '../../../store/auth/auth.actions';
+import * as UiActions from '../../../store/ui/ui.actions';
+import * as fromUi from '../../../store/ui/ui.selectors';
 
 @Component({
   selector: 'cwl-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
   dictionary = dictionary;
   icons = {
     email: PrimeIcons.ENVELOPE,
@@ -64,6 +68,9 @@ export class RegistrationComponent implements OnInit {
     },
   };
 
+  private readonly subscriptions = new Subscription();
+  isRegistrationError: boolean;
+
   constructor(
     private readonly store: Store<RootState>,
     private readonly formBuilder: FormBuilder,
@@ -79,7 +86,7 @@ export class RegistrationComponent implements OnInit {
       [this.formFields.birthday]: [null, [Validators.required, this.birthdayValidator]],
       [this.formFields.name]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
       [this.formFields.surname]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.about]: ['', [Validators.required, Validators.minLength(MIN_ABOUT_LENGTH)]],
+      [this.formFields.about]: ['', [Validators.minLength(MIN_ABOUT_LENGTH)]],
       [this.formFields.langs[Languages.Be]]: [0, []],
       [this.formFields.langs[Languages.Ch]]: [0, []],
       [this.formFields.langs[Languages.En]]: [0, []],
@@ -90,6 +97,18 @@ export class RegistrationComponent implements OnInit {
       [this.formFields.langs[Languages.Sp]]: [0, []],
       [this.formFields.langs[Languages.Sw]]: [0, []],
     });
+
+    this.subscriptions.add(
+      this.store.select(fromUi.getRegistrationError).subscribe((isError) => {
+        this.isRegistrationError = isError;
+      })
+    );
+
+    this.subscriptions.add(
+      this.formGroup.valueChanges.pipe(filter(() => this.isRegistrationError)).subscribe(() => {
+        this.store.dispatch(UiActions.setRegistrationError({ isRegistrationError: false }));
+      })
+    );
   }
 
   get isFormValid(): boolean {
@@ -143,6 +162,7 @@ export class RegistrationComponent implements OnInit {
     }
 
     const user: User = {
+      _id: '',
       email: this.getFieldValue(this.formFields.login),
       password: this.getFieldValue(this.formFields.password),
       role: this.getFieldValue(this.formFields.role).value as Roles,
@@ -172,5 +192,9 @@ export class RegistrationComponent implements OnInit {
     const now = Date.now();
 
     return now < birthday ? { error: 'Incorrect date' } : null;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

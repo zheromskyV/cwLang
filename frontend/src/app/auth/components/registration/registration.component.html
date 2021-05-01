@@ -131,4 +131,8 @@
       styleClass="button p-button-secondary"
     ></p-button>
   </div>
+
+  <div class="messages p-d-flex p-flex-column p-jc-start p-ai-center">
+    <p-message *ngIf="isRegistrationError" severity="error" [text]="dictionary.registrationError"></p-message>
+  </div>
 </form>

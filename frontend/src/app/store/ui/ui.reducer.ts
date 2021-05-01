@@ -12,6 +12,14 @@ const reducer = createReducer(
   on(UiActions.hideNavigation, (state) => ({
     ...state,
     isNavigationShown: false,
+  })),
+  on(UiActions.setLoginError, (state, { isLoginError }) => ({
+    ...state,
+    isLoginError,
+  })),
+  on(UiActions.setRegistrationError, (state, { isRegistrationError }) => ({
+    ...state,
+    isRegistrationError,
   }))
 );
 

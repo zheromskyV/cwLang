@@ -1,6 +1,5 @@
 import { hash } from 'bcrypt';
-import { omit, pick } from 'lodash';
-import { IProfile } from 'src/types';
+import { omit } from 'lodash';
 
 import { SALT_ROUNDS } from '../constants';
 import { Language, Profile, User } from '../models';

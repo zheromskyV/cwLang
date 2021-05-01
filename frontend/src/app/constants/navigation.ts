@@ -31,4 +31,5 @@ export const navigation = {
     navLinks.navAnalytics,
     navLinks.navConnect,
   ] as NavigationModel,
+  [Roles.Undefined]: [] as NavigationModel,
 };
