@@ -44,4 +44,8 @@
       styleClass="button p-button-info"
     ></p-button>
   </div>
+
+  <div class="messages p-d-flex p-flex-column p-jc-start p-ai-center">
+    <p-message *ngIf="isLoginError" severity="error" [text]="dictionary.loginError"></p-message>
+  </div>
 </form>

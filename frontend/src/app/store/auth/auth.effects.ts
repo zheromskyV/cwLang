@@ -8,7 +8,7 @@ import { switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { SESSION_EXPIRATION_TIME } from '../../constants/auth';
 import { RootState } from '../root.state';
 import * as AuthActions from './auth.actions';
-import * as fromAuth from './auth.selector';
+import * as fromAuth from './auth.selectors';
 import * as UiActions from '../ui/ui.actions';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NavigationService } from 'src/app/core/services/navigation.service';
@@ -45,9 +45,10 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.logIn),
       switchMap(({ email, password }) => this.authService.login(email, password)),
-      switchMap((userInfo) =>
-        _.compact([AuthActions.setUserInfo({ userInfo }), _.isEmpty(userInfo) ? null : AuthActions.initSession()])
-      )
+      switchMap((userInfo) => [
+        AuthActions.setUserInfo({ userInfo }),
+        _.isEmpty(userInfo) ? UiActions.setLoginError({ isLoginError: true }) : AuthActions.initSession(),
+      ])
     )
   );
 
@@ -68,11 +69,11 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signUp),
       switchMap(({ user }) => this.authService.signUp(user)),
-      switchMap((userInfo) =>
-        _.compact([
-          _.isEmpty(userInfo) ? null : AuthActions.logIn({ email: userInfo!.email, password: userInfo!.password }),
-        ])
-      )
+      switchMap((userInfo) => [
+        _.isEmpty(userInfo)
+          ? UiActions.setRegistrationError({ isRegistrationError: true })
+          : AuthActions.logIn({ email: userInfo!.email, password: userInfo!.password }),
+      ])
     )
   );
 

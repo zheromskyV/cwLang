@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, CanActivateChild } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
 import { RootState } from 'src/app/store/root.state';
 import { NavigationService } from './navigation.service';
-import * as fromAuth from '../../store/auth/auth.selector';
+import * as fromAuth from '../../store/auth/auth.selectors';
 import * as AuthActions from '../../store/auth/auth.actions';
 
 @Injectable({
