@@ -1,12 +1,3 @@
-<div class="toolbar p-d-flex p-jc-end">
-  <p-button 
-    styleClass="p-button-success"
-    [icon]="icons.add"
-    [label]="dictionary.add"
-    (click)="addCourse()"
-  ></p-button>
-</div>
-
 <p-table
   [value]="courses | slice:0" 
   dataKey="_id"
@@ -54,12 +45,12 @@
         <p-button 
           styleClass="p-button-rounded p-button-warning p-mr-2"
           [icon]="icons.edit"
-          (click)="editCourse(course)"
+          (click)="edit(course)"
         ></p-button>
         <p-button 
           styleClass="p-button-rounded p-button-danger"
           [icon]="icons.delete"
-          (click)="deleteCourse(course)"
+          (click)="delete(course)"
         ></p-button>
       </td>
     </tr>
@@ -70,30 +61,9 @@
       <td colspan="6">
         <div>
           <p>{{ course.info }}</p>
-
-          <p-table [value]="course.words" dataKey="_id">
-            <ng-template pTemplate="header">
-                <tr>
-                  <th>{{ dictionary.wordsInitialLang }}</th>
-                  <th>{{ dictionary.wordsInitial }}</th>
-                  <th>{{ dictionary.wordsTarget }}</th>
-                  <th>{{ dictionary.wordsTargetLang }}</th>
-                </tr>
-              </ng-template>
-
-              <ng-template pTemplate="body" let-word>
-                <tr>
-                  <td>{{ dictionary[word.initialLang] }}</td>
-                  <td>{{ word.initial }}</td>
-                  <td>{{ word.target }}</td>
-                  <td>{{ dictionary[word.targetLang] }}</td>
-                </tr>
-              </ng-template>
-          </p-table>
+          <cwl-words-table [words]="course.words"></cwl-words-table>
         </div>
       </td>
     </tr>
   </ng-template>
 </p-table>
-
-<p-confirmDialog></p-confirmDialog>

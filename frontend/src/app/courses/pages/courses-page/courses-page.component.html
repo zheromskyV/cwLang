@@ -2,5 +2,21 @@
   <h2 class="header">{{ dictionary.courses }}</h2>
   <p-divider></p-divider>
 
-  <cwl-courses-table></cwl-courses-table>
+  <div class="toolbar p-d-flex p-jc-end">
+    <p-button 
+      styleClass="p-button-success"
+      [icon]="icons.add"
+      [label]="dictionary.add"
+      (click)="addCourse()"
+    ></p-button>
+  </div>
+
+  <cwl-courses-table
+    [courses]="(courses$ | async) || []"
+    (editCourse)="editCourse($event)"
+    (deleteCourse)="deleteCourse($event)"
+  ></cwl-courses-table>
+
+  <p-confirmDialog></p-confirmDialog>
 </div>
+
