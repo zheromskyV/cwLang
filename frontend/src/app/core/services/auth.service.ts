@@ -26,12 +26,12 @@ export class AuthService {
 
   signUp(user: User): Observable<UserInfo> {
     return this.apollo
-      .mutate<{ user: User }>({
+      .mutate<{ createUser: User }>({
         mutation: CREATE_USER,
         variables: { user },
       })
       .pipe(
-        map(({ data }) => data?.user),
+        map(({ data }) => data?.createUser),
         catchError(() => of(null))
       );
   }

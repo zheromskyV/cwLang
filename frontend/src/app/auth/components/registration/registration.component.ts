@@ -97,7 +97,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       [this.formFields.role]: [{ value: this.userInfo?.role, disabled }, [Validators.required]],
       [this.formFields.nativeLang]: [{ value: this.userInfo?.nativeLanguage, disabled }, [Validators.required]],
       [this.formFields.birthday]: [
-        { value: new Date(this.userInfo?.birthday || 0), disabled },
+        { value: this.userInfo?.birthday ? new Date(this.userInfo!.birthday) : null, disabled },
         [(Validators.required, this.birthdayValidator)],
       ],
       [this.formFields.name]: [this.userInfo?.name, [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
@@ -178,13 +178,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   private signUp(): void {
     const user: User = {
-      _id: '',
       email: this.getFieldValue(this.formFields.login),
       password: this.getFieldValue(this.formFields.password),
-      role: this.getFieldValue(this.formFields.role).value as Roles,
+      role: this.getFieldValue(this.formFields.role) as Roles,
       name: this.getFieldValue(this.formFields.name),
       surname: this.getFieldValue(this.formFields.surname),
-      nativeLanguage: this.getFieldValue(this.formFields.nativeLang).value as Languages,
+      nativeLanguage: this.getFieldValue(this.formFields.nativeLang) as Languages,
       birthday: new Date(this.getFieldValue(this.formFields.birthday)).getTime(),
       profile: {
         languages: this.getLanguages(),

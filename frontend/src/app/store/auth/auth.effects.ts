@@ -70,11 +70,11 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signUp),
       switchMap(({ user }) => this.authService.signUp(user)),
-      switchMap((userInfo) => [
+      switchMap((userInfo) =>
         _.isEmpty(userInfo)
-          ? UiActions.setRegistrationError({ isRegistrationError: true })
-          : AuthActions.logIn({ email: userInfo!.email, password: userInfo!.password }),
-      ])
+          ? [UiActions.setRegistrationError({ isRegistrationError: true })]
+          : [AuthActions.setUserInfo({ userInfo }), AuthActions.initSession()]
+      )
     )
   );
 
