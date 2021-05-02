@@ -15,7 +15,7 @@ const resolvers = {
     },
     updateCourse: async (_: void, { id, course }: { id: string, course: ICourse }): Promise<ICourse | undefined> => {
       try {
-        const updatedCourse = (await Course.findByIdAndUpdate(id, course))?.populate('words').execPopulate();
+        const updatedCourse = (await Course.findByIdAndUpdate(id, course, { new: true, useFindAndModify: false }))?.populate('words').execPopulate();
 
         return updatedCourse;
       } catch(e) {

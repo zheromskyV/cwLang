@@ -5,7 +5,8 @@ export const COURSE = `{
   title,
   info,
   price,
-  language,
+  initialLang,
+  targetLang,
   level,
   words {
     _id,
