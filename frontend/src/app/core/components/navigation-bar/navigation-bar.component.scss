@@ -2,6 +2,8 @@
 
 :host {
   display: block;
+  position: sticky;
+  top: 0;
 }
 
 .navigation {
@@ -16,11 +18,11 @@
 :host ::ng-deep {
   .p-button {
     .p-button-icon {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     &.nav-link {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       width: 100%;
       text-align: start;
     }

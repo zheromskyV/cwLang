@@ -6,6 +6,10 @@
 
 .form {
   margin: 2rem 4rem;
+
+  &.non-editable {
+    pointer-events: none;
+  }
 }
 
 .field {
@@ -42,8 +46,8 @@
 .buttons-container {
   margin: 1.5rem 0;
 
-  p-button {
-    margin: 0 1rem;
+  p-button:not(:last-child) {
+    margin-right: 2rem;
   }
 }
 

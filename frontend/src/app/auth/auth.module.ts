@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -21,7 +20,6 @@ import { RegistrationComponent } from './components/registration/registration.co
   declarations: [LoginPageComponent, RegistrationPageComponent, LoginComponent, RegistrationComponent],
   imports: [
     CommonModule,
-    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
@@ -33,6 +31,18 @@ import { RegistrationComponent } from './components/registration/registration.co
     KnobModule,
     CalendarModule,
     MessageModule,
+  ],
+  exports: [
+    RegistrationComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    PasswordModule,
+    ButtonModule,
+    DividerModule,
+    InputTextareaModule,
+    DropdownModule,
+    KnobModule,
+    CalendarModule,
   ],
 })
 export class AuthModule {}

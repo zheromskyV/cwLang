@@ -1,0 +1,16 @@
+<div class="p-d-flex p-jc-end">
+  <p-button
+    class="label"
+    [styleClass]="isDebt ? 'p-button-danger' : 'p-button-success'"
+    [label]="statusLabel" 
+    [disabled]="true"
+  ></p-button>
+  
+  <p-button
+    class="label"
+    *ngIf="isDiscount"
+    styleClass="p-button-help"
+    [label]="discountLabel" 
+    [disabled]="true"
+  ></p-button>
+</div>

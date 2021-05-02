@@ -13,3 +13,5 @@ export const getRegistrationError = createSelector(
   rootSelector,
   (state: UiState): boolean => state.isRegistrationError
 );
+
+export const getUpdateUserError = createSelector(rootSelector, (state: UiState): boolean => state.isUpdateUserError);

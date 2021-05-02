@@ -1,3 +1,4 @@
+import { ApolloError } from 'apollo-server';
 import { hash } from 'bcrypt';
 import { omit } from 'lodash';
 
@@ -9,6 +10,14 @@ const resolvers = {
   Mutation: {
     createUser: async (_: void, { user }: { user: IUser }): Promise<IUser | null> => {
       try {
+        const existingUser: IUser | null = await User.findOne({
+          email: user?.email,
+        });
+
+        if (existingUser) {
+          throw new ApolloError('User has already exist');
+        }
+
         const hashedPassword = await hash(user.password, SALT_ROUNDS);
 
         const languages = await Language.insertMany(user.profile.languages);
@@ -28,14 +37,14 @@ const resolvers = {
           path: 'profile',
           populate: {
             path: 'languages',
-          }
+          },
         });
       } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    updateUser: async (_: void, { id, user }: { id: string, user: IUser }): Promise<IUser | null> => {
+    updateUser: async (_: void, { id, user }: { id: string; user: IUser }): Promise<IUser | null> => {
       try {
         const outdatedUser = await User.findById(id);
 
@@ -56,7 +65,7 @@ const resolvers = {
           path: 'profile',
           populate: {
             path: 'languages',
-          }
+          },
         });
       } catch (e) {
         console.error(e);

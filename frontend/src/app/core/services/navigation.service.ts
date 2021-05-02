@@ -14,7 +14,11 @@ export class NavigationService {
   }
 
   navigateToHomePage(): void {
-    this.navigateTo(routerPaths.home);
+    this.navigateToMyProfilePage();
+  }
+
+  navigateToMyProfilePage(): void {
+    this.navigateTo(routerPaths.myProfile);
   }
 
   navigateToLoginPage(): void {

@@ -1,4 +1,9 @@
-<form class="form p-d-flex p-flex-column p-jc-start" [formGroup]="formGroup" novalidate>
+<form 
+  class="form p-d-flex p-flex-column p-jc-start"
+  [class.non-editable]="!isEditable"
+  [formGroup]="formGroup"
+  novalidate
+>
   <div class="info-section">
     <div class="field p-inputgroup">
       <span class="p-inputgroup-addon">
@@ -15,7 +20,7 @@
       />
     </div>
   
-    <div class="field p-inputgroup">
+    <div class="field p-inputgroup" *ngIf="!isProfilePage">
       <span class="p-inputgroup-addon">
         <i [class]="icons.password"></i>
       </span>
@@ -33,7 +38,8 @@
       <p-dropdown 
         class="role p-col-12 p-md-4" 
         [options]="roles" 
-        optionLabel="label" 
+        optionLabel="label"
+        optionValue="value"
         [placeholder]="dictionary.role"
         [id]="formFields.role"
         [formControlName]="formFields.role"
@@ -42,7 +48,8 @@
       <p-dropdown 
         class="nativeLang p-col-12 p-md-4" 
         [options]="languages" 
-        optionLabel="label" 
+        optionLabel="label"
+        optionValue="value"
         [placeholder]="dictionary.nativeLang"
         [id]="formFields.nativeLang"
         [formControlName]="formFields.nativeLang"
@@ -104,29 +111,29 @@
       <div *ngFor="let lang of languages" class="lang p-field p-col-12 p-md-4">
         <span>{{ lang.label }}</span>
         <p-knob
-        [id]="formFields.langs[lang.value]"
-        [formControlName]="formFields.langs[lang.value]"
-        [min]="0"
-        [max]="100"
-        [step]="1"
+          [id]="formFields.langs[lang.value]"
+          [formControlName]="formFields.langs[lang.value]"
+          [min]="0"
+          [max]="100"
+          [step]="1"
         ></p-knob>
       </div>
     </div>
     <p-divider></p-divider>
   </ng-container>
 
-  <div class="buttons-container p-d-flex p-jc-end">
+  <div class="buttons-container p-d-flex p-jc-end" *ngIf="isEditable">
     <p-button 
-      [label]="dictionary.signUp"
-      [icon]="icons.signUp"
+      [label]="isProfilePage ? dictionary.save : dictionary.signUp"
+      [icon]="isProfilePage ? icons.save : icons.signUp"
       [disabled]="!isFormValid"
       (click)="submit()"
-      styleClass="button p-button-success"
+      styleClass="button p-button"
     ></p-button>
 
     <p-button 
-      [label]="dictionary.back"
-      [icon]="icons.back"
+      [label]="isProfilePage ? dictionary.cancel : dictionary.back"
+      [icon]="isProfilePage ? icons.cancel : icons.back"
       (click)="back()"
       styleClass="button p-button-secondary"
     ></p-button>
@@ -134,5 +141,6 @@
 
   <div class="messages p-d-flex p-flex-column p-jc-start p-ai-center">
     <p-message *ngIf="isRegistrationError" severity="error" [text]="dictionary.registrationError"></p-message>
+    <p-message *ngIf="isUpdateUserError" severity="error" [text]="dictionary.updateError"></p-message>
   </div>
 </form>

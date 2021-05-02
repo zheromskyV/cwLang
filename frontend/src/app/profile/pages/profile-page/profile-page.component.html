@@ -1,0 +1,12 @@
+<div class="container">
+  <h2 class="header">{{ dictionary.myProfile }}</h2>
+  <p-divider></p-divider>
+
+  <cwl-status-bar
+    *ngIf="isStatusSectionAvailable"
+    [debt]="debt"
+    [discount]="discount"
+  ></cwl-status-bar>
+
+  <cwl-profile></cwl-profile>
+</div>

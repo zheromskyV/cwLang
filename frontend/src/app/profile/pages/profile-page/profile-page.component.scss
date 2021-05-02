@@ -7,14 +7,14 @@
 }
 
 .container {
-  width: 45rem;
+  width: 60rem;
   padding: 2rem;
-  margin-top: 3rem;
 
   @extend %std-tile;
 }
 
 .header {
-  text-align: center;
+  text-align: left;
   color: $text-color;
+  margin-top: 0.5rem;
 }

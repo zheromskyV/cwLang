@@ -25,6 +25,7 @@ export class AuthEffects {
   initSession$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.initSession),
+      tap(() => this.navigationService.navigateToHomePage()),
       switchMap(() => [
         AuthActions.setLoginTimestamp({ loginTimestamp: Date.now() }),
         AuthActions.setUserLoggedIn({ isUserLoggedIn: true }),
@@ -55,13 +56,13 @@ export class AuthEffects {
   logOut$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logOut),
+      tap(() => this.navigationService.navigateToLoginPage()),
       switchMap(() => [
         UiActions.hideNavigation(),
         AuthActions.setUserLoggedIn({ isUserLoggedIn: false }),
         AuthActions.setUserInfo({ userInfo: null }),
         AuthActions.setLoginTimestamp({ loginTimestamp: 0 }),
-      ]),
-      tap(() => this.navigationService.navigateToLoginPage())
+      ])
     )
   );
 
@@ -69,10 +70,22 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signUp),
       switchMap(({ user }) => this.authService.signUp(user)),
+      switchMap((userInfo) =>
+        _.isEmpty(userInfo)
+          ? [UiActions.setRegistrationError({ isRegistrationError: true })]
+          : [AuthActions.setUserInfo({ userInfo }), AuthActions.initSession()]
+      )
+    )
+  );
+
+  updateUser$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateUser),
+      switchMap(({ user }) => this.authService.updateUser(user)),
       switchMap((userInfo) => [
         _.isEmpty(userInfo)
           ? UiActions.setRegistrationError({ isRegistrationError: true })
-          : AuthActions.logIn({ email: userInfo!.email, password: userInfo!.password }),
+          : AuthActions.setUserInfo({ userInfo }),
       ])
     )
   );
