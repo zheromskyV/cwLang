@@ -9,3 +9,5 @@ export interface Word {
 }
 
 export type Words = Word[];
+
+export type WordInfo = Word | null | undefined;
