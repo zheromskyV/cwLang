@@ -70,4 +70,5 @@ export const dictionary: CommonModel = {
   registrationError: 'Пользователь с таким логином уже существует',
   updateError: 'Обновление данных не произошло',
   updateSuccess: 'Данные обновлены',
+  coursesError: 'Ошибка при работе с курсами',
 };

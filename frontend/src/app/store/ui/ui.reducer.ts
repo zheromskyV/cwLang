@@ -28,6 +28,10 @@ const reducer = createReducer(
   on(UiActions.setUpdateUserSuccess, (state, { isUpdateUserSuccess }) => ({
     ...state,
     isUpdateUserSuccess,
+  })),
+  on(UiActions.setCoursesError, (state, { isCoursesError }) => ({
+    ...state,
+    isCoursesError,
   }))
 );
 

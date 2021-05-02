@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-export const COURSE = `{
+const COURSE = `{
   _id,
   title,
   info,

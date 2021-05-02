@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AuthStoreModule } from './auth/auth-store.module';
+import { CoursesStoreModule } from './courses/courses-store.module';
 import { UiStoreModule } from './ui/ui-store.module';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { UiStoreModule } from './ui/ui-store.module';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
     AuthStoreModule,
+    CoursesStoreModule,
     UiStoreModule,
   ],
 })
