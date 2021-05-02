@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { KnobModule } from 'primeng/knob';
 import { CalendarModule } from 'primeng/calendar';
 import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -31,6 +32,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     KnobModule,
     CalendarModule,
     MessageModule,
+    ToastModule,
   ],
   exports: [
     RegistrationComponent,
@@ -43,6 +45,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     DropdownModule,
     KnobModule,
     CalendarModule,
+    ToastModule,
   ],
 })
 export class AuthModule {}

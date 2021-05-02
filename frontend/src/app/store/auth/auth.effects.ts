@@ -82,11 +82,11 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.updateUser),
       switchMap(({ user }) => this.authService.updateUser(user)),
-      switchMap((userInfo) => [
+      switchMap((userInfo) =>
         _.isEmpty(userInfo)
-          ? UiActions.setRegistrationError({ isRegistrationError: true })
-          : AuthActions.setUserInfo({ userInfo }),
-      ])
+          ? [UiActions.setRegistrationError({ isRegistrationError: true })]
+          : [AuthActions.setUserInfo({ userInfo }), UiActions.setUpdateUserSuccess({ isUpdateUserSuccess: true })]
+      )
     )
   );
 
