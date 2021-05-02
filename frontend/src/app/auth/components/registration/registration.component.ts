@@ -6,13 +6,8 @@ import { MessageService, PrimeIcons } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import {
-  LANGUAGE_OPTIONS,
-  MIN_ABOUT_LENGTH,
-  MIN_NAME_LENGTH,
-  MIN_PASSWORD_LENGTH,
-  ROLE_OPTIONS,
-} from 'src/app/constants/auth';
+import { MIN_ABOUT_LENGTH, MIN_NAME_LENGTH, MIN_PASSWORD_LENGTH, ROLE_OPTIONS } from 'src/app/constants/auth';
+import { LANGUAGE_OPTIONS } from 'src/app/constants/languages';
 import { Languages } from 'src/app/constants/languages.enum';
 import { Roles } from 'src/app/constants/roles.enum';
 import { NavigationService } from 'src/app/core/services/navigation.service';

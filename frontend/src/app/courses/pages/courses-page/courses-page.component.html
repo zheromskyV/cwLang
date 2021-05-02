@@ -17,6 +17,22 @@
     (deleteCourse)="deleteCourse($event)"
   ></cwl-courses-table>
 
+  <p-dialog
+    [(visible)]="formDialog"
+    [header]="dictionary.course"
+    styleClass="p-fluid form-dialog"
+    [modal]="true"
+    (onHide)="cancel()"
+  >
+    <ng-template pTemplate="content">
+      <cwl-course-form
+        [course]="currentCourse"
+        (saveCourse)="saveCourse($event)"
+        (cancelCourse)="cancel()"
+      ></cwl-course-form>
+    </ng-template>
+  </p-dialog>
+
   <p-confirmDialog></p-confirmDialog>
 </div>
 

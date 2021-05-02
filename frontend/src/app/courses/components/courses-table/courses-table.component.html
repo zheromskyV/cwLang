@@ -61,7 +61,10 @@
       <td colspan="6">
         <div>
           <p>{{ course.info }}</p>
-          <cwl-words-table [words]="course.words"></cwl-words-table>
+          <cwl-words-table
+            *ngIf="course.words.length"
+            [words]="course.words"
+          ></cwl-words-table>
         </div>
       </td>
     </tr>

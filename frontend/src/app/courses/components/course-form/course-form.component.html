@@ -1,0 +1,88 @@
+<form 
+  class="form p-d-flex p-flex-column p-jc-start"
+  [formGroup]="formGroup"
+  novalidate
+>
+  <div class="info-section">
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.title"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.courseTitle"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.title"
+        [formControlName]="formFields.title"
+      />
+    </div>
+
+    <div class="field dropdowns p-grid p-formgrid">
+      <p-dropdown 
+        class="lang p-col-12 p-md-6" 
+        [options]="languages" 
+        optionLabel="label"
+        optionValue="value"
+        [placeholder]="dictionary.courseLang"
+        [id]="formFields.lang"
+        [formControlName]="formFields.lang"
+      ></p-dropdown>
+
+      <p-dropdown 
+        class="lang-level p-col-12 p-md-6" 
+        [options]="languageLevels" 
+        optionLabel="label"
+        optionValue="value"
+        [placeholder]="dictionary.courseLevel"
+        [id]="formFields.level"
+        [formControlName]="formFields.level"
+      ></p-dropdown>
+    </div>
+
+    <div class="field">
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        spinnerMode="horizontal"
+        [incrementButtonIcon]="icons.increment"
+        incrementButtonClass="p-button-success"
+        [decrementButtonIcon]="icons.decrement"
+        decrementButtonClass="p-button-danger"
+        [step]="0.5"
+        mode="currency"
+        currency="USD"
+        [id]="formFields.price"
+        [formControlName]="formFields.price"
+      ></p-inputNumber>
+    </div>
+
+    <div class="field about-field">
+      <p>{{ dictionary.courseInfo }}</p>
+      <textarea 
+        pInputTextarea         
+        [id]="formFields.info"
+        [formControlName]="formFields.info"
+        rows="5"
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="buttons-container p-d-flex p-jc-end">
+    <p-button 
+      [label]="dictionary.save"
+      [icon]="icons.save"
+      [disabled]="!isFormValid"
+      (click)="save()"
+      styleClass="button p-button"
+    ></p-button>
+
+    <p-button 
+      [label]="dictionary.cancel"
+      [icon]="icons.cancel"
+      (click)="cancel()"
+      styleClass="button p-button-secondary"
+    ></p-button>
+  </div>
+</form>

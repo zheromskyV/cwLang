@@ -37,12 +37,15 @@ export class CoursesService {
   }
 
   update(course: Course): Observable<CourseInfo> {
+    const cleanCourse = _.omit(course, ['_id', '__typename']);
+    const cleanWords = cleanCourse.words?.map((word) => _.omit(word, '__typename'));
+
     return this.apollo
       .mutate<{ updateCourse: Course }>({
         mutation: UPDATE_COURSE,
         variables: {
           id: course._id,
-          course: _.omit(course, ['_id', '__typename']),
+          course: { ...cleanCourse, words: cleanWords },
         },
       })
       .pipe(

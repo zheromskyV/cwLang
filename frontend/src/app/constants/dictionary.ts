@@ -58,10 +58,12 @@ export const dictionary: CommonModel = {
   edit: 'Редактировать',
 
   // courses
+  course: 'Курс',
   courseTitle: 'Название',
   courseLang: 'Язык',
   courseLevel: 'Уровень',
   coursePrice: 'Цена',
+  courseInfo: 'Описание',
   add: 'Добавить',
 
   // words

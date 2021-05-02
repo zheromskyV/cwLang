@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { RootState } from 'src/app/store/root.state';
 import { dictionary } from 'src/app/constants/dictionary';
-import { Course, Courses } from 'src/app/models/course';
+import { Course, CourseInfo, Courses } from 'src/app/models/course';
 import * as CoursesActions from '../../../store/courses/courses.actions';
 import * as fromCourses from '../../../store/courses/courses.selectors';
 
@@ -23,6 +23,9 @@ export class CoursesPageComponent implements OnInit {
   };
 
   courses$: Observable<Courses>;
+  formDialog: boolean;
+  isEditing: boolean;
+  currentCourse: CourseInfo;
 
   constructor(private readonly store: Store<RootState>, private readonly confirmationService: ConfirmationService) {}
 
@@ -32,9 +35,31 @@ export class CoursesPageComponent implements OnInit {
     this.courses$ = this.store.select(fromCourses.getCourses);
   }
 
-  addCourse(): void {}
+  addCourse(): void {
+    this.currentCourse = null;
+    this.formDialog = true;
+    this.isEditing = false;
+  }
 
-  editCourse(course: Course): void {}
+  editCourse(course: Course): void {
+    this.currentCourse = { ...course };
+    this.formDialog = true;
+    this.isEditing = true;
+  }
+
+  saveCourse(course: Course): void {
+    this.isEditing
+      ? this.store.dispatch(CoursesActions.updateCourse({ course }))
+      : this.store.dispatch(CoursesActions.addCourse({ course }));
+
+    this.cancel();
+  }
+
+  cancel(): void {
+    this.currentCourse = null;
+    this.isEditing = false;
+    this.formDialog = false;
+  }
 
   deleteCourse(course: Course): void {
     this.confirmationService.confirm({
