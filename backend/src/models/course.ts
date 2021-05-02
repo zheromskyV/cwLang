@@ -8,6 +8,7 @@ const CourseSchema = new Schema(
     info: { type: String, required: true },
     language: { type: String, required: true },
     price: { type: String, required: true },
+    level: { type: String, required: true },
     words: [
       {
         type: Schema.Types.ObjectId,

@@ -1,11 +1,12 @@
 import { gql } from 'apollo-angular';
 
-const COURSE = `{
+export const COURSE = `{
   _id,
   title,
   info,
   price,
   language,
+  level,
   words {
     _id,
     target,
@@ -29,7 +30,7 @@ export const CREATE_COURSE = gql`
 
 export const UPDATE_COURSE = gql`
   mutation Course($id: String!, $course: CourseInput!) {
-    updateCourseCourse(id: $id, course: $course) ${COURSE}
+    updateCourse(id: $id, course: $course) ${COURSE}
   }
 `;
 

@@ -6,6 +6,7 @@ export default `
     title: String!
     language: String!
     info: String!
+    level: String!
     words: [WordType!]!
     price: Float
   }
@@ -13,6 +14,7 @@ export default `
   input CourseInput {
     title: String!
     language: String!
+    level: String!
     info: String!
     words: [WordInput!]!
     price: Float!

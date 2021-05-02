@@ -5,6 +5,7 @@ import { IWord } from './word.interface';
 export interface ICourse extends Document {
   _id: Types.ObjectId;
   title: string;
+  level: string;
   language: string;
   info: string;
   words: IWord[];
