@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <form 
   class="form p-d-flex p-flex-column p-jc-start"
   [class.non-editable]="!isEditable"
@@ -137,10 +139,5 @@
       (click)="back()"
       styleClass="button p-button-secondary"
     ></p-button>
-  </div>
-
-  <div class="messages p-d-flex p-flex-column p-jc-start p-ai-center">
-    <p-message *ngIf="isRegistrationError" severity="error" [text]="dictionary.registrationError"></p-message>
-    <p-message *ngIf="isUpdateUserError" severity="error" [text]="dictionary.updateError"></p-message>
   </div>
 </form>

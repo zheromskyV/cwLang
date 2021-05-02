@@ -12,3 +12,8 @@ export const setRegistrationError = createAction(
 );
 
 export const setUpdateUserError = createAction('[UI] SET_UPDATE_USER_ERROR', props<{ isUpdateUserError: boolean }>());
+
+export const setUpdateUserSuccess = createAction(
+  '[UI] SET_UPDATE_USER_SUCCESS',
+  props<{ isUpdateUserSuccess: boolean }>()
+);

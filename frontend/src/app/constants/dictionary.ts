@@ -24,7 +24,6 @@ export const dictionary: CommonModel = {
   password: 'Пароль',
   signIn: 'Войти',
   signUp: 'Зарегистрироваться',
-  loginError: 'Ошибка входа. Неправильный логин или пароль.',
 
   // registration
   registration: 'Регистрация',
@@ -48,7 +47,6 @@ export const dictionary: CommonModel = {
   birthday: 'Дата рождения',
   nativeLang: 'Родной язык',
   about: 'О себе',
-  registrationError: 'Ошибка регистрации',
 
   // profile
   status: 'Статус',
@@ -58,9 +56,18 @@ export const dictionary: CommonModel = {
   save: 'Сохранить',
   cancel: 'Отменить',
   edit: 'Редактировать',
-  updateError: 'Ошибка при обновлении данных',
 
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
+
+  // notifications
+  error: 'Ошибка',
+  success: 'Успех',
+  info: 'Информация',
+  warn: 'Предупреждение',
+  loginError: 'Неправильный логин или пароль',
+  registrationError: 'Пользователь с таким логином уже существует',
+  updateError: 'Обновление данных не произошло',
+  updateSuccess: 'Данные обновлены',
 };

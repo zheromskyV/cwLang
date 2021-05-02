@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { MIN_PASSWORD_LENGTH } from 'src/app/constants/auth';
 import { NavigationService } from 'src/app/core/services/navigation.service';
@@ -17,6 +17,7 @@ import * as fromUi from '../../../store/ui/ui.selectors';
   selector: 'cwl-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [MessageService],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   dictionary = dictionary;
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private readonly store: Store<RootState>,
     private readonly formBuilder: FormBuilder,
-    private readonly navigationService: NavigationService
+    private readonly navigationService: NavigationService,
+    private readonly messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.store.select(fromUi.getLoginError).subscribe((isError) => {
         this.isLoginError = isError;
+
+        this.isLoginError && this.showErrorMessage(this.dictionary.loginError);
       })
     );
 
@@ -82,6 +86,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   signUp(): void {
     this.navigationService.navigateToSignUpPage();
+  }
+
+  private showErrorMessage(message: string): void {
+    this.messageService.add({
+      severity: 'error',
+      summary: this.dictionary.error,
+      detail: message,
+    });
   }
 
   ngOnDestroy(): void {

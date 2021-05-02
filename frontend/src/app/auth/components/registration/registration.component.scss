@@ -51,12 +51,6 @@
   }
 }
 
-.messages {
-  *:not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
-}
-
 :host ::ng-deep {
   .p-button {
     &.button {
