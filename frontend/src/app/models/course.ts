@@ -5,10 +5,10 @@ import { Word } from './word';
 export interface Course {
   _id?: string;
   title: string;
-  info: string;
-  price: number;
   language: Languages;
   level: LanguageLevels;
+  price: number;
+  info: string;
   words: Word[];
 }
 

@@ -8,6 +8,10 @@ const reducer = createReducer(
   on(CoursesActions.setCourses, (state, { courses }) => ({
     ...state,
     courses,
+  })),
+  on(CoursesActions.clearCourses, (state) => ({
+    ...state,
+    courses: [],
   }))
 );
 

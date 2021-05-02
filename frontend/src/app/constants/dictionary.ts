@@ -57,6 +57,19 @@ export const dictionary: CommonModel = {
   cancel: 'Отменить',
   edit: 'Редактировать',
 
+  // courses
+  courseTitle: 'Название',
+  courseLang: 'Язык',
+  courseLevel: 'Уровень',
+  coursePrice: 'Цена',
+  add: 'Добавить',
+
+  // words
+  wordsInitial: 'Слово',
+  wordsTarget: 'Перевод',
+  wordsInitialLang: 'Язык слова',
+  wordsTargetLang: 'Язык перевода',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
@@ -71,4 +84,10 @@ export const dictionary: CommonModel = {
   updateError: 'Обновление данных не произошло',
   updateSuccess: 'Данные обновлены',
   coursesError: 'Ошибка при работе с курсами',
+
+  // confirmation
+  confirm: 'Необходимо подверждение',
+  confirmMessage: 'Вы уверены, что хотите удалить выбранный элемент?',
+  acceptLabel: 'Да',
+  rejectLabel: 'Нет',
 };

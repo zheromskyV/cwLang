@@ -11,3 +11,5 @@ export const addCourse = createAction('[COURSES] ADD_COURSE', props<{ course: Co
 export const updateCourse = createAction('[COURSES] UPDATE_COURSE', props<{ course: Course }>());
 
 export const deleteCourse = createAction('[COURSES] DELETE_COURSE', props<{ course: Course }>());
+
+export const clearCourses = createAction('[COURSES] CLEAR_COURSES');

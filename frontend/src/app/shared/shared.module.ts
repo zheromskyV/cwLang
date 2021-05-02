@@ -12,6 +12,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { TableModule } from 'primeng/table';
     MessageModule,
     ToastModule,
     TableModule,
+    ConfirmDialogModule,
   ],
   exports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { TableModule } from 'primeng/table';
     MessageModule,
     ToastModule,
     TableModule,
+    ConfirmDialogModule,
   ],
 })
 export class SharedModule {}
