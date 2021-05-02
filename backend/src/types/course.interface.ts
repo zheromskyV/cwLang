@@ -6,7 +6,8 @@ export interface ICourse extends Document {
   _id: Types.ObjectId;
   title: string;
   level: string;
-  language: string;
+  initialLang: string;
+  targetLang: string;
   info: string;
   words: IWord[];
   price: number;

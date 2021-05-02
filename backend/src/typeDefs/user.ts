@@ -13,7 +13,7 @@ type ProfileType {
   info: String
   discount: Float
   rating: Float
-  languages: [LanguageType!]!
+  languages: [LanguageType!]
 }
 
 type UserType {

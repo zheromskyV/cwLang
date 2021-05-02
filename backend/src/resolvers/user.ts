@@ -56,10 +56,15 @@ const resolvers = {
           await Profile.findByIdAndUpdate(outdatedUser.profile, {
             ...user.profile,
             languages: createdLanguages,
-          });
+          },
+          { new: true, useFindAndModify: false });
         }
 
-        const updatedUser = await User.findByIdAndUpdate(id, omit(user, ['languages', 'profile']));
+        const updatedUser = await User.findByIdAndUpdate(
+          id,
+          omit(user, ['languages', 'profile']),
+          { new: true, useFindAndModify: false }
+        );
 
         return User.findById(updatedUser?._id).populate({
           path: 'profile',
