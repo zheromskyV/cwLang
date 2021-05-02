@@ -141,5 +141,6 @@
 
   <div class="messages p-d-flex p-flex-column p-jc-start p-ai-center">
     <p-message *ngIf="isRegistrationError" severity="error" [text]="dictionary.registrationError"></p-message>
+    <p-message *ngIf="isUpdateUserError" severity="error" [text]="dictionary.updateError"></p-message>
   </div>
 </form>

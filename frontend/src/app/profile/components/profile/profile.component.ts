@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
     this.isEditable = true;
   }
 
-  onCancel(): void {
+  onStopEditing(): void {
     this.isEditable = false;
   }
 }

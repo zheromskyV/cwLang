@@ -58,6 +58,7 @@ export const dictionary: CommonModel = {
   save: 'Сохранить',
   cancel: 'Отменить',
   edit: 'Редактировать',
+  updateError: 'Ошибка при обновлении данных',
 
   // not-found
   pageNotFound: 'Страница не найдена',

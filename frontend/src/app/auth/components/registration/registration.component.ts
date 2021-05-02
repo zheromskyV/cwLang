@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   @Input() isEditable: boolean = true;
   @Input() userInfo: UserInfo = null;
 
-  @Output() cancel = new EventEmitter();
+  @Output() stopEditing = new EventEmitter();
 
   dictionary = dictionary;
   icons = {
@@ -78,6 +78,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   private readonly subscriptions = new Subscription();
   isRegistrationError: boolean;
+  isUpdateUserError: boolean;
 
   constructor(
     private readonly store: Store<RootState>,
@@ -89,30 +90,31 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     const disabled = this.isProfilePage;
 
     this.formGroup = this.formBuilder.group({
-      [this.formFields.login]: [{ value: this.userInfo?.email, disabled }, [Validators.required, Validators.email]],
+      [this.formFields.login]: [{ value: '', disabled }, [Validators.required, Validators.email]],
       [this.formFields.password]: [
-        { value: this.userInfo?.password, disabled },
+        { value: '', disabled },
         [(Validators.required, Validators.minLength(MIN_PASSWORD_LENGTH))],
       ],
-      [this.formFields.role]: [{ value: this.userInfo?.role, disabled }, [Validators.required]],
-      [this.formFields.nativeLang]: [{ value: this.userInfo?.nativeLanguage, disabled }, [Validators.required]],
-      [this.formFields.birthday]: [
-        { value: this.userInfo?.birthday ? new Date(this.userInfo!.birthday) : null, disabled },
-        [(Validators.required, this.birthdayValidator)],
-      ],
-      [this.formFields.name]: [this.userInfo?.name, [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.surname]: [this.userInfo?.surname, [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.about]: [this.userInfo?.profile?.info, [Validators.minLength(MIN_ABOUT_LENGTH)]],
-      [this.formFields.langs[Languages.Be]]: [this.getLangValueFromUser(Languages.Be), []],
-      [this.formFields.langs[Languages.Ch]]: [this.getLangValueFromUser(Languages.Ch), []],
-      [this.formFields.langs[Languages.En]]: [this.getLangValueFromUser(Languages.En), []],
-      [this.formFields.langs[Languages.Fr]]: [this.getLangValueFromUser(Languages.Fr), []],
-      [this.formFields.langs[Languages.Ge]]: [this.getLangValueFromUser(Languages.Ge), []],
-      [this.formFields.langs[Languages.It]]: [this.getLangValueFromUser(Languages.It), []],
-      [this.formFields.langs[Languages.Ru]]: [this.getLangValueFromUser(Languages.Ru), []],
-      [this.formFields.langs[Languages.Sp]]: [this.getLangValueFromUser(Languages.Sp), []],
-      [this.formFields.langs[Languages.Sw]]: [this.getLangValueFromUser(Languages.Sw), []],
+      [this.formFields.role]: [{ value: null, disabled }, [Validators.required]],
+      [this.formFields.nativeLang]: [{ value: null, disabled }, [Validators.required]],
+      [this.formFields.birthday]: [{ value: null, disabled }, [(Validators.required, this.birthdayValidator)]],
+      [this.formFields.name]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
+      [this.formFields.surname]: ['', [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
+      [this.formFields.about]: ['', [Validators.minLength(MIN_ABOUT_LENGTH)]],
+      [this.formFields.langs[Languages.Be]]: [0, []],
+      [this.formFields.langs[Languages.Ch]]: [0, []],
+      [this.formFields.langs[Languages.En]]: [0, []],
+      [this.formFields.langs[Languages.Fr]]: [0, []],
+      [this.formFields.langs[Languages.Ge]]: [0, []],
+      [this.formFields.langs[Languages.It]]: [0, []],
+      [this.formFields.langs[Languages.Ru]]: [0, []],
+      [this.formFields.langs[Languages.Sp]]: [0, []],
+      [this.formFields.langs[Languages.Sw]]: [0, []],
     });
+
+    if (this.isProfilePage && this.userInfo) {
+      this.prefillData();
+    }
 
     this.subscriptions.add(
       this.store.select(fromUi.getRegistrationError).subscribe((isError) => {
@@ -121,14 +123,43 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.add(
-      this.formGroup.valueChanges.pipe(filter(() => this.isRegistrationError)).subscribe(() => {
-        this.store.dispatch(UiActions.setRegistrationError({ isRegistrationError: false }));
+      this.store.select(fromUi.getUpdateUserError).subscribe((isError) => {
+        this.isUpdateUserError = isError;
       })
+    );
+
+    this.subscriptions.add(
+      this.formGroup.valueChanges
+        .pipe(filter(() => this.isRegistrationError || this.isUpdateUserError))
+        .subscribe(() => {
+          this.store.dispatch(UiActions.setRegistrationError({ isRegistrationError: false }));
+          this.store.dispatch(UiActions.setUpdateUserError({ isUpdateUserError: false }));
+        })
     );
   }
 
   private getLangValueFromUser(langName: Languages): number {
     return this.userInfo?.profile?.languages.find(({ name }) => name === langName)?.value || 0;
+  }
+
+  private prefillData(): void {
+    this.formGroup.controls[this.formFields.login].setValue(this.userInfo!.email);
+    this.formGroup.controls[this.formFields.password].setValue(this.userInfo!.password);
+    this.formGroup.controls[this.formFields.role].setValue(this.userInfo!.role);
+    this.formGroup.controls[this.formFields.nativeLang].setValue(this.userInfo!.nativeLanguage);
+    this.formGroup.controls[this.formFields.birthday].setValue(new Date(this.userInfo!.birthday));
+    this.formGroup.controls[this.formFields.name].setValue(this.userInfo!.name);
+    this.formGroup.controls[this.formFields.surname].setValue(this.userInfo!.surname);
+    this.formGroup.controls[this.formFields.about].setValue(this.userInfo!.profile?.info);
+    this.formGroup.controls[this.formFields.langs[Languages.Be]].setValue(this.getLangValueFromUser(Languages.Be));
+    this.formGroup.controls[this.formFields.langs[Languages.Ch]].setValue(this.getLangValueFromUser(Languages.Ch));
+    this.formGroup.controls[this.formFields.langs[Languages.En]].setValue(this.getLangValueFromUser(Languages.En));
+    this.formGroup.controls[this.formFields.langs[Languages.Fr]].setValue(this.getLangValueFromUser(Languages.Fr));
+    this.formGroup.controls[this.formFields.langs[Languages.Ge]].setValue(this.getLangValueFromUser(Languages.Ge));
+    this.formGroup.controls[this.formFields.langs[Languages.It]].setValue(this.getLangValueFromUser(Languages.It));
+    this.formGroup.controls[this.formFields.langs[Languages.Ru]].setValue(this.getLangValueFromUser(Languages.Ru));
+    this.formGroup.controls[this.formFields.langs[Languages.Sp]].setValue(this.getLangValueFromUser(Languages.Sp));
+    this.formGroup.controls[this.formFields.langs[Languages.Sw]].setValue(this.getLangValueFromUser(Languages.Sw));
   }
 
   get isFormValid(): boolean {
@@ -205,7 +236,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       },
     };
 
-    console.log(user);
+    this.stopEditing.emit();
+    this.store.dispatch(AuthActions.updateUser({ user }));
   }
 
   submit(): void {
@@ -217,7 +249,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   back(): void {
-    this.isProfilePage ? this.cancel.emit() : this.navigationService.navigateToLoginPage();
+    if (this.isProfilePage) {
+      this.prefillData();
+      this.stopEditing.emit();
+      return;
+    }
+
+    this.navigationService.navigateToLoginPage();
   }
 
   private birthdayValidator({ value }: FormControl): ValidationErrors | null {

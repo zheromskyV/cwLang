@@ -7,10 +7,9 @@
 }
 
 .container {
-  width: 50rem;
-  min-height: 30rem;
+  width: 45rem;
   padding: 2rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
 
   @extend %std-tile;
 }

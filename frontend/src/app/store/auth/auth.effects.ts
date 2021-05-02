@@ -78,6 +78,18 @@ export class AuthEffects {
     )
   );
 
+  updateUser$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateUser),
+      switchMap(({ user }) => this.authService.updateUser(user)),
+      switchMap((userInfo) => [
+        _.isEmpty(userInfo)
+          ? UiActions.setRegistrationError({ isRegistrationError: true })
+          : AuthActions.setUserInfo({ userInfo }),
+      ])
+    )
+  );
+
   private isSessionValid(loginTimestamp: number): boolean {
     return loginTimestamp + SESSION_EXPIRATION_TIME > Date.now();
   }

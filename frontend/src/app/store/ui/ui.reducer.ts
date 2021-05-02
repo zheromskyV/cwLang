@@ -20,6 +20,10 @@ const reducer = createReducer(
   on(UiActions.setRegistrationError, (state, { isRegistrationError }) => ({
     ...state,
     isRegistrationError,
+  })),
+  on(UiActions.setUpdateUserError, (state, { isUpdateUserError }) => ({
+    ...state,
+    isUpdateUserError,
   }))
 );
 

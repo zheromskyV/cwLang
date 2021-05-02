@@ -2,7 +2,7 @@
   [isProfilePage]="true"
   [isEditable]="isEditable"
   [userInfo]="userInfo$ | async"
-  (cancel)="onCancel()"
+  (stopEditing)="onStopEditing()"
 ></cwl-registration>
 
 <div class="buttons-container p-d-flex p-jc-end" *ngIf="!isEditable">
