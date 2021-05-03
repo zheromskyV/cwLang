@@ -15,6 +15,7 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PickListModule } from 'primeng/picklist';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TableModule,
     DialogModule,
     ConfirmDialogModule,
+    PickListModule,
   ],
   exports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TableModule,
     DialogModule,
     ConfirmDialogModule,
+    PickListModule,
   ],
 })
 export class SharedModule {}

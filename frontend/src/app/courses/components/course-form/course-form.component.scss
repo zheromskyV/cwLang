@@ -5,8 +5,12 @@
 }
 
 .form {
-  width: 35rem;
+  width: 50rem;
   margin: 0 2rem;
+
+  &-wrapper {
+    width: 35rem;
+  }
 }
 
 .field {
@@ -37,6 +41,14 @@
   textarea {
     resize: none;
     width: 100%;
+  }
+}
+
+.words-section {
+  width: 100%;
+
+  p-button {
+    margin: 0 0 1rem;
   }
 }
 

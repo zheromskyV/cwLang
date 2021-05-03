@@ -72,6 +72,10 @@ export const dictionary: CommonModel = {
   wordsTarget: 'Перевод',
   wordsInitialLang: 'Язык слова',
   wordsTargetLang: 'Язык перевода',
+  searchByWord: 'Поиск по слову',
+  availableItems: 'Доступные',
+  selectedItems: 'Выбранные',
+  loadWords: 'Загрузить слова',
 
   // not-found
   pageNotFound: 'Страница не найдена',

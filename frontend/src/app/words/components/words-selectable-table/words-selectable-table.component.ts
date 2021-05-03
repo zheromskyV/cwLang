@@ -9,14 +9,32 @@ import { Words } from 'src/app/models/word';
   styleUrls: ['./words-selectable-table.component.scss'],
 })
 export class WordsSelectableTableComponent implements OnInit {
-  @Input() words: Words = [];
+  @Input() sourceWords: Words = [];
+  @Output() sourceWordsChange = new EventEmitter<Words>();
 
-  @Input() selectedWords: Words = [];
-  @Output() selectedWordsChange = new EventEmitter<Words>();
+  @Input() targetWords: Words = [];
+  @Output() targetWordsChange = new EventEmitter<Words>();
 
   dictionary = dictionary;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  moveToTarget(words: Words): void {
+    this.targetWords = [...this.targetWords, ...words];
+    this.sourceWords = this.sourceWords.filter((word) => !words.includes(word));
+    this.emitWords();
+  }
+
+  moveToSource(words: Words): void {
+    this.sourceWords = [...this.sourceWords, ...words];
+    this.targetWords = this.targetWords.filter((word) => !words.includes(word));
+    this.emitWords();
+  }
+
+  private emitWords(): void {
+    this.sourceWordsChange.emit(this.sourceWords);
+    this.targetWordsChange.emit(this.targetWords);
+  }
 }
