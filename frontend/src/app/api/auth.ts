@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-const USER = `{
+export const USER = `{
   _id
   email
   password
@@ -35,5 +35,11 @@ export const CREATE_USER = gql`
 export const UPDATE_USER = gql`
   mutation User($id: String!, $user: UserInput!) {
     updateUser(id: $id, user: $user) ${USER}
+  }
+`;
+
+export const GET_USERS = gql`
+  query User($role: String!) {
+    getUserByRole(role: $role) ${USER}
   }
 `;

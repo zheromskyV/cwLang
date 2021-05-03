@@ -52,6 +52,10 @@ input UserInput {
   profile: ProfileInput!
 }
 
+extend type Query {
+  getUsersByRole(role: String!): [UserType!]!
+}
+
 extend type Mutation {
   createUser(user: UserInput!): UserType!
   updateUser(id: String!, user: UserInput!): UserType!

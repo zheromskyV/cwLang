@@ -78,6 +78,16 @@ const resolvers = {
       }
     },
   },
+  Query: {
+    getUsersByRole: async (_: void, { role }: { role: string }): Promise<IUser[]> => {
+      return User.find({ role }).populate({
+        path: 'profile',
+        populate: {
+          path: 'languages',
+        }
+      });
+    },
+  },
 };
 
 export default resolvers;
