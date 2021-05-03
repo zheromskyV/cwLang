@@ -21,17 +21,27 @@
 
     <div class="field dropdowns p-grid p-formgrid">
       <p-dropdown 
-        class="lang p-col-12 p-md-6" 
+        class="initial-lang p-col-12 p-md-4" 
         [options]="languages" 
         optionLabel="label"
         optionValue="value"
-        [placeholder]="dictionary.courseLang"
-        [id]="formFields.lang"
-        [formControlName]="formFields.lang"
+        [placeholder]="dictionary.courseInitialLang"
+        [id]="formFields.initialLang"
+        [formControlName]="formFields.initialLang"
       ></p-dropdown>
 
       <p-dropdown 
-        class="lang-level p-col-12 p-md-6" 
+        class="target-lang p-col-12 p-md-4" 
+        [options]="languages" 
+        optionLabel="label"
+        optionValue="value"
+        [placeholder]="dictionary.courseTargetLang"
+        [id]="formFields.targetLang"
+        [formControlName]="formFields.targetLang"
+      ></p-dropdown>
+
+      <p-dropdown 
+        class="lang-level p-col-12 p-md-4" 
         [options]="languageLevels" 
         optionLabel="label"
         optionValue="value"

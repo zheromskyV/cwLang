@@ -17,6 +17,7 @@ export class CoursesService {
     return this.apollo
       .query<{ getCourses: Courses }>({
         query: GET_COURSES,
+        fetchPolicy: 'no-cache',
       })
       .pipe(
         map(({ data }) => data?.getCourses),

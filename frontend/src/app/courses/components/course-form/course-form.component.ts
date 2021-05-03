@@ -34,7 +34,8 @@ export class CourseFormComponent implements OnInit {
   formGroup: FormGroup;
   formFields = {
     title: 'title',
-    lang: 'lang',
+    initialLang: 'initialLang',
+    targetLang: 'targetLang',
     level: 'level',
     price: 'price',
     info: 'info',
@@ -45,9 +46,10 @@ export class CourseFormComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       [this.formFields.title]: [this.course?.title, [Validators.required, Validators.minLength(MIN_NAME_LENGTH)]],
-      [this.formFields.lang]: [this.course?.language, [Validators.required]],
+      [this.formFields.initialLang]: [this.course?.initialLang, [Validators.required]],
+      [this.formFields.targetLang]: [this.course?.targetLang, [Validators.required]],
       [this.formFields.level]: [this.course?.level, [Validators.required]],
-      [this.formFields.price]: [this.course?.price, [Validators.required]],
+      [this.formFields.price]: [this.course?.price ?? 0, [Validators.required]],
       [this.formFields.info]: [this.course?.info, [Validators.required, Validators.minLength(MIN_ABOUT_LENGTH)]],
     });
   }
@@ -68,7 +70,8 @@ export class CourseFormComponent implements OnInit {
     const course: Course = {
       ...this.course,
       title: this.getFieldValue(this.formFields.title),
-      language: this.getFieldValue(this.formFields.lang) as Languages,
+      initialLang: this.getFieldValue(this.formFields.initialLang) as Languages,
+      targetLang: this.getFieldValue(this.formFields.targetLang) as Languages,
       level: this.getFieldValue(this.formFields.level) as LanguageLevels,
       price: this.getFieldValue(this.formFields.price),
       info: this.getFieldValue(this.formFields.info),

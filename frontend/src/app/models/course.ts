@@ -5,7 +5,8 @@ import { Word } from './word';
 export interface Course {
   _id?: string;
   title: string;
-  language: Languages;
+  initialLang: Languages;
+  targetLang: Languages;
   level: LanguageLevels;
   price: number;
   info: string;

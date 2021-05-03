@@ -18,6 +18,7 @@ export class WordsService {
       .query<{ getWords: Words }>({
         query: GET_WORDS,
         variables: { initialLang, targetLang },
+        fetchPolicy: 'no-cache',
       })
       .pipe(
         map(({ data }) => data?.getWords),

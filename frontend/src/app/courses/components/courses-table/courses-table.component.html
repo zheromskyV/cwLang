@@ -12,9 +12,13 @@
         {{ dictionary.courseTitle }}
         <p-sortIcon field="title"></p-sortIcon>
       </th>
-      <th pSortableColumn="language">
-        {{ dictionary.courseLang }}
-        <p-sortIcon field="language"></p-sortIcon>
+      <th pSortableColumn="initialLang">
+        {{ dictionary.courseInitialLang }}
+        <p-sortIcon field="initialLang"></p-sortIcon>
+      </th>
+      <th pSortableColumn="targetLang">
+        {{ dictionary.courseTargetLang }}
+        <p-sortIcon field="targetLang"></p-sortIcon>
       </th>
       <th pSortableColumn="level">
         {{ dictionary.courseLevel }}
@@ -38,7 +42,8 @@
         ></p-button>
       </td>
       <td>{{ course.title }}</td>
-      <td>{{ dictionary[course.language] }}</td>
+      <td>{{ dictionary[course.initialLang] }}</td>
+      <td>{{ dictionary[course.targetLang] }}</td>
       <td>{{ course.level }}</td>
       <td>{{ course.price }}</td>
       <td>
@@ -58,7 +63,7 @@
 
   <ng-template pTemplate="rowexpansion" let-course>
     <tr class="inner-data">
-      <td colspan="6">
+      <td colspan="7">
         <div>
           <p>{{ course.info }}</p>
           <cwl-words-table

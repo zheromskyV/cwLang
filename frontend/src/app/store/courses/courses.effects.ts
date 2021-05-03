@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { RootState } from '../root.state';
 import { CoursesService } from 'src/app/courses/services/courses.service';
@@ -24,7 +24,6 @@ export class CoursesEffects {
     this.actions$.pipe(
       ofType(CoursesActions.getCourses),
       switchMap(() => this.coursesService.getAll()),
-      tap((c) => console.log(c)),
       switchMap((courses) => [CoursesActions.setCourses({ courses })])
     )
   );

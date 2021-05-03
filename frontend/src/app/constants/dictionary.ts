@@ -60,7 +60,8 @@ export const dictionary: CommonModel = {
   // courses
   course: 'Курс',
   courseTitle: 'Название',
-  courseLang: 'Язык',
+  courseInitialLang: 'Язык студентов',
+  courseTargetLang: 'Язык обучения',
   courseLevel: 'Уровень',
   coursePrice: 'Цена',
   courseInfo: 'Описание',
