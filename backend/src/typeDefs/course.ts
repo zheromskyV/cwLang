@@ -4,7 +4,8 @@ export default `
   type CourseType {
     _id: String!
     title: String!
-    language: String!
+    initialLang: String!
+    targetLang: String!
     info: String!
     level: String!
     words: [WordType!]!
@@ -13,10 +14,11 @@ export default `
 
   input CourseInput {
     title: String!
-    language: String!
+    initialLang: String!
+    targetLang: String!
     level: String!
     info: String!
-    words: [WordInput!]!
+    words: [WordInput!]
     price: Float!
   }
 
