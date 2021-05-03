@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 import { WordsTableComponent } from './components/words-table/words-table.component';
-import { WordsSelectableTableComponent } from './components/words-selectable-table/words-selectable-table.component';
+import { WordsSelectionListComponent } from './components/words-selection-list/words-selection-list.component';
 
 @NgModule({
-  declarations: [WordsTableComponent, WordsSelectableTableComponent],
+  declarations: [WordsTableComponent, WordsSelectionListComponent],
   imports: [CommonModule, SharedModule],
-  exports: [WordsTableComponent, WordsSelectableTableComponent],
+  exports: [WordsTableComponent, WordsSelectionListComponent],
 })
 export class WordsModule {}

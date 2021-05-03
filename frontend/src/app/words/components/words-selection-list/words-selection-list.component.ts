@@ -4,11 +4,11 @@ import { dictionary } from 'src/app/constants/dictionary';
 import { Words } from 'src/app/models/word';
 
 @Component({
-  selector: 'cwl-words-selectable-table',
-  templateUrl: './words-selectable-table.component.html',
-  styleUrls: ['./words-selectable-table.component.scss'],
+  selector: 'cwl-words-selection-list',
+  templateUrl: './words-selection-list.component.html',
+  styleUrls: ['./words-selection-list.component.scss'],
 })
-export class WordsSelectableTableComponent implements OnInit {
+export class WordsSelectionListComponent implements OnInit {
   @Input() sourceWords: Words = [];
   @Output() sourceWordsChange = new EventEmitter<Words>();
 
