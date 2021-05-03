@@ -22,3 +22,5 @@ export const getUpdateUserSuccess = createSelector(
 );
 
 export const getCoursesError = createSelector(rootSelector, (state: UiState): boolean => state.isCoursesError);
+
+export const getWordsError = createSelector(rootSelector, (state: UiState): boolean => state.isWordsError);

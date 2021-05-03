@@ -32,6 +32,10 @@ const reducer = createReducer(
   on(UiActions.setCoursesError, (state, { isCoursesError }) => ({
     ...state,
     isCoursesError,
+  })),
+  on(UiActions.setWordsError, (state, { isWordsError }) => ({
+    ...state,
+    isWordsError,
   }))
 );
 
