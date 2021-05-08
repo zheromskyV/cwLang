@@ -47,16 +47,11 @@
       <td>{{ course.level }}</td>
       <td>{{ course.price }}</td>
       <td>
-        <p-button 
-          styleClass="p-button-rounded p-button-warning p-mr-2"
-          [icon]="icons.edit"
-          (click)="edit(course)"
-        ></p-button>
-        <p-button 
-          styleClass="p-button-rounded p-button-danger"
-          [icon]="icons.delete"
-          (click)="delete(course)"
-        ></p-button>
+        <cwl-edit-delete-controls
+          [course]="course"
+          (onEdit)="edit($event)"
+          (onDelete)="delete($event)"
+        ></cwl-edit-delete-controls>
       </td>
     </tr>
   </ng-template>
