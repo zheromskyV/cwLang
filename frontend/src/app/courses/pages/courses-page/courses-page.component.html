@@ -1,0 +1,38 @@
+<div class="container">
+  <h2 class="header">{{ dictionary.courses }}</h2>
+  <p-divider></p-divider>
+
+  <div class="toolbar p-d-flex p-jc-end">
+    <p-button 
+      styleClass="p-button-success"
+      [icon]="icons.add"
+      [label]="dictionary.add"
+      (click)="addCourse()"
+    ></p-button>
+  </div>
+
+  <cwl-courses-table
+    [courses]="(courses$ | async) || []"
+    (editCourse)="editCourse($event)"
+    (deleteCourse)="deleteCourse($event)"
+  ></cwl-courses-table>
+
+  <p-dialog
+    [(visible)]="formDialog"
+    [header]="dictionary.course"
+    styleClass="p-fluid form-dialog"
+    [modal]="true"
+    (onHide)="cancel()"
+  >
+    <ng-template pTemplate="content">
+      <cwl-course-form
+        [course]="currentCourse"
+        (saveCourse)="saveCourse($event)"
+        (cancelCourse)="cancel()"
+      ></cwl-course-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog></p-confirmDialog>
+</div>
+

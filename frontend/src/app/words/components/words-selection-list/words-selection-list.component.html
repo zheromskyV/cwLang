@@ -1,0 +1,27 @@
+<p-pickList
+  [source]="sourceWords | slice:0"
+  [target]="targetWords | slice:0"
+  (onMoveToTarget)="moveToTarget($event.items)"
+  (onMoveToSource)="moveToSource($event.items)"
+  (onMoveAllToTarget)="moveToTarget($event.items)"
+  (onMoveAllToSource)="moveToSource($event.items)"
+  [sourceHeader]="dictionary.availableItems"
+  [targetHeader]="dictionary.selectedItems"
+  [dragdrop]="true"
+  [responsive]="true"
+  filterBy="initial"
+  [sourceFilterPlaceholder]="dictionary.searchByWord"
+  [targetFilterPlaceholder]="dictionary.searchByWord"
+  [sourceStyle]="{ 'height': '20rem' }"
+  [targetStyle]="{ 'height': '20rem' }"
+  [showSourceControls]="false"
+  [showTargetControls]="false"
+>
+  <ng-template pTemplate="item" let-word>
+    <div class="word">
+      <span class="word__initial">{{ word.initial }}</span>
+      <span class="word__target">{{ word.target }}</span>
+    </div>
+  </ng-template>
+</p-pickList>
+

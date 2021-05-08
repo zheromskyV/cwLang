@@ -10,7 +10,7 @@ import { RootState } from '../root.state';
 import * as AuthActions from './auth.actions';
 import * as fromAuth from './auth.selectors';
 import * as UiActions from '../ui/ui.actions';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 
 @Injectable()

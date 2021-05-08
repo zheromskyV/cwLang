@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { AuthModule } from '../auth/auth.module';
@@ -9,6 +8,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [ProfilePageComponent, StatusBarComponent, ProfileComponent],
-  imports: [CommonModule, ProfileRoutingModule, AuthModule],
+  imports: [ProfileRoutingModule, AuthModule],
 })
 export class ProfileModule {}

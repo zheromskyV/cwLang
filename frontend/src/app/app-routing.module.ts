@@ -6,13 +6,18 @@ import { AuthGuardService } from './core/services/auth-guard.service';
 
 const routes: Routes = [
   {
+    path: routerPaths.auth,
+    loadChildren: () => import('./auth/auth.module').then(({ AuthModule }) => AuthModule),
+  },
+  {
     path: routerPaths.myProfile,
     loadChildren: () => import('./profile/profile.module').then(({ ProfileModule }) => ProfileModule),
     canActivate: [AuthGuardService],
   },
   {
-    path: routerPaths.auth,
-    loadChildren: () => import('./auth/auth.module').then(({ AuthModule }) => AuthModule),
+    path: routerPaths.courses,
+    loadChildren: () => import('./courses/courses.module').then(({ CoursesModule }) => CoursesModule),
+    canActivate: [AuthGuardService],
   },
   {
     path: routerPaths.notFound,

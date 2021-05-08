@@ -57,6 +57,26 @@ export const dictionary: CommonModel = {
   cancel: 'Отменить',
   edit: 'Редактировать',
 
+  // courses
+  course: 'Курс',
+  courseTitle: 'Название',
+  courseInitialLang: 'Язык студентов',
+  courseTargetLang: 'Язык обучения',
+  courseLevel: 'Уровень',
+  coursePrice: 'Цена',
+  courseInfo: 'Описание',
+  add: 'Добавить',
+
+  // words
+  wordsInitial: 'Слово',
+  wordsTarget: 'Перевод',
+  wordsInitialLang: 'Язык слова',
+  wordsTargetLang: 'Язык перевода',
+  searchByWord: 'Поиск по слову',
+  availableItems: 'Доступные',
+  selectedItems: 'Выбранные',
+  loadWords: 'Загрузить слова',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
@@ -70,4 +90,11 @@ export const dictionary: CommonModel = {
   registrationError: 'Пользователь с таким логином уже существует',
   updateError: 'Обновление данных не произошло',
   updateSuccess: 'Данные обновлены',
+  coursesError: 'Ошибка при работе с курсами',
+
+  // confirmation
+  confirm: 'Необходимо подверждение',
+  confirmMessage: 'Вы уверены, что хотите удалить выбранный элемент?',
+  acceptLabel: 'Да',
+  rejectLabel: 'Нет',
 };

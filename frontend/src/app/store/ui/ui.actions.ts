@@ -17,3 +17,7 @@ export const setUpdateUserSuccess = createAction(
   '[UI] SET_UPDATE_USER_SUCCESS',
   props<{ isUpdateUserSuccess: boolean }>()
 );
+
+export const setCoursesError = createAction('[UI] SET_COURSES_ERROR', props<{ isCoursesError: boolean }>());
+
+export const setWordsError = createAction('[UI] SET_WORDS_ERROR', props<{ isWordsError: boolean }>());

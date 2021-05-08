@@ -4,6 +4,8 @@ export interface UiState {
   isRegistrationError: boolean;
   isUpdateUserError: boolean;
   isUpdateUserSuccess: boolean;
+  isCoursesError: boolean;
+  isWordsError: boolean;
 }
 
 export const initialUiState: UiState = {
@@ -12,4 +14,6 @@ export const initialUiState: UiState = {
   isRegistrationError: false,
   isUpdateUserError: false,
   isUpdateUserSuccess: false,
+  isCoursesError: false,
+  isWordsError: false,
 };

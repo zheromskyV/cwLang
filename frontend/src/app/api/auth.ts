@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-const USER = `{
+export const USER = `{
   _id
   email
   password
