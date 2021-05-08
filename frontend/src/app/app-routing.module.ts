@@ -25,6 +25,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: routerPaths.groups,
+    loadChildren: () => import('./groups/groups.module').then(({ GroupsModule }) => GroupsModule),
+    canActivate: [AuthGuardService],
+  },
+  {
     path: routerPaths.notFound,
     loadChildren: () => import('./not-found/not-found.module').then(({ NotFoundModule }) => NotFoundModule),
     canActivate: [AuthGuardService],
