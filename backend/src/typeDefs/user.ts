@@ -14,6 +14,7 @@ type ProfileType {
   discount: Float
   rating: Float
   languages: [LanguageType!]
+  groups: [GroupType]
 }
 
 type UserType {

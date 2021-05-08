@@ -4,7 +4,7 @@ import { COURSE } from './course';
 import { SCHEDULE } from './schedule';
 import { USER } from './auth';
 
-const GROUP = `{
+export const GROUP = `{
   _id
   students ${USER}
   teacher ${USER}

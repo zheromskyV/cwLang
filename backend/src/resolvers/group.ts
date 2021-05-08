@@ -2,34 +2,59 @@ import { omit } from 'lodash';
 
 import { Group, Profile, Schedule, User } from '../models';
 import { IGroup, IUser } from '../types';
+import { removeStudentFromGroup } from './student';
+
+export const deleteGroup = async (_: void, { id }: { id: string }): Promise<void> => {
+  try {
+    const group = await Group.findByIdAndDelete(id);
+
+    if (group) {
+      group.students?.forEach((student) => {
+        removeStudentFromGroup(undefined, {
+          userId: String(student._id),
+          groupId: String(group._id),
+        })
+      });
+
+      await User.findByIdAndUpdate(group.teacher, {
+        $pull: {
+          groups: group?._id as any,
+        },
+      }, { new: true, useFindAndModify: false });
+    }
+  } catch(e) {
+    console.error(e);
+    throw e;
+  }
+};
 
 const resolvers = {
   Mutation: {
     createGroup: async (_: void, { group }: { group: IGroup }): Promise<IGroup | null> => {
       try {
         const schedule = await Schedule.create(group.schedule);
-        const createdGroup = await Group.create({
+        const createdGroup = await (await Group.create({
           ...group,
           schedule,
-        });
+        }))
+        .populate('teacher')
+        .populate({
+          path: 'course',
+          populate: {
+            path: 'words',
+          }
+        })
+        .populate('schedule')
+        .populate('students')
+        .execPopulate();
 
-        await Profile.findByIdAndUpdate(group.teacher, {
-          $push: {
+        await Profile.findByIdAndUpdate((createdGroup.teacher as IUser)?.profile, {
+          $addToSet: {
             groups: createdGroup,
           },
-        });
+        }, { new: true, useFindAndModify: false });
 
-        return createdGroup
-          .populate('teacher')
-          .populate({
-            path: 'course',
-            populate: {
-              path: 'words',
-            }
-          })
-          .populate('schedule')
-          .populate('students')
-          .execPopulate();
+        return createdGroup;
       } catch(e) {
         console.error(e);
         throw e;
@@ -79,14 +104,7 @@ const resolvers = {
         throw e;
       }
     },
-    deleteGroup: async (_: void, { id }: { id: string }): Promise<void> => {
-      try {
-        await Group.findByIdAndDelete(id);
-      } catch(e) {
-        console.error(e);
-        throw e;
-      }
-    },
+    deleteGroup,
   },
   Query: {
     getGroups: async (): Promise<IGroup[]> => {
@@ -117,28 +135,40 @@ const resolvers = {
         const user = await User.findById(id).populate('profile');
 
         if (user?.profile?.groups?.length) {
-          return Group.find()
-          .populate({
-            path: 'teacher',
-            match: { _id: id },
-          })
-          .populate({
-            path: 'profile',
-            populate: {
-              path: 'languages',
-            }
-          })
-          .populate({
-            path: 'course',
-            populate: {
-              path: 'words',
-            }
-          })
-          .populate('schedule')
-          .populate('students');
-        } else {
-          return [];
+          if (user.role === 'teacher') {
+            return Group.find()
+              .populate({
+                path: 'teacher',
+                match: { _id: id },
+              })
+              .populate({
+                path: 'course',
+                populate: {
+                  path: 'words',
+                }
+              })
+              .populate('schedule')
+              .populate('students');
+          }
+
+          if (user.role === 'student') {
+            return Group.find()
+              .populate({
+                path: 'students',
+                match: { _id: id },
+              })
+              .populate('teacher')
+              .populate({
+                path: 'course',
+                populate: {
+                  path: 'words',
+                }
+              })
+              .populate('schedule');
+          }
         }
+
+        return [];
        } catch(e) {
         console.error(e);
         throw e;
