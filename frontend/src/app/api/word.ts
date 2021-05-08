@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-const WORD = `{
+export const WORD = `{
   _id,
   target,
   initial,
