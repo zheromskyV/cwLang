@@ -6,3 +6,4 @@ export * from './profile.interface';
 export * from './schedule.interface';
 export * from './user.interface';
 export * from './word.interface';
+export * from './roles.enum';

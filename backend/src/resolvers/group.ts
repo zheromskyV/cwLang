@@ -1,7 +1,7 @@
 import { omit } from 'lodash';
 
 import { Group, Profile, Schedule, User } from '../models';
-import { IGroup, IUser } from '../types';
+import { IGroup, IUser, Roles } from '../types';
 import { removeStudentFromGroup } from './student';
 
 export const deleteGroup = async (_: void, { id }: { id: string }): Promise<void> => {
@@ -135,7 +135,7 @@ const resolvers = {
         const user = await User.findById(id).populate('profile');
 
         if (user?.profile?.groups?.length) {
-          if (user.role === 'teacher') {
+          if (user.role === Roles.Teacher) {
             return Group.find()
               .populate({
                 path: 'teacher',
@@ -151,7 +151,7 @@ const resolvers = {
               .populate('students');
           }
 
-          if (user.role === 'student') {
+          if (user.role === Roles.Student) {
             return Group.find()
               .populate({
                 path: 'students',
