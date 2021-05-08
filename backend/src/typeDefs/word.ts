@@ -17,9 +17,12 @@ input WordInput {
 
 extend type Query {
   getWords(targetLang: String!, initialLang: String!): [WordType!]!
+  getAllUserWords(id: String!): [WordType!]!
+  getFavoriteWords(id: String!): [WordType!]!
 }
 
 extend type Mutation {
   createWord(word: WordInput!): WordType!
+  addFavoriteWord(id: String!, wordId: String!): Void
 }
 `;

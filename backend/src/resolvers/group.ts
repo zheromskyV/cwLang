@@ -148,7 +148,12 @@ const resolvers = {
                 }
               })
               .populate('schedule')
-              .populate('students');
+              .populate({
+                path: 'students',
+                populate: {
+                  path: 'profile',
+                }
+              });
           }
 
           if (user.role === Roles.Student) {

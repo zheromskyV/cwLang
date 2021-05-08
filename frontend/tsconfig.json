@@ -16,7 +16,7 @@
     "target": "es2015",
     "module": "es2020",
     "lib": [
-      "es2018",
+      "es2019",
       "dom",
       "esnext.asynciterable"
     ],
@@ -25,10 +25,4 @@
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true
   },
-  "angularCompilerOptions": {
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "strictPropertyInitialization": false
-  }
 }

@@ -2,6 +2,32 @@ import { Course, Group, Profile, User } from '../models';
 import { ICourse } from '../types';
 import { deleteGroup } from './group';
 
+export const getUserCourses = async(_: void, { id }: { id: String }): Promise<ICourse[]> => {
+  try {
+    const user = await User.findById(id);
+
+    const profile = await Profile.findById(user?.profile)
+      .populate({
+        path: 'groups',
+        populate: {
+          path: 'course',
+          populate: {
+            path: 'words',
+          }
+        },
+      });
+
+    if (profile?.groups) {
+      return profile.groups.map((group) => group.course as ICourse);
+    }
+
+    return [];
+  } catch(e) {
+    console.error(e);
+    throw e;
+  }
+};
+
 const resolvers = {
   Mutation: {
     createCourse: async (_: void, { course }: { course: ICourse }): Promise<ICourse | null> => {
@@ -51,31 +77,7 @@ const resolvers = {
         throw e;
       }
     },
-    getUserCourses: async(_: void, { id }: { id: String }): Promise<ICourse[]> => {
-      try {
-        const user = await User.findById(id);
-
-        const profile = await Profile.findById(user?.profile)
-          .populate({
-            path: 'groups',
-            populate: {
-              path: 'course',
-              populate: {
-                path: 'words',
-              }
-            },
-          });
-
-        if (profile?.groups) {
-          return profile.groups.map((group) => group.course as ICourse);
-        }
-
-        return [];
-      } catch(e) {
-        console.error(e);
-        throw e;
-      }
-    },
+    getUserCourses,
   },
 };
 
