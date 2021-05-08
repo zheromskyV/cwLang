@@ -1,0 +1,18 @@
+<p-button 
+  styleClass="p-button-outlined p-button-secondary"
+  [icon]="icons.clearFilters"
+  [label]="dictionary.clearFilters"
+  (click)="table.clear()"
+></p-button>
+
+<span class="p-input-icon-left p-ml-auto">
+  <i [class]="icons.search"></i>
+  <input
+    pInputText
+    type="text"
+    [placeholder]="dictionary.search"
+    autocomplete="off"
+    class="p-inputtext"
+    (input)="table.filterGlobal($any($event.target)?.value, 'contains')"
+  />
+</span>
