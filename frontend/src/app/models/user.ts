@@ -22,4 +22,6 @@ export interface User {
   profile?: Profile;
 }
 
+export type Users = User[];
+
 export type UserInfo = User | null | undefined;

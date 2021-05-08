@@ -3,4 +3,5 @@ export enum StoreFeature {
   Ui = 'ui',
   Courses = 'courses',
   Words = 'words',
+  Students = 'students',
 }

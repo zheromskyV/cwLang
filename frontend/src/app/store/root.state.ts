@@ -1,8 +1,14 @@
 import { StoreFeature } from './store.enum';
 import { AuthState } from './auth/auth.state';
 import { UiState } from './ui/ui.state';
+import { WordsState } from './words/words.state';
+import { StudentsState } from './students/students.state';
+import { CoursesState } from './courses/courses.state';
 
 export interface RootState {
-  [StoreFeature.Auth]: AuthState;
   [StoreFeature.Ui]: UiState;
+  [StoreFeature.Auth]: AuthState;
+  [StoreFeature.Words]: WordsState;
+  [StoreFeature.Courses]: CoursesState;
+  [StoreFeature.Students]: StudentsState;
 }

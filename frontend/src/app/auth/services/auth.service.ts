@@ -4,8 +4,9 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { CREATE_USER, LOGIN, UPDATE_USER } from 'src/app/api/auth';
-import { User, UserInfo } from 'src/app/models/user';
+import { CREATE_USER, GET_USERS, LOGIN, UPDATE_USER } from 'src/app/api/auth';
+import { User, UserInfo, Users } from 'src/app/models/user';
+import { Roles } from 'src/app/constants/roles.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,19 @@ export class AuthService {
       .pipe(
         map(({ data }) => data?.updateUser),
         catchError(() => of(null))
+      );
+  }
+
+  getUsers(role: Roles): Observable<Users> {
+    return this.apollo
+      .query<{ getUserByRole: Users }>({
+        query: GET_USERS,
+        variables: { role },
+        fetchPolicy: 'no-cache',
+      })
+      .pipe(
+        map(({ data }) => data?.getUserByRole),
+        catchError(() => of([]))
       );
   }
 }
