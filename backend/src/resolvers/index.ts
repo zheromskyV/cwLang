@@ -4,6 +4,7 @@ import course from './course';
 import group from './group';
 import login from './login';
 import schedule from './schedule';
+import student from './student';
 import user from './user';
 import word from './words';
 
@@ -13,6 +14,7 @@ export default {
     group,
     login,
     schedule,
+    student,
     user,
     word
   ),
