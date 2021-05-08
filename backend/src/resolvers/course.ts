@@ -1,5 +1,6 @@
-import { Course } from '../models';
+import { Course, Group, Profile, User } from '../models';
 import { ICourse } from '../types';
+import { deleteGroup } from './group';
 
 const resolvers = {
   Mutation: {
@@ -25,7 +26,16 @@ const resolvers = {
     },
     deleteCourse: async (_: void, { id }: { id: string }): Promise<void> => {
       try {
-        await Course.findByIdAndDelete(id);
+        const course = await Course.findByIdAndDelete(id);
+
+        const groups = await Group.find().populate({
+          path: 'course',
+          match: { _id: course!._id },
+        });
+
+        groups.forEach(async(group) => {
+          await deleteGroup(undefined, { id: String(group._id) });
+        });
       } catch(e) {
         console.error(e);
         throw e;
@@ -36,6 +46,31 @@ const resolvers = {
     getCourses: async (): Promise<ICourse[]> => {
       try {
         return Course.find().populate('words');;
+      } catch(e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    getUserCourses: async(_: void, { id }: { id: String }): Promise<ICourse[]> => {
+      try {
+        const user = await User.findById(id);
+
+        const profile = await Profile.findById(user?.profile)
+          .populate({
+            path: 'groups',
+            populate: {
+              path: 'course',
+              populate: {
+                path: 'words',
+              }
+            },
+          });
+
+        if (profile?.groups) {
+          return profile.groups.map((group) => group.course as ICourse);
+        }
+
+        return [];
       } catch(e) {
         console.error(e);
         throw e;

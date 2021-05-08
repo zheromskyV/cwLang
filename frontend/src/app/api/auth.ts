@@ -37,3 +37,9 @@ export const UPDATE_USER = gql`
     updateUser(id: $id, user: $user) ${USER}
   }
 `;
+
+export const GET_USERS = gql`
+  query User($role: String!) {
+    getUserByRole(role: $role) ${USER}
+  }
+`;

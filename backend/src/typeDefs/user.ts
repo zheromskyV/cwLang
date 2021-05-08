@@ -14,6 +14,7 @@ type ProfileType {
   discount: Float
   rating: Float
   languages: [LanguageType!]
+  groups: [GroupType]
 }
 
 type UserType {
@@ -50,6 +51,10 @@ input UserInput {
   birthday: Float!
   nativeLanguage: String!
   profile: ProfileInput!
+}
+
+extend type Query {
+  getUsersByRole(role: String!): [UserType!]!
 }
 
 extend type Mutation {
