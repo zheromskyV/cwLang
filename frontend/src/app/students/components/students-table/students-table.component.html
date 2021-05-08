@@ -1,0 +1,84 @@
+<p-table
+  #table
+  [value]="students | slice:0" 
+  dataKey="_id"
+  [rowHover]="true"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="['name', 'surname', 'email']"
+>
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex">
+      <p-button 
+        styleClass="p-button-outlined p-button-secondary"
+        [icon]="icons.clearFilters"
+        [label]="dictionary.clearFilters"
+        (click)="table.clear()"
+      ></p-button>
+      
+      <span class="p-input-icon-left p-ml-auto">
+        <i [class]="icons.search"></i>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="dictionary.search"
+          autocomplete="off"
+          class="p-inputtext"
+          (input)="table.filterGlobal($any($event.target)?.value, 'contains')"
+        />
+      </span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th pSortableColumn="name">
+        {{ dictionary.name }}
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="surname">
+        {{ dictionary.surname }}
+        <p-sortIcon field="surname"></p-sortIcon>
+      </th>
+      <th>
+        {{ dictionary.status }}
+      </th>
+      <th pSortableColumn="birthday">
+        {{ dictionary.age }}
+        <p-sortIcon field="birthday"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email">
+        {{ dictionary.email }}
+        <p-sortIcon field="email"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-student let-expanded="expanded">
+    <tr>
+      <td>
+        <p-button 
+          styleClass="p-button-text p-button-rounded p-button-plain"
+          [pRowToggler]="student"
+          [icon]="expanded ? icons.collapse : icons.expand"
+        ></p-button>
+      </td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.surname }}</td>
+      <td>{{ getStatus(student) }}</td>
+      <td>{{ getAge(student) }}</td>
+      <td>{{ student.email }}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="rowexpansion" let-student>
+    <tr class="inner-data">
+      <td colspan="6">
+        <div>
+          <p>{{ student.surname }}</p>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

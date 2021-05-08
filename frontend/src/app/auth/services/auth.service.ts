@@ -55,13 +55,13 @@ export class AuthService {
 
   getUsers(role: Roles): Observable<Users> {
     return this.apollo
-      .query<{ getUserByRole: Users }>({
+      .query<{ getUsersByRole: Users }>({
         query: GET_USERS,
         variables: { role },
         fetchPolicy: 'no-cache',
       })
       .pipe(
-        map(({ data }) => data?.getUserByRole),
+        map(({ data }) => data?.getUsersByRole),
         catchError(() => of([]))
       );
   }

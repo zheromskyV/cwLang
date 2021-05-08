@@ -1,0 +1,9 @@
+<div class="container">
+  <h2 class="header">{{ dictionary.students }}</h2>
+  <p-divider></p-divider>
+
+  <cwl-students-table
+    [students]="(students$ | async) || []"
+  ></cwl-students-table>
+</div>
+
