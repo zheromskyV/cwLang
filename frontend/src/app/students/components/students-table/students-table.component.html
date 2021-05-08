@@ -32,7 +32,6 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 3rem"></th>
       <th pSortableColumn="name">
         {{ dictionary.name }}
         <p-sortIcon field="name"></p-sortIcon>
@@ -55,30 +54,13 @@
     </tr>
   </ng-template>
 
-  <ng-template pTemplate="body" let-student let-expanded="expanded">
+  <ng-template pTemplate="body" let-student>
     <tr>
-      <td>
-        <p-button 
-          styleClass="p-button-text p-button-rounded p-button-plain"
-          [pRowToggler]="student"
-          [icon]="expanded ? icons.collapse : icons.expand"
-        ></p-button>
-      </td>
       <td>{{ student.name }}</td>
       <td>{{ student.surname }}</td>
       <td>{{ getStatus(student) }}</td>
       <td>{{ getAge(student) }}</td>
       <td>{{ student.email }}</td>
-    </tr>
-  </ng-template>
-
-  <ng-template pTemplate="rowexpansion" let-student>
-    <tr class="inner-data">
-      <td colspan="6">
-        <div>
-          <p>{{ student.surname }}</p>
-        </div>
-      </td>
     </tr>
   </ng-template>
 </p-table>
