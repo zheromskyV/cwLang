@@ -24,6 +24,7 @@ export default `
 
   extend type Query {
     getCourses: [CourseType!]!
+    getUserCourses(id: String!): [CourseType!]!
   }
 
   extend type Mutation {
