@@ -17,9 +17,10 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PickListModule } from 'primeng/picklist';
 import { EditDeleteControlsComponent } from './components/edit-delete-controls/edit-delete-controls.component';
+import { ModulePageComponent } from './components/module-page/module-page.component';
 
 @NgModule({
-  declarations: [EditDeleteControlsComponent],
+  declarations: [EditDeleteControlsComponent, ModulePageComponent],
   imports: [
     CommonModule,
     ButtonModule,
@@ -41,6 +42,7 @@ import { EditDeleteControlsComponent } from './components/edit-delete-controls/e
   ],
   exports: [
     EditDeleteControlsComponent,
+    ModulePageComponent,
     CommonModule,
     ButtonModule,
     DividerModule,

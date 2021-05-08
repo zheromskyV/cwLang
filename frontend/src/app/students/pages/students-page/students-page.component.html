@@ -1,9 +1,5 @@
-<div class="container">
-  <h2 class="header">{{ dictionary.students }}</h2>
-  <p-divider></p-divider>
-
+<cwl-module-page [header]="dictionary.students">
   <cwl-students-table
     [students]="(students$ | async) || []"
   ></cwl-students-table>
-</div>
-
+</cwl-module-page>

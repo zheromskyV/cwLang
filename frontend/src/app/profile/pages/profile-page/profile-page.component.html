@@ -1,7 +1,4 @@
-<div class="container">
-  <h2 class="header">{{ dictionary.myProfile }}</h2>
-  <p-divider></p-divider>
-
+<cwl-module-page [header]="dictionary.myProfile">
   <cwl-status-bar
     *ngIf="isStatusSectionAvailable"
     [debt]="debt"
@@ -9,4 +6,4 @@
   ></cwl-status-bar>
 
   <cwl-profile></cwl-profile>
-</div>
+</cwl-module-page>
