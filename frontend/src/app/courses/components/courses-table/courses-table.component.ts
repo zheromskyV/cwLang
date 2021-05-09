@@ -24,6 +24,8 @@ export class CoursesTableComponent implements OnInit {
     edit: PrimeIcons.PENCIL,
     delete: PrimeIcons.TRASH,
     confirm: PrimeIcons.EXCLAMATION_TRIANGLE,
+    clearFilters: PrimeIcons.FILTER_SLASH,
+    search: PrimeIcons.SEARCH,
   };
 
   constructor() {}

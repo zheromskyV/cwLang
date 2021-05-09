@@ -1,20 +1,7 @@
-@import '~src/styles/style-import';
-
 :host {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 }
 
-.container {
+:host ::ng-deep cwl-module-page .container {
   width: 60rem;
-  padding: 2rem;
-
-  @extend %std-tile;
-}
-
-.header {
-  text-align: left;
-  color: $text-color;
-  margin-top: 0.5rem;
 }

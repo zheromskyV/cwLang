@@ -40,6 +40,6 @@ export const UPDATE_USER = gql`
 
 export const GET_USERS = gql`
   query User($role: String!) {
-    getUserByRole(role: $role) ${USER}
+    getUsersByRole(role: $role) ${USER}
   }
 `;

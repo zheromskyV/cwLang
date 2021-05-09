@@ -1,7 +1,4 @@
-<div class="container">
-  <h2 class="header">{{ dictionary.courses }}</h2>
-  <p-divider></p-divider>
-
+<cwl-module-page [header]="dictionary.courses">
   <div class="toolbar p-d-flex p-jc-end">
     <p-button 
       styleClass="p-button-success"
@@ -34,5 +31,4 @@
   </p-dialog>
 
   <p-confirmDialog></p-confirmDialog>
-</div>
-
+</cwl-module-page>

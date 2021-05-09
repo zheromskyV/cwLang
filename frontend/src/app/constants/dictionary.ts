@@ -60,8 +60,8 @@ export const dictionary: CommonModel = {
   // courses
   course: 'Курс',
   courseTitle: 'Название',
-  courseInitialLang: 'Язык студентов',
-  courseTargetLang: 'Язык обучения',
+  courseInitialLang: 'Родной язык',
+  courseTargetLang: 'Язык курса',
   courseLevel: 'Уровень',
   coursePrice: 'Цена',
   courseInfo: 'Описание',
@@ -76,6 +76,12 @@ export const dictionary: CommonModel = {
   availableItems: 'Доступные',
   selectedItems: 'Выбранные',
   loadWords: 'Загрузить слова',
+
+  // students
+  age: 'Возраст',
+  email: 'Почта',
+  clearFilters: 'Очистить фильтры',
+  search: 'Поиск',
 
   // not-found
   pageNotFound: 'Страница не найдена',

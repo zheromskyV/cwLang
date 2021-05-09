@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfirmationService, PrimeIcons } from 'primeng/api';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import * as fromCourses from '../../../store/courses/courses.selectors';
   styleUrls: ['./courses-page.component.scss'],
   providers: [ConfirmationService],
 })
-export class CoursesPageComponent implements OnInit {
+export class CoursesPageComponent implements OnInit, OnDestroy {
   dictionary = dictionary;
   icons = {
     add: PrimeIcons.PLUS,

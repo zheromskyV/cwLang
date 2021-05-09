@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+
 import { dictionary } from 'src/app/constants/dictionary';
+import { UtilsService } from 'src/app/utils/utils.service';
 
 @Component({
   selector: 'cwl-status-bar',
@@ -20,15 +22,11 @@ export class StatusBarComponent {
     return this.discount > 0;
   }
 
-  get debtLabel(): string {
-    return this.isDebt ? `${dictionary.debt} (${this.debt}$)` : dictionary.paid;
-  }
-
   get statusLabel(): string {
-    return `${dictionary.status}: ${this.debtLabel}`;
+    return `${dictionary.status}: ${UtilsService.getDebtLabel(this.debt)}`;
   }
 
   get discountLabel(): string {
-    return this.isDiscount ? `${dictionary.discount}: ${this.discount}%` : '';
+    return UtilsService.getDiscountLabel(this.discount);
   }
 }
