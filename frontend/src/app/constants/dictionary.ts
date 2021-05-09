@@ -87,6 +87,9 @@ export const dictionary: CommonModel = {
   clearFilters: 'Очистить фильтры',
   search: 'Поиск',
 
+  // teacher
+  rating: 'Рейтинг',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',

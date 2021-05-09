@@ -28,4 +28,10 @@ export class UtilsService {
 
     return `${debtLabel}${separator}${discountLabel}`;
   }
+
+  static getAge(user: User): number {
+    const ageDate = new Date(Date.now() - user.birthday);
+
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
 }
