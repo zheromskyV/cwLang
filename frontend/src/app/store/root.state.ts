@@ -4,6 +4,7 @@ import { UiState } from './ui/ui.state';
 import { WordsState } from './words/words.state';
 import { StudentsState } from './students/students.state';
 import { CoursesState } from './courses/courses.state';
+import { TeachersState } from './teachers/teachers.state';
 
 export interface RootState {
   [StoreFeature.Ui]: UiState;
@@ -11,4 +12,5 @@ export interface RootState {
   [StoreFeature.Words]: WordsState;
   [StoreFeature.Courses]: CoursesState;
   [StoreFeature.Students]: StudentsState;
+  [StoreFeature.Teachers]: TeachersState;
 }

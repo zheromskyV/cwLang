@@ -25,6 +25,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: routerPaths.teachers,
+    loadChildren: () => import('./teachers/teachers.module').then(({ TeachersModule }) => TeachersModule),
+    canActivate: [AuthGuardService],
+  },
+  {
     path: routerPaths.groups,
     loadChildren: () => import('./groups/groups.module').then(({ GroupsModule }) => GroupsModule),
     canActivate: [AuthGuardService],

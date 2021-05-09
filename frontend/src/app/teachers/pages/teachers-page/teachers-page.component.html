@@ -1,0 +1,6 @@
+<cwl-module-page [header]="dictionary.teachers">
+  <cwl-teachers-table
+    [teachers]="(teachers$ | async) || []"
+  ></cwl-teachers-table>
+</cwl-module-page>
+
