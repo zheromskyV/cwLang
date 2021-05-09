@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PrimeIcons } from 'primeng/api';
 
 import { LANGUAGE_LEVEL_OPTIONS, LANGUAGE_OPTIONS } from 'src/app/constants/languages';
@@ -10,12 +13,9 @@ import { dictionary } from 'src/app/constants/dictionary';
 import { Languages } from 'src/app/constants/languages.enum';
 import { LanguageLevels } from 'src/app/constants/language-levels.enum';
 import { Words } from 'src/app/models/word';
+import { RootState } from 'src/app/store/root.state';
 import * as WordsActions from '../../../store/words/words.actions';
 import * as fromWords from '../../../store/words/words.selectors';
-import { Store } from '@ngrx/store';
-import { RootState } from 'src/app/store/root.state';
-import { Subscription } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
 
 @Component({
   selector: 'cwl-course-form',

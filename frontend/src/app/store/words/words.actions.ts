@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Languages } from 'src/app/constants/languages.enum';
+import { Course } from 'src/app/models/course';
 import { User } from 'src/app/models/user';
 import { Word, Words } from 'src/app/models/word';
 
@@ -16,7 +17,7 @@ export const setStudentWords = createAction('[WORDS] SET_STUDENT_WORDS', props<{
 
 export const setFavoriteWords = createAction('[WORDS] SET_FAVORITE_WORDS', props<{ favoriteWords: Words }>());
 
-export const addWord = createAction('[WORDS] ADD_WORD', props<{ word: Word }>());
+export const addWord = createAction('[WORDS] ADD_WORD', props<{ course: Course; word: Word }>());
 
 export const addFavoriteWord = createAction('[WORDS] ADD_FAVORITE_WORD', props<{ word: Word }>());
 

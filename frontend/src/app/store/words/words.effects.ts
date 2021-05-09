@@ -49,12 +49,15 @@ export class WordsEffects {
   addWord$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(WordsActions.addWord),
-      switchMap(({ word }) => this.wordsService.create(word)),
+      switchMap(({ course, word }) => this.wordsService.create(course, word)),
       withLatestFrom(this.store.select(fromWords.getWords)),
       switchMap(([wordInfo, oldWords]) =>
         _.isEmpty(wordInfo)
           ? [UiActions.setGeneralError({ isGeneralError: true })]
-          : [WordsActions.setWords({ words: [...oldWords, wordInfo as Word] })]
+          : [
+              WordsActions.setWords({ words: [...oldWords, wordInfo as Word] }),
+              UiActions.setGeneralSuccess({ isGeneralSuccess: true }),
+            ]
       )
     )
   );

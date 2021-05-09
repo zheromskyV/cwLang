@@ -7,6 +7,7 @@ import { ADD_FAVORITE_WORD, CREATE_WORD, GET_ALL_USER_WORDS, GET_FAVORITE_WORDS,
 import { Word, WordInfo, Words } from 'src/app/models/word';
 import { Languages } from 'src/app/constants/languages.enum';
 import { User } from 'src/app/models/user';
+import { Course } from 'src/app/models/course';
 
 @Injectable({
   providedIn: 'root',
@@ -53,11 +54,11 @@ export class WordsService {
       );
   }
 
-  create(word: Word): Observable<WordInfo> {
+  create(course: Course, word: Word): Observable<WordInfo> {
     return this.apollo
       .mutate<{ createWord: Word }>({
         mutation: CREATE_WORD,
-        variables: { word },
+        variables: { word, courseId: course._id },
       })
       .pipe(
         map(({ data }) => data?.createWord),

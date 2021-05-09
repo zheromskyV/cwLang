@@ -79,6 +79,7 @@ export const dictionary: CommonModel = {
   loadWords: 'Загрузить слова',
   yourWords: 'Ваши слова',
   favoriteWords: 'Избранные',
+  addWord: 'Добавить слово к курсу',
 
   // students
   age: 'Возраст',

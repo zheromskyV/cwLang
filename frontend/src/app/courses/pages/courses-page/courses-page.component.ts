@@ -1,13 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfirmationService, PrimeIcons } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { RootState } from 'src/app/store/root.state';
 import { dictionary } from 'src/app/constants/dictionary';
 import { Course, CourseInfo, Courses } from 'src/app/models/course';
+import { Roles } from 'src/app/constants/roles.enum';
+import { Word } from 'src/app/models/word';
 import * as CoursesActions from '../../../store/courses/courses.actions';
+import * as WordsActions from '../../../store/words/words.actions';
 import * as fromCourses from '../../../store/courses/courses.selectors';
+import * as fromAuth from '../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'cwl-courses-page',
@@ -22,17 +26,34 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
     confirm: PrimeIcons.EXCLAMATION_TRIANGLE,
   };
 
+  role: Roles = Roles.Undefined;
   courses$: Observable<Courses>;
   formDialog: boolean;
   isEditing: boolean;
   currentCourse: CourseInfo;
+  formWordDialog: boolean;
+
+  private readonly subscriptions = new Subscription();
 
   constructor(private readonly store: Store<RootState>, private readonly confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
-    this.store.dispatch(CoursesActions.getCourses());
+    this.subscriptions.add(
+      this.store.select(fromAuth.getUserRole).subscribe((role) => {
+        this.role = role;
+        this.store.dispatch(CoursesActions.getCourses());
+      })
+    );
 
     this.courses$ = this.store.select(fromCourses.getCourses);
+  }
+
+  get isAdminView(): boolean {
+    return this.role === Roles.Admin;
+  }
+
+  get isTeacherView(): boolean {
+    return this.role === Roles.Teacher;
   }
 
   addCourse(): void {
@@ -59,6 +80,7 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
     this.currentCourse = null;
     this.isEditing = false;
     this.formDialog = false;
+    this.formWordDialog = false;
   }
 
   deleteCourse(course: Course): void {
@@ -74,7 +96,19 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  addWordToCourse(course: Course): void {
+    this.currentCourse = course;
+    this.formWordDialog = true;
+  }
+
+  saveWord(word: Word): void {
+    this.store.dispatch(WordsActions.addWord({ word, course: this.currentCourse as Course }));
+
+    this.cancel();
+  }
+
   ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
     this.store.dispatch(CoursesActions.clearCourses());
   }
 }
