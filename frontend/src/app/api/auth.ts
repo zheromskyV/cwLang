@@ -11,6 +11,7 @@ export const USER = `{
   nativeLanguage
   profile {
     debt
+    discount
     info
     rating
     languages {
