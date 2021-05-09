@@ -22,7 +22,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  createWord(word: WordInput!): WordType!
+  createWord(word: WordInput!, courseId: String!): WordType!
   addFavoriteWord(id: String!, wordId: String!): Void
 }
 `;
