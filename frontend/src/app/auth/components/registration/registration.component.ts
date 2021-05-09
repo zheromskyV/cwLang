@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { Store } from '@ngrx/store';
 import { MessageService, PrimeIcons } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import { MIN_ABOUT_LENGTH, MIN_NAME_LENGTH, MIN_PASSWORD_LENGTH, ROLE_OPTIONS } from 'src/app/constants/auth';
 import { LANGUAGE_OPTIONS } from 'src/app/constants/languages';
@@ -17,13 +16,11 @@ import { RootState } from 'src/app/store/root.state';
 import { dictionary } from '../../../constants/dictionary';
 import * as AuthActions from '../../../store/auth/auth.actions';
 import * as UiActions from '../../../store/ui/ui.actions';
-import * as fromUi from '../../../store/ui/ui.selectors';
 
 @Component({
   selector: 'cwl-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
-  providers: [MessageService],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   @Input() isProfilePage: boolean = false;
@@ -81,8 +78,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private readonly store: Store<RootState>,
     private readonly formBuilder: FormBuilder,
-    private readonly navigationService: NavigationService,
-    private readonly messageService: MessageService
+    private readonly navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -114,39 +110,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     if (this.isProfilePage && this.userInfo) {
       this.prefillData();
     }
-
-    this.subscriptions.add(
-      this.store.select(fromUi.getRegistrationError).subscribe((isError) => {
-        this.isRegistrationError = isError;
-
-        this.isRegistrationError && this.showErrorMessage(this.dictionary.registrationError);
-      })
-    );
-
-    this.subscriptions.add(
-      this.store.select(fromUi.getUpdateUserError).subscribe((isError) => {
-        this.isUpdateUserError = isError;
-
-        this.isRegistrationError && this.showErrorMessage(this.dictionary.updateError);
-      })
-    );
-
-    this.subscriptions.add(
-      this.store.select(fromUi.getUpdateUserSuccess).subscribe((isSuccess) => {
-        this.isUpdateUserSuccess = isSuccess;
-
-        this.isUpdateUserSuccess && this.showSuccessMessage(this.dictionary.updateSuccess);
-      })
-    );
-
-    this.subscriptions.add(
-      this.formGroup.valueChanges
-        .pipe(filter(() => this.isRegistrationError || this.isUpdateUserError))
-        .subscribe(() => {
-          this.store.dispatch(UiActions.setRegistrationError({ isRegistrationError: false }));
-          this.store.dispatch(UiActions.setUpdateUserError({ isUpdateUserError: false }));
-        })
-    );
   }
 
   private getLangValueFromUser(langName: Languages): number {
@@ -280,22 +243,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     const now = Date.now();
 
     return now < birthday ? { error: 'Incorrect date' } : null;
-  }
-
-  private showErrorMessage(message: string): void {
-    this.messageService.add({
-      severity: 'error',
-      summary: this.dictionary.error,
-      detail: message,
-    });
-  }
-
-  private showSuccessMessage(message: string): void {
-    this.messageService.add({
-      severity: 'success',
-      summary: this.dictionary.success,
-      detail: message,
-    });
   }
 
   ngOnDestroy(): void {
