@@ -36,7 +36,10 @@ export class CoursesEffects {
       switchMap(([courseInfo, oldCourses]) =>
         _.isEmpty(courseInfo)
           ? [UiActions.setCoursesError({ isCoursesError: true })]
-          : [CoursesActions.setCourses({ courses: [...oldCourses, courseInfo as Course] })]
+          : [
+              CoursesActions.setCourses({ courses: [...oldCourses, courseInfo as Course] }),
+              UiActions.setGeneralSuccess({ isGeneralSuccess: true }),
+            ]
       )
     )
   );
@@ -56,6 +59,7 @@ export class CoursesEffects {
                   ...(currCourse._id === courseInfo!._id && courseInfo),
                 })),
               }),
+              UiActions.setGeneralSuccess({ isGeneralSuccess: true }),
             ]
       )
     )
@@ -69,7 +73,10 @@ export class CoursesEffects {
       switchMap(([deletedId, oldCourses]) =>
         _.isEmpty(deletedId)
           ? [UiActions.setCoursesError({ isCoursesError: true })]
-          : [CoursesActions.setCourses({ courses: oldCourses.filter(({ _id }) => _id !== deletedId) })]
+          : [
+              CoursesActions.setCourses({ courses: oldCourses.filter(({ _id }) => _id !== deletedId) }),
+              UiActions.setGeneralSuccess({ isGeneralSuccess: true }),
+            ]
       )
     )
   );
