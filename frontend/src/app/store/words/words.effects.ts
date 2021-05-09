@@ -53,7 +53,7 @@ export class WordsEffects {
       withLatestFrom(this.store.select(fromWords.getWords)),
       switchMap(([wordInfo, oldWords]) =>
         _.isEmpty(wordInfo)
-          ? [UiActions.setWordsError({ isWordsError: true })]
+          ? [UiActions.setGeneralError({ isGeneralError: true })]
           : [WordsActions.setWords({ words: [...oldWords, wordInfo as Word] })]
       )
     )
@@ -67,8 +67,11 @@ export class WordsEffects {
       withLatestFrom(this.store.select(fromWords.getFavoriteWords)),
       switchMap(([wordInfo, oldWords]) =>
         _.isEmpty(wordInfo)
-          ? [UiActions.setWordsError({ isWordsError: true })]
-          : [WordsActions.setFavoriteWords({ favoriteWords: [...oldWords, wordInfo as Word] })]
+          ? [UiActions.setGeneralError({ isGeneralError: true })]
+          : [
+              WordsActions.setFavoriteWords({ favoriteWords: [...oldWords, wordInfo as Word] }),
+              UiActions.setGeneralSuccess({ isGeneralSuccess: true }),
+            ]
       )
     )
   );
