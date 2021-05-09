@@ -40,3 +40,9 @@ export const DELETE_COURSE = gql`
     deleteCourse(id: $id)
   }
 `;
+
+export const GET_USER_COURSE = gql`
+  query Course($id: String!) {
+    getUserCourses(id: $id) ${COURSE}
+  }
+`;
