@@ -23,7 +23,8 @@
   .p-button,
   .p-dropdown,
   .p-calendar,
-  .p-inputtextarea {
+  .p-inputtextarea,
+  .p-tabview-nav-link {
     &:focus,
     &:active {
       box-shadow: none !important;
@@ -38,7 +39,6 @@
     border: 1px solid $border-color;
     outline: none;
     padding: 0.4rem;
-    width: 100%;
 
     &:focus {
       border: 1px solid $border-focus-color;
@@ -46,6 +46,10 @@
 
     &:disabled {
       color: $disabled-text-color;
+    }
+
+    &:not(.fluid) {
+      width: 100%;
     }
   }
 

@@ -12,6 +12,22 @@ const reducer = createReducer(
   on(WordsActions.clearWords, (state) => ({
     ...state,
     words: [],
+  })),
+  on(WordsActions.setStudentWords, (state, { studentWords }) => ({
+    ...state,
+    studentWords,
+  })),
+  on(WordsActions.clearStudentWords, (state) => ({
+    ...state,
+    studentWords: [],
+  })),
+  on(WordsActions.setFavoriteWords, (state, { favoriteWords }) => ({
+    ...state,
+    favoriteWords,
+  })),
+  on(WordsActions.clearFavoriteWords, (state) => ({
+    ...state,
+    favoriteWords: [],
   }))
 );
 

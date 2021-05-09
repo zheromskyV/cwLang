@@ -16,6 +16,8 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PickListModule } from 'primeng/picklist';
+import { TabViewModule } from 'primeng/tabview';
+
 import { EditDeleteControlsComponent } from './components/edit-delete-controls/edit-delete-controls.component';
 import { ModulePageComponent } from './components/module-page/module-page.component';
 import { TableCaptionComponent } from './components/table-caption/table-caption.component';
@@ -40,6 +42,7 @@ import { TableCaptionComponent } from './components/table-caption/table-caption.
     DialogModule,
     ConfirmDialogModule,
     PickListModule,
+    TabViewModule,
   ],
   exports: [
     EditDeleteControlsComponent,
@@ -62,6 +65,7 @@ import { TableCaptionComponent } from './components/table-caption/table-caption.
     DialogModule,
     ConfirmDialogModule,
     PickListModule,
+    TabViewModule,
   ],
 })
 export class SharedModule {}

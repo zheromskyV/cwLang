@@ -36,6 +36,14 @@ const reducer = createReducer(
   on(UiActions.setWordsError, (state, { isWordsError }) => ({
     ...state,
     isWordsError,
+  })),
+  on(UiActions.setGeneralError, (state, { isGeneralError }) => ({
+    ...state,
+    isGeneralError,
+  })),
+  on(UiActions.setGeneralSuccess, (state, { isGeneralSuccess }) => ({
+    ...state,
+    isGeneralSuccess,
   }))
 );
 

@@ -30,6 +30,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: routerPaths.learning,
+    loadChildren: () => import('./words/words.module').then(({ WordsModule }) => WordsModule),
+    canActivate: [AuthGuardService],
+  },
+  {
     path: routerPaths.notFound,
     loadChildren: () => import('./not-found/not-found.module').then(({ NotFoundModule }) => NotFoundModule),
     canActivate: [AuthGuardService],

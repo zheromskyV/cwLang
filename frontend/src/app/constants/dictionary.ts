@@ -14,6 +14,7 @@ export const dictionary: CommonModel = {
   messages: 'Сообщения',
   schedule: 'Расписание',
   testing: 'Тестирование',
+  learning: 'Изучение',
   game: 'Игра',
   connect: 'Связь',
   logOut: 'Выйти',
@@ -76,6 +77,9 @@ export const dictionary: CommonModel = {
   availableItems: 'Доступные',
   selectedItems: 'Выбранные',
   loadWords: 'Загрузить слова',
+  yourWords: 'Ваши слова',
+  favoriteWords: 'Избранные',
+  addWord: 'Добавить слово к курсу',
 
   // students
   age: 'Возраст',
@@ -97,6 +101,8 @@ export const dictionary: CommonModel = {
   updateError: 'Обновление данных не произошло',
   updateSuccess: 'Данные обновлены',
   coursesError: 'Ошибка при работе с курсами',
+  generalError: 'Ошибка в работе сервера',
+  generalSuccess: 'Операция проведена успешно',
 
   // confirmation
   confirm: 'Необходимо подверждение',
