@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+:host ::ng-deep .tabview-custom {
+  i,
+  .panel-header {
+    vertical-align: middle;
+  }
+
+  .panel-header {
+    margin: 0 0.5rem;
+  }
+}

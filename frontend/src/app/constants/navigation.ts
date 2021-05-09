@@ -26,6 +26,7 @@ export const navigation = {
     navLinks.navMyProfile,
     navLinks.navCourses,
     navLinks.navGroups,
+    navLinks.navLearning,
     navLinks.navGame,
     navLinks.navSchedule,
     navLinks.navAnalytics,

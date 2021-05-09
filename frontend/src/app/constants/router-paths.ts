@@ -16,6 +16,7 @@ export const routerPaths: CommonModel = {
   messages: 'messages',
   schedule: 'schedule',
   testing: 'testing',
+  learning: 'learning',
   game: 'game',
   connect: 'connect',
   notFound: 'not-found',

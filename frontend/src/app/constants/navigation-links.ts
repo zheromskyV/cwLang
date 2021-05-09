@@ -70,6 +70,12 @@ export const navTesting: NavigationLinkModel = {
   icon: PrimeIcons.PENCIL,
 };
 
+export const navLearning: NavigationLinkModel = {
+  name: dictionary.learning,
+  url: routerPaths.learning,
+  icon: PrimeIcons.SLACK,
+};
+
 export const navGame: NavigationLinkModel = {
   name: dictionary.game,
   url: routerPaths.game,

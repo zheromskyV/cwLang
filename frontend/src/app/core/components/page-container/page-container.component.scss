@@ -23,7 +23,8 @@
   .p-button,
   .p-dropdown,
   .p-calendar,
-  .p-inputtextarea {
+  .p-inputtextarea,
+  .p-tabview-nav-link {
     &:focus,
     &:active {
       box-shadow: none !important;

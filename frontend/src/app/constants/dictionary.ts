@@ -14,6 +14,7 @@ export const dictionary: CommonModel = {
   messages: 'Сообщения',
   schedule: 'Расписание',
   testing: 'Тестирование',
+  learning: 'Изучение',
   game: 'Игра',
   connect: 'Связь',
   logOut: 'Выйти',
@@ -76,6 +77,8 @@ export const dictionary: CommonModel = {
   availableItems: 'Доступные',
   selectedItems: 'Выбранные',
   loadWords: 'Загрузить слова',
+  yourWords: 'Ваши слова',
+  favoriteWords: 'Избранные',
 
   // students
   age: 'Возраст',
