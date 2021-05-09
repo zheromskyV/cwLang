@@ -1,12 +1,18 @@
-import { Profile, User, Word } from '../models';
+import { Course, Profile, User, Word } from '../models';
 import { IWord } from '../types';
 import { getUserCourses } from './course';
 
 const resolvers = {
   Mutation: {
-    createWord: async (_: void, { word }: { word: IWord }): Promise<IWord | null> => {
+    createWord: async (_: void, { word, courseId }: { word: IWord, courseId: string }): Promise<IWord | null> => {
       try {
         const createdWord = await Word.create(word);
+
+        await Course.findByIdAndUpdate(courseId, {
+          $addToSet: {
+            words: createdWord,
+          },
+        }, { new: true, useFindAndModify: false });
 
         return createdWord;
       } catch(e) {

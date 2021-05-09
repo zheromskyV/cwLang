@@ -27,8 +27,8 @@ export const GET_ALL_USER_WORDS = gql`
 `;
 
 export const CREATE_WORD = gql`
-  mutation Word($word: WordInput!) {
-    createWord(word: $word) ${WORD}
+  mutation Word($word: WordInput!, $courseId: String!) {
+    createWord(word: $word, courseId: $courseId) ${WORD}
   }
 `;
 
