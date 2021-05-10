@@ -6,4 +6,5 @@ export enum StoreFeature {
   Words = 'words',
   Students = 'students',
   Teachers = 'teachers',
+  Schedule = 'schedule',
 }

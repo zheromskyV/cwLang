@@ -8,10 +8,10 @@ import { dictionary } from 'src/app/constants/dictionary';
 import { Group, GroupInfo, Groups } from 'src/app/models/group';
 import { Roles } from 'src/app/constants/roles.enum';
 import { User, UserInfo } from 'src/app/models/user';
+import { Rating } from 'src/app/models/rating';
 import * as GroupsActions from '../../../store/groups/groups.actions';
 import * as fromGroups from '../../../store/groups/groups.selectors';
 import * as fromAuth from '../../../store/auth/auth.selectors';
-import { Rating } from 'primeng/rating';
 @Component({
   selector: 'cwl-groups-page',
   templateUrl: './groups-page.component.html',

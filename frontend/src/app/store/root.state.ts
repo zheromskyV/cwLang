@@ -6,6 +6,7 @@ import { StudentsState } from './students/students.state';
 import { CoursesState } from './courses/courses.state';
 import { TeachersState } from './teachers/teachers.state';
 import { GroupsState } from './groups/groups.state';
+import { ScheduleState } from './schedule/schedule.state';
 
 export interface RootState {
   [StoreFeature.Ui]: UiState;
@@ -15,4 +16,5 @@ export interface RootState {
   [StoreFeature.Courses]: CoursesState;
   [StoreFeature.Students]: StudentsState;
   [StoreFeature.Teachers]: TeachersState;
+  [StoreFeature.Schedule]: ScheduleState;
 }

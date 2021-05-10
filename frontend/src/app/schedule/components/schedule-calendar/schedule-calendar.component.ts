@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as Core from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -11,7 +11,7 @@ import { Schedule, ScheduleEvents } from 'src/app/models/schedule';
   templateUrl: './schedule-calendar.component.html',
   styleUrls: ['./schedule-calendar.component.scss'],
 })
-export class ScheduleCalendarComponent implements OnInit {
+export class ScheduleCalendarComponent implements OnInit, OnChanges {
   @Input() events: ScheduleEvents = [];
 
   OPTIONS = {
@@ -31,15 +31,17 @@ export class ScheduleCalendarComponent implements OnInit {
     const name = Core.Calendar.name;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.mappedEvents = this.events.map((event: Schedule) => ({
       _id: event._id,
       title: event.title,
       daysOfWeek: event.daysOfWeek,
       startTime: this.parseTime(+event.startTime),
       endTime: this.parseTime(+event.endTime),
-      startRecur: this.parseTime(+event.startRecur),
-      endRecur: this.parseTime(+event.endRecur),
+      startRecur: this.parseDate(+event.startRecur),
+      endRecur: this.parseDate(+event.endRecur),
     }));
   }
 
