@@ -109,6 +109,9 @@ export const dictionary: CommonModel = {
   selectStartRecur: 'Выберите дату начала',
   selectEndRecur: 'Выберите дату окончания',
 
+  // analytics
+  myMarks: 'Мои оценки',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
