@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthStoreModule } from './auth/auth-store.module';
 import { CoursesStoreModule } from './courses/courses-store.module';
 import { GroupsStoreModule } from './groups/groups-store.module';
+import { ScheduleStoreModule } from './schedule/schedule-store.module';
 import { StudentsStoreModule } from './students/students-store.module';
 import { TeachersStoreModule } from './teachers/teachers-store.module';
 import { UiStoreModule } from './ui/ui-store.module';
@@ -31,6 +32,7 @@ import { WordsStoreModule } from './words/words-store.module';
     AuthStoreModule,
     CoursesStoreModule,
     GroupsStoreModule,
+    ScheduleStoreModule,
     StudentsStoreModule,
     TeachersStoreModule,
     UiStoreModule,

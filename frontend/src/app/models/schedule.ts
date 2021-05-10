@@ -7,3 +7,5 @@ export interface Schedule {
   endRecur: string;
   daysOfWeek: number[];
 }
+
+export type ScheduleEvents = Schedule[];

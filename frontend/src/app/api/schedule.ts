@@ -11,7 +11,7 @@ export const SCHEDULE = `{
 `;
 
 export const GET_USER_SCHEDULE = gql`
-  query Schedule($id: number) {
+  query Schedule($id: String!) {
     getUserSchedule(id: $id) ${SCHEDULE}
   }
 `;
