@@ -1,0 +1,42 @@
+<form 
+  class="form p-d-flex p-flex-column p-ai-center"
+  novalidate
+>
+  <h3>{{ teacher?.name }} {{ teacher?.surname }}</h3>
+
+  <div class="rate-section field p-d-flex p-jc-center">
+    <p-rating
+      [(ngModel)]="rate"
+      [ngModelOptions]="{ standalone: true }"
+      [stars]="5"
+      [cancel]="false"
+    ></p-rating>
+  </div>
+
+  <div class="field about-field">
+    <h4>{{ dictionary.rateMessage }}</h4>
+    <textarea 
+      pInputTextarea         
+      [(ngModel)]="message"
+      [ngModelOptions]="{ standalone: true }"
+      rows="5"
+    ></textarea>
+  </div>
+
+  <div class="buttons-container p-d-flex p-jc-around">
+    <p-button 
+      [label]="dictionary.save"
+      [icon]="icons.save"
+      [disabled]="!isFormValid"
+      (click)="save()"
+      styleClass="button p-button"
+    ></p-button>
+
+    <p-button 
+      [label]="dictionary.cancel"
+      [icon]="icons.cancel"
+      (click)="cancel()"
+      styleClass="button p-button-secondary"
+    ></p-button>
+  </div>
+</form>

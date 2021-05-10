@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ADD_FAVORITE_WORD, CREATE_WORD, GET_ALL_USER_WORDS, GET_FAVORITE_WORDS, GET_WORDS } from 'src/app/api/word';
@@ -79,5 +79,10 @@ export class WordsService {
         map(() => word),
         catchError(() => of(null))
       );
+  }
+
+  downloadFavorites(favoriteWords: Words): Observable<never> {
+    // TO DO женя
+    return EMPTY;
   }
 }

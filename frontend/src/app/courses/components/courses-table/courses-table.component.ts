@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfirmationService, PrimeIcons } from 'primeng/api';
+import { PrimeIcons } from 'primeng/api';
 
 import { Course, Courses } from 'src/app/models/course';
 import { dictionary } from 'src/app/constants/dictionary';
@@ -9,7 +9,6 @@ import { Roles } from 'src/app/constants/roles.enum';
   selector: 'cwl-courses-table',
   templateUrl: './courses-table.component.html',
   styleUrls: ['./courses-table.component.scss'],
-  providers: [ConfirmationService],
 })
 export class CoursesTableComponent implements OnInit {
   @Input() courses: Courses = [];
@@ -24,11 +23,6 @@ export class CoursesTableComponent implements OnInit {
     expand: PrimeIcons.CHEVRON_RIGHT,
     collapse: PrimeIcons.CHEVRON_DOWN,
     add: PrimeIcons.PLUS,
-    edit: PrimeIcons.PENCIL,
-    delete: PrimeIcons.TRASH,
-    confirm: PrimeIcons.EXCLAMATION_TRIANGLE,
-    clearFilters: PrimeIcons.FILTER_SLASH,
-    search: PrimeIcons.SEARCH,
   };
 
   constructor() {}

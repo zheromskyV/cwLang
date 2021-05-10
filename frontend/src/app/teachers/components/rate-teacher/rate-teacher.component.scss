@@ -9,7 +9,7 @@
   margin: 0 2rem;
 }
 
-.word-section {
+.rate-section {
   width: 100%;
 }
 
@@ -22,15 +22,17 @@
   }
 }
 
-.dropdowns {
-  .initial-lang,
-  .target-lang {
-    padding: 0 0.5rem 0 0;
-  }
-}
+.about-field {
+  width: 100%;
 
-.lang-section {
-  margin: 1rem 0;
+  p {
+    margin: 0 0 0.5rem;
+  }
+
+  textarea {
+    resize: none;
+    width: 100%;
+  }
 }
 
 .buttons-container {

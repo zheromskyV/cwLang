@@ -1,13 +1,14 @@
 import _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { CREATE_GROUP, DELETE_GROUP, GET_GROUPS, GET_USER_GROUPS, UPDATE_GROUP } from 'src/app/api/group';
+import { ADD_STUDENT_TO_GROUP } from 'src/app/api/student';
 import { Group, GroupInfo, Groups } from 'src/app/models/group';
 import { UtilsService } from 'src/app/utils/utils.service';
-import { User } from 'src/app/models/user';
+import { User, UserInfo } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -44,10 +45,15 @@ export class GroupsService {
     return this.apollo
       .mutate<{ createGroup: Group }>({
         mutation: CREATE_GROUP,
-        variables: { group: UtilsService.cleanObject(group) },
+        variables: { group: this.prepareGroup(group) },
       })
       .pipe(
-        map(({ data }) => data?.createGroup),
+        map(({ data }) => data?.createGroup as GroupInfo),
+        switchMap((groupInfo) =>
+          forkJoin(group.students.map((student) => this.addStudentToGroup(student._id, groupInfo?._id))).pipe(
+            switchMap(() => of(groupInfo))
+          )
+        ),
         catchError(() => of(null))
       );
   }
@@ -58,7 +64,7 @@ export class GroupsService {
         mutation: UPDATE_GROUP,
         variables: {
           id: group._id,
-          group: UtilsService.cleanObject(group),
+          group: this.prepareGroup(group),
         },
       })
       .pipe(
@@ -77,5 +83,25 @@ export class GroupsService {
         map(() => id || ''),
         catchError(() => of(''))
       );
+  }
+
+  addStudentToGroup(userId: string = '', groupId: string = ''): Observable<UserInfo> {
+    return this.apollo
+      .mutate<{ addStudentToGroup: User }>({
+        mutation: ADD_STUDENT_TO_GROUP,
+        variables: { userId, groupId },
+      })
+      .pipe(
+        map(({ data }) => data?.addStudentToGroup),
+        catchError(() => of(null))
+      );
+  }
+
+  private prepareGroup(group: Group): object {
+    return {
+      teacher: group.teacher._id,
+      course: group.course._id,
+      schedule: UtilsService.cleanObject(group.schedule),
+    };
   }
 }

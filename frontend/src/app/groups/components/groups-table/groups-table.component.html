@@ -1,0 +1,75 @@
+<p-table
+  #table
+  [value]="mappedTableData | slice:0" 
+  dataKey="_id"
+  [rowHover]="true"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="['title', 'teacher']"
+>
+  <ng-template pTemplate="caption">
+    <cwl-table-caption [table]="table"></cwl-table-caption>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngIf="!isStudentView" style="width: 3rem"></th>
+      <th pSortableColumn="title">
+        {{ dictionary.groupTitle }}
+        <p-sortIcon field="title"></p-sortIcon>
+      </th>
+      <th pSortableColumn="schedule">
+        {{ dictionary.groupSchedule }}
+        <p-sortIcon field="schedule"></p-sortIcon>
+      </th>
+      <th pSortableColumn="teacher">
+        {{ dictionary.groupTeacher }}
+        <p-sortIcon field="teacher"></p-sortIcon>
+      </th>
+      <th *ngIf="areControlsVisible" [style]="{ 'width': isStudentView ? '5rem' : '8rem' }"></th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-group let-expanded="expanded">
+    <tr>
+      <td *ngIf="!isStudentView">
+        <p-button 
+          styleClass="p-button-text p-button-rounded p-button-plain"
+          [pRowToggler]="group"
+          [icon]="expanded ? icons.collapse : icons.expand"
+        ></p-button>
+      </td>
+      <td>{{ group.title }}</td>
+      <td>{{ group.schedule }}</td>
+      <td>{{ group.teacher }}</td>
+      <td *ngIf="areControlsVisible">
+        <cwl-edit-delete-controls
+          *ngIf="isAdminView"
+          [data]="group"
+          (onEdit)="edit($event)"
+          (onDelete)="delete($event)"
+        ></cwl-edit-delete-controls>
+        <p-button 
+          *ngIf="isStudentView"
+          styleClass="p-button-rounded p-button-outlined p-button-warning"
+          [icon]="icons.rate"
+          (click)="rate(group)"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="rowexpansion" let-group>
+    <tr class="inner-data">
+      <td [attr.colspan]="areControlsVisible ? '5' : '4'">
+        <div *ngIf="group.students.length">
+          <cwl-students-table [students]="group.students || []"></cwl-students-table>
+        </div>
+        
+        <div *ngIf="!group.students.length">
+          <p>{{ dictionary.noStudentsYet }}</p>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

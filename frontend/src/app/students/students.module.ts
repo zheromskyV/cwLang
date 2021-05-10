@@ -8,5 +8,6 @@ import { StudentsTableComponent } from './components/students-table/students-tab
 @NgModule({
   declarations: [StudentsPageComponent, StudentsTableComponent],
   imports: [SharedModule, StudentsRoutingModule],
+  exports: [StudentsTableComponent],
 })
 export class StudentsModule {}

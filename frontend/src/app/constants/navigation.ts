@@ -27,7 +27,6 @@ export const navigation = {
     navLinks.navCourses,
     navLinks.navGroups,
     navLinks.navLearning,
-    navLinks.navGame,
     navLinks.navSchedule,
     navLinks.navAnalytics,
     navLinks.navConnect,

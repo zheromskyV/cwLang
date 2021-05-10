@@ -55,7 +55,7 @@
       <td *ngIf="areControlsVisible">
         <cwl-edit-delete-controls
           *ngIf="isAdminView"
-          [course]="course"
+          [data]="course"
           (onEdit)="edit($event)"
           (onDelete)="delete($event)"
         ></cwl-edit-delete-controls>
