@@ -17,7 +17,7 @@ export interface AnalyticsState {
 export const initialAnalyticsState: AnalyticsState = {
   languages: { student: [], teacher: [] },
   courses: { initialLang: [], targetLang: [] },
-  generalMarks: { marks: [] },
-  studentMarks: { marks: [] },
-  studentMarksForTeacher: { pairs: [] },
+  generalMarks: [],
+  studentMarks: [],
+  studentMarksForTeacher: [],
 };

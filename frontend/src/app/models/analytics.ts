@@ -10,17 +10,13 @@ export interface CoursesAnalytics {
   targetLang: Language[];
 }
 
-export interface GeneralMarksAnalytics {
-  marks: number[];
+export type GeneralMarksAnalytics = number[];
+
+export type StudentMarksAnalytics = number[];
+
+export interface StudentMarksForTeacherPair {
+  fullname: string;
+  marks: [];
 }
 
-export interface StudentMarksAnalytics {
-  marks: number[];
-}
-
-export interface StudentMarksForTeacherAnalytics {
-  pairs: {
-    fullname: string;
-    marks: [];
-  }[];
-}
+export type StudentMarksForTeacherAnalytics = StudentMarksForTeacherPair[];

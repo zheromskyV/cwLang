@@ -27,11 +27,7 @@ const reducer = createReducer(
   })),
   on(AnalyticsActions.clearAnalytics, (state) => ({
     ...state,
-    languages: { student: [], teacher: [] },
-    courses: { initialLang: [], targetLang: [] },
-    generalMarks: { marks: [] },
-    studentMarks: { marks: [] },
-    studentMarksForTeacher: { pairs: [] },
+    ...initialAnalyticsState,
   }))
 );
 
