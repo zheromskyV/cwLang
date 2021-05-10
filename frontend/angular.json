@@ -34,7 +34,8 @@
               "zen-observable",
               "@fullcalendar/daygrid",
               "@fullcalendar/timegrid",
-              "@fullcalendar/interaction"
+              "@fullcalendar/interaction",
+              "chart.js"
             ]
           },
           "configurations": {
