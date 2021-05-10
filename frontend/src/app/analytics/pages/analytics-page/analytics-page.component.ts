@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { dictionary } from 'src/app/constants/dictionary';
+import { Roles } from 'src/app/constants/roles.enum';
+import { RootState } from 'src/app/store/root.state';
+import * as fromAuth from '../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'cwl-analytics-page',
@@ -10,7 +15,11 @@ import { dictionary } from 'src/app/constants/dictionary';
 export class AnalyticsPageComponent implements OnInit {
   dictionary = dictionary;
 
-  constructor() {}
+  role$: Observable<Roles>;
 
-  ngOnInit(): void {}
+  constructor(private readonly store: Store<RootState>) {}
+
+  ngOnInit(): void {
+    this.role$ = this.store.select(fromAuth.getUserRole);
+  }
 }
