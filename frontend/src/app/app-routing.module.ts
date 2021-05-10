@@ -40,6 +40,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: routerPaths.schedule,
+    loadChildren: () => import('./schedule/schedule.module').then(({ ScheduleModule }) => ScheduleModule),
+    canActivate: [AuthGuardService],
+  },
+  {
     path: routerPaths.notFound,
     loadChildren: () => import('./not-found/not-found.module').then(({ NotFoundModule }) => NotFoundModule),
     canActivate: [AuthGuardService],
