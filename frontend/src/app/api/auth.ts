@@ -1,5 +1,10 @@
 import { gql } from 'apollo-angular';
 
+export const LANGUAGE = `{
+  name
+  value
+}`;
+
 export const USER = `{
   _id
   email
@@ -14,10 +19,7 @@ export const USER = `{
     discount
     info
     rating
-    languages {
-      name
-      value
-    }
+    languages ${LANGUAGE}
   }
 }`;
 

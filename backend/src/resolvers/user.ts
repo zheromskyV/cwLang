@@ -46,11 +46,10 @@ const resolvers = {
     },
     updateUser: async (_: void, { id, user }: { id: string; user: IUser }): Promise<IUser | null> => {
       try {
-        const outdatedUser = await User.findById(id);
+        const outdatedUser = await User.findById(id).populate('profile');
 
         if (outdatedUser) {
-          await Language.remove(outdatedUser.profile.languages);
-
+          await Language.deleteMany({ _id: { $in: outdatedUser.profile.languages }});
           const createdLanguages = await Language.insertMany(user.profile.languages);
 
           await Profile.findByIdAndUpdate(outdatedUser.profile, {

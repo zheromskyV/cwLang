@@ -3,8 +3,8 @@ scalar Date
 
 type LanguageType {
   _id: String
-  name: String!
-  value: Int!
+  name: String
+  value: Int
 }
 
 type ProfileType {
