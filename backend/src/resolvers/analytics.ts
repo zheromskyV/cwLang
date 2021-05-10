@@ -38,7 +38,6 @@ const resolvers = {
         const generalMarks = new Array(10).fill(0);
         marks.forEach((mark) => generalMarks[mark._id - 1] = mark.count)
 
-        console.log(generalMarks);
         return generalMarks;
       } catch(e) {
         console.error(e);
@@ -51,7 +50,6 @@ const resolvers = {
         const group = await Group.findById(groupId).populate('students');
 
         if (group?.students) {
-          console.log(group.students);
           const marks = group.students.map(async(student) => ({
             fullname: `${student.name} ${student.surname}`,
             marks: await studentMarks(undefined, { id: String(student._id) }),

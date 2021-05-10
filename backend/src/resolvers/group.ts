@@ -1,9 +1,7 @@
 import { omit } from 'lodash';
-import course from 'src/typeDefs/course';
 
 import { Group, Profile, Schedule, User } from '../models';
 import { IGroup, IUser, Roles } from '../types';
-import { studentMarks } from './analytics';
 import { removeStudentFromGroup } from './student';
 
 export const deleteGroup = async (_: void, { id }: { id: string }): Promise<void> => {
