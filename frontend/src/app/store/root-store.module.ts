@@ -4,6 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { AnalyticsStoreModule } from './analytics/analytics-store.module';
 import { AuthStoreModule } from './auth/auth-store.module';
 import { CoursesStoreModule } from './courses/courses-store.module';
 import { GroupsStoreModule } from './groups/groups-store.module';
@@ -29,6 +30,7 @@ import { WordsStoreModule } from './words/words-store.module';
     ),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
+    AnalyticsStoreModule,
     AuthStoreModule,
     CoursesStoreModule,
     GroupsStoreModule,

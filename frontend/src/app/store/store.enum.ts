@@ -7,4 +7,5 @@ export enum StoreFeature {
   Students = 'students',
   Teachers = 'teachers',
   Schedule = 'schedule',
+  Analytics = 'analytics',
 }
