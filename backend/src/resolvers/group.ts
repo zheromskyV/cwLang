@@ -1,7 +1,9 @@
 import { omit } from 'lodash';
+import course from 'src/typeDefs/course';
 
 import { Group, Profile, Schedule, User } from '../models';
 import { IGroup, IUser, Roles } from '../types';
+import { studentMarks } from './analytics';
 import { removeStudentFromGroup } from './student';
 
 export const deleteGroup = async (_: void, { id }: { id: string }): Promise<void> => {
@@ -21,6 +23,8 @@ export const deleteGroup = async (_: void, { id }: { id: string }): Promise<void
           groups: group?._id as any,
         },
       }, { new: true, useFindAndModify: false });
+
+      await Schedule.findByIdAndDelete(group.schedule)
     }
   } catch(e) {
     console.error(e);
@@ -134,43 +138,34 @@ const resolvers = {
       try {
         const user = await User.findById(id).populate('profile');
 
-        if (user?.profile?.groups?.length) {
-          if (user.role === Roles.Teacher) {
-            return Group.find()
-              .populate({
-                path: 'teacher',
-                match: { _id: id },
-              })
-              .populate({
+        if (user?.profile.groups) {
+          const profile = await Profile.findById(user?.profile?._id)
+            .populate({
+              path: 'groups',
+              populate: [{
                 path: 'course',
                 populate: {
-                  path: 'words',
-                }
-              })
-              .populate('schedule')
-              .populate({
+                  path: 'words'
+                },
+              },
+              {
+                path: 'schedule',
+              },
+              {
                 path: 'students',
+                populate: {
+                  path: 'profile'
+                },
+              },
+              {
+                path: 'teacher',
                 populate: {
                   path: 'profile',
-                }
-              });
-          }
+                },
+              }
+            ]});
 
-          if (user.role === Roles.Student) {
-            return Group.find()
-              .populate({
-                path: 'students',
-                match: { _id: id },
-              })
-              .populate('teacher')
-              .populate({
-                path: 'course',
-                populate: {
-                  path: 'words',
-                }
-              })
-              .populate('schedule');
-          }
+          return profile?.groups || [];
         }
 
         return [];
