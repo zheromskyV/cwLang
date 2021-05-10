@@ -1,0 +1,191 @@
+<form 
+  class="form p-d-flex p-flex-column p-ai-center"
+  [formGroup]="formGroup"
+  novalidate
+>
+  <div class="section course-section">
+    <p-dropdown
+      [options]="courses"
+      [(ngModel)]="selectedCourse"
+      [ngModelOptions]="{ standalone: true }"
+      optionLabel="_id"
+      [filter]="true"
+      filterBy="title"
+      [showClear]="true"
+      [placeholder]="dictionary.selectCourse"
+      id="courses"
+      name="courses"
+    >
+      <ng-template pTemplate="selectedItem">
+        <div class="select-item select-item-value" *ngIf="selectedCourse">
+          <div>{{ selectedCourse.title }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template let-course pTemplate="item">
+        <div class="select-item">
+          <div>{{ course.title }} ({{ dictionary[course.targetLang] }} {{ course.level }})</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+
+  <div class="section teacher-section">
+    <p-dropdown
+      [options]="teachers"
+      [(ngModel)]="selectedTeacher"
+      [ngModelOptions]="{ standalone: true }"
+      optionLabel="_id"
+      [filter]="true"
+      filterBy="surname"
+      [showClear]="true"
+      [placeholder]="dictionary.selectTeacher"
+      id="teachers"
+      name="teachers"
+    >
+      <ng-template pTemplate="selectedItem">
+        <div class="select-item select-item-value" *ngIf="selectedTeacher">
+          <div>{{ selectedTeacher.surname }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template let-teacher pTemplate="item">
+        <div class="select-item">
+          <div>{{ teacher.surname }} {{ teacher.name }}</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+
+  <div class="section students-section p-fluid" *ngIf="!group">
+    <p-multiSelect
+      [options]="students"
+      [(ngModel)]="selectedStudents"
+      [ngModelOptions]="{ standalone: true }"
+      optionLabel="_id"
+      [defaultLabel]="dictionary.selectStudents"
+      class="multiselect-custom"
+    >
+      <ng-template pTemplate="selectedItems" let-value>
+        <div
+          class="select-item select-item-value"
+          *ngFor="let option of selectedStudents"
+        >
+          <div>{{ option.surname }}</div>
+        </div>
+        <div 
+          class="item-placeholder" 
+          *ngIf="!selectedStudents || selectedStudents.length === 0"
+        >
+          {{ dictionary.selectStudents }}
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="item" let-student>
+        <div class="select-item">
+          <div>{{ student.surname }} {{ student.name }}</div>
+        </div>
+      </ng-template>
+    </p-multiSelect>
+  </div>
+
+  <div class="section schedule-section">
+    <div class="row p-grid p-form-grid p-fluid">
+      <div class="field p-col-12 p-md-6">
+        <input
+          pInputText
+          type="text"
+          [placeholder]="dictionary.selectScheduleTitle"
+          autocomplete="off"
+          class="p-inputtext p-col-12 p-md-6 field"
+          [id]="formFields.title"
+          [formControlName]="formFields.title"
+        />
+      </div>
+
+      <p-multiSelect
+        [options]="daysOfWeek"
+        [(ngModel)]="selectedDaysOfWeek"
+        [ngModelOptions]="{ standalone: true }"
+        [filter]="false"
+        optionLabel="label"
+        [defaultLabel]="dictionary.selectDaysOfWeek"
+        class="multiselect-custom p-col-12 p-md-6"
+      >
+        <ng-template pTemplate="selectedItems" let-value>
+          <div
+            class="select-item select-item-value"
+            *ngFor="let option of selectedDaysOfWeek"
+          >
+            <div>{{ option.label }}</div>
+          </div>
+          <div 
+            class="item-placeholder" 
+            *ngIf="selectedDaysOfWeek.length === 0"
+          >
+            {{ dictionary.selectDaysOfWeek }}
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="item" let-day>
+          <div class="select-item">
+            <div>{{ day.label }}</div>
+          </div>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+    
+    <div class="row p-grid p-form-grid p-fluid">
+      <p-calendar
+        class="p-col-12 p-md-6" 
+        dateFormat="dd-mm-yy"
+        [placeholder]="dictionary.selectStartRecur"
+        [id]="formFields.startRecur"
+        [formControlName]="formFields.startRecur"
+      ></p-calendar>
+
+      <p-calendar
+        class="p-col-12 p-md-6" 
+        dateFormat="dd-mm-yy"
+        [placeholder]="dictionary.selectEndRecur"
+        [id]="formFields.endRecur"
+        [formControlName]="formFields.endRecur"
+      ></p-calendar>
+    </div>
+
+    <div class="row p-grid p-form-grid p-fluid">
+      <p-calendar
+        [timeOnly]="true" 
+        class="p-col-12 p-md-6"
+        [placeholder]="dictionary.selectStartTime"
+        [id]="formFields.startTime"
+        [formControlName]="formFields.startTime"
+      ></p-calendar>
+      
+      <p-calendar
+        [timeOnly]="true" 
+        class="p-col-12 p-md-6"
+        [placeholder]="dictionary.selectEndTime"
+        [id]="formFields.endTime"
+        [formControlName]="formFields.endTime"
+      ></p-calendar>
+    </div>
+  </div>
+
+  <div class="buttons-container p-d-flex p-jc-around">
+    <p-button 
+      [label]="dictionary.save"
+      [icon]="icons.save"
+      [disabled]="!isFormValid"
+      (click)="save()"
+      styleClass="button p-button"
+    ></p-button>
+
+    <p-button 
+      [label]="dictionary.cancel"
+      [icon]="icons.cancel"
+      (click)="cancel()"
+      styleClass="button p-button-secondary"
+    ></p-button>
+  </div>
+</form>

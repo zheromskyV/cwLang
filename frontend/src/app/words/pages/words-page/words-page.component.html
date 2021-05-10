@@ -22,6 +22,14 @@
       <cwl-words-table
         [words]="(favoriteWords$ | async) || []"
       ></cwl-words-table>
+
+      <p-button 
+        styleClass="p-button-warning p-button-outlined"
+        [icon]="icons.download"
+        [label]="dictionary.downloadFile"
+        (click)="downloadFile()"
+        class="download-btn"
+      ></p-button>
     </p-tabPanel>
   </p-tabView>
 </cwl-module-page>

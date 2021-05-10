@@ -10,6 +10,16 @@ export interface Group {
   schedule: Schedule;
 }
 
+export interface TableGroup {
+  _id?: string;
+  title: string;
+  schedule: string;
+  teacher: string;
+  students: Users;
+}
+
 export type Groups = Group[];
+
+export type TableGroups = TableGroup[];
 
 export type GroupInfo = Group | null | undefined;

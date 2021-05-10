@@ -8,11 +8,11 @@ import { Course } from 'src/app/models/course';
   templateUrl: './edit-delete-controls.component.html',
   styleUrls: ['./edit-delete-controls.component.scss'],
 })
-export class EditDeleteControlsComponent implements OnInit {
-  @Input() course: Course;
+export class EditDeleteControlsComponent<T> implements OnInit {
+  @Input() data: T;
 
-  @Output() onEdit = new EventEmitter<Course>();
-  @Output() onDelete = new EventEmitter<Course>();
+  @Output() onEdit = new EventEmitter<T>();
+  @Output() onDelete = new EventEmitter<T>();
 
   icons = {
     edit: PrimeIcons.PENCIL,
@@ -24,10 +24,10 @@ export class EditDeleteControlsComponent implements OnInit {
   ngOnInit(): void {}
 
   edit(): void {
-    this.onEdit.emit(this.course);
+    this.onEdit.emit(this.data);
   }
 
   delete(): void {
-    this.onDelete.emit(this.course);
+    this.onDelete.emit(this.data);
   }
 }

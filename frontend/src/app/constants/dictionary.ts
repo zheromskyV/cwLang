@@ -80,15 +80,34 @@ export const dictionary: CommonModel = {
   yourWords: 'Ваши слова',
   favoriteWords: 'Избранные',
   addWord: 'Добавить слово к курсу',
+  downloadFile: 'Скачать избранные слова',
 
   // students
   age: 'Возраст',
   email: 'Почта',
   clearFilters: 'Очистить фильтры',
   search: 'Поиск',
+  noStudentsYet: 'Студентов еще нет',
 
   // teacher
   rating: 'Рейтинг',
+  rateTeacher: 'Оцените преподавателя',
+  rateMessage: 'Ваш комментарий',
+
+  // groups
+  group: 'Группа',
+  groupTitle: 'Название',
+  groupSchedule: 'Расписание',
+  groupTeacher: 'Преподаватель',
+  selectStudents: 'Выберите студентов',
+  selectTeacher: 'Выберите преподавателя',
+  selectCourse: 'Выберите курс',
+  selectScheduleTitle: 'Название',
+  selectDaysOfWeek: 'Выберите дни недели',
+  selectStartTime: 'Выберите время начала',
+  selectEndTime: 'Выберите время окончания',
+  selectStartRecur: 'Выберите дату начала',
+  selectEndRecur: 'Выберите дату окончания',
 
   // not-found
   pageNotFound: 'Страница не найдена',

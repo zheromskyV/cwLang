@@ -21,6 +21,7 @@ export class WordsPageComponent implements OnInit, OnDestroy {
   icons = {
     table: PrimeIcons.TABLE,
     favorite: PrimeIcons.STAR,
+    download: PrimeIcons.DOWNLOAD,
   };
 
   studentWords$: Observable<Words>;
@@ -51,5 +52,9 @@ export class WordsPageComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(WordsActions.clearStudentWords());
     this.store.dispatch(WordsActions.clearFavoriteWords());
+  }
+
+  downloadFile(): void {
+    this.store.dispatch(WordsActions.downloadFavoriteWords());
   }
 }

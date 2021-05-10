@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { CREATE_COURSE, DELETE_COURSE, GET_COURSES, UPDATE_COURSE } from 'src/app/api/course';
 import { Course, CourseInfo, Courses } from 'src/app/models/course';
+import { UtilsService } from 'src/app/utils/utils.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,15 +27,10 @@ export class CoursesService {
   }
 
   create(course: Course): Observable<CourseInfo> {
-    const cleanCourse = _.omit(course, ['_id', '__typename']);
-    const cleanWords = cleanCourse.words?.map((word) => _.omit(word, '__typename'));
-
     return this.apollo
       .mutate<{ createCourse: Course }>({
         mutation: CREATE_COURSE,
-        variables: {
-          course: { ...cleanCourse, words: cleanWords },
-        },
+        variables: { course: UtilsService.cleanObject(course) },
       })
       .pipe(
         map(({ data }) => data?.createCourse),
@@ -43,15 +39,12 @@ export class CoursesService {
   }
 
   update(course: Course): Observable<CourseInfo> {
-    const cleanCourse = _.omit(course, ['_id', '__typename']);
-    const cleanWords = cleanCourse.words?.map((word) => _.omit(word, '__typename'));
-
     return this.apollo
       .mutate<{ updateCourse: Course }>({
         mutation: UPDATE_COURSE,
         variables: {
           id: course._id,
-          course: { ...cleanCourse, words: cleanWords },
+          course: UtilsService.cleanObject(course),
         },
       })
       .pipe(

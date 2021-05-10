@@ -78,4 +78,13 @@ export class WordsEffects {
       )
     )
   );
+
+  downloadFavoriteWords$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WordsActions.downloadFavoriteWords),
+      withLatestFrom(this.store.select(fromWords.getFavoriteWords)),
+      switchMap(([_, favoriteWords]) => this.wordsService.downloadFavorites(favoriteWords)),
+      switchMap(() => [UiActions.setGeneralSuccess({ isGeneralSuccess: true })])
+    )
+  );
 }

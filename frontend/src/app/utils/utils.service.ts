@@ -1,8 +1,13 @@
+import _ from 'lodash';
 import { Route } from '@angular/router';
 
 import { routerPaths } from '../constants/router-paths';
 import { dictionary } from '../constants/dictionary';
 import { User } from '../models/user';
+
+interface anyObj {
+  [key: string]: any;
+}
 
 export class UtilsService {
   static defaultRedirect(redirectTo: string): Route {
@@ -33,5 +38,25 @@ export class UtilsService {
     const ageDate = new Date(Date.now() - user.birthday);
 
     return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  static deepOmit(obj: anyObj, keysToOmit: string[]): anyObj {
+    const keysToOmitIndex = _.keyBy(keysToOmit);
+
+    function omitFromObject(obj: anyObj): anyObj {
+      return _.transform(obj, (result: anyObj, value: any, key: string) => {
+        if (key in keysToOmitIndex) {
+          return;
+        }
+
+        result[key] = _.isObject(value) ? omitFromObject(value) : value;
+      });
+    }
+
+    return omitFromObject(obj);
+  }
+
+  static cleanObject(obj: anyObj): anyObj {
+    return _.omit(UtilsService.deepOmit(obj, ['__typename']), '_id');
   }
 }

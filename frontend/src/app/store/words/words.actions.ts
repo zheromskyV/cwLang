@@ -26,3 +26,5 @@ export const clearWords = createAction('[WORDS] CLEAR_WORDS');
 export const clearStudentWords = createAction('[WORDS] CLEAR_STUDENT_WORDS');
 
 export const clearFavoriteWords = createAction('[WORDS] CLEAR_FAVORITE_WORDS');
+
+export const downloadFavoriteWords = createAction('[WORDS] DOWNLOAD_FAVORITE_WORDS');
