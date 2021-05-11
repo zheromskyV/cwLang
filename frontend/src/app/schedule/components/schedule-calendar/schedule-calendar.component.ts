@@ -23,6 +23,7 @@ export class ScheduleCalendarComponent implements OnInit, OnChanges {
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
     editable: false,
+    locale: 'ru',
   };
 
   mappedEvents: ScheduleEvents;

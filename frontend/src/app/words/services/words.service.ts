@@ -82,7 +82,18 @@ export class WordsService {
   }
 
   downloadFavorites(favoriteWords: Words): Observable<never> {
-    // TO DO женя
+    const words = favoriteWords.map((word) => `${word.target} - ${word.initial}`);
+    const content = `"Избранные слова"\r\n\r\n${words.join('\r\n')}`;
+
+    const link = document.createElement('a');
+    link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+    link.setAttribute('download', 'CWLang_favorite_words.txt');
+
+    link.style.display = 'none';
+    document.body.appendChild(link);
+
+    link.click();
+
     return EMPTY;
   }
 }
