@@ -28,6 +28,7 @@ export const navigation = {
     navLinks.navGroups,
     navLinks.navLearning,
     navLinks.navSchedule,
+    navLinks.navTesting,
     navLinks.navAnalytics,
     navLinks.navConnect,
   ] as NavigationModel,
