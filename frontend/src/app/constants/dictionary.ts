@@ -127,6 +127,11 @@ export const dictionary: CommonModel = {
   testingComment: 'Комментарий:',
   selectStudent: 'Выберите студента',
 
+  // messages
+  askQuestionGiveFeedback: 'Задайте свой вопрос или оставьте комментарий',
+  sendDebtNotification: 'Отправить напоминание о задолженности',
+  send: 'Отправить',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
