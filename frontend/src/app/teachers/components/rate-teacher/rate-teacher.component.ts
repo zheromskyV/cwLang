@@ -28,9 +28,7 @@ export class RateTeacherComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.rate = this.teacher?.profile?.rating || 0;
-  }
+  ngOnInit(): void {}
 
   get isFormValid(): boolean {
     return this.rate > 0 && this.message.length > MIN_ABOUT_LENGTH;

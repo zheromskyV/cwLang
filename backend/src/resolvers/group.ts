@@ -13,18 +13,22 @@ export const deleteGroup = async (_: void, { id }: { id: string }): Promise<void
         removeStudentFromGroup(undefined, {
           userId: String(student._id),
           groupId: String(group._id),
-        })
+        });
       });
 
-      await User.findByIdAndUpdate(group.teacher, {
-        $pull: {
-          groups: group?._id as any,
+      await User.findByIdAndUpdate(
+        group.teacher,
+        {
+          $pull: {
+            groups: group?._id as any,
+          },
         },
-      }, { new: true, useFindAndModify: false });
+        { new: true, useFindAndModify: false }
+      );
 
-      await Schedule.findByIdAndDelete(group.schedule)
+      await Schedule.findByIdAndDelete(group.schedule);
     }
-  } catch(e) {
+  } catch (e) {
     console.error(e);
     throw e;
   }
@@ -35,56 +39,66 @@ const resolvers = {
     createGroup: async (_: void, { group }: { group: IGroup }): Promise<IGroup | null> => {
       try {
         const schedule = await Schedule.create(group.schedule);
-        const createdGroup = await (await Group.create({
-          ...group,
-          schedule,
-        }))
-        .populate('teacher')
-        .populate({
-          path: 'course',
-          populate: {
-            path: 'words',
-          }
-        })
-        .populate('schedule')
-        .populate('students')
-        .execPopulate();
+        const createdGroup = await (
+          await Group.create({
+            ...group,
+            schedule,
+          })
+        )
+          .populate('teacher')
+          .populate({
+            path: 'course',
+            populate: {
+              path: 'words',
+            },
+          })
+          .populate('schedule')
+          .populate('students')
+          .execPopulate();
 
-        await Profile.findByIdAndUpdate((createdGroup.teacher as IUser)?.profile, {
-          $addToSet: {
-            groups: createdGroup,
+        await Profile.findByIdAndUpdate(
+          (createdGroup.teacher as IUser)?.profile,
+          {
+            $addToSet: {
+              groups: createdGroup,
+            },
           },
-        }, { new: true, useFindAndModify: false });
+          { new: true, useFindAndModify: false }
+        );
 
         return createdGroup;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    updateGroup: async (_: void, { id, group }: { id: string, group: IGroup }): Promise<IGroup | undefined> => {
+    updateGroup: async (_: void, { id, group }: { id: string; group: IGroup }): Promise<IGroup | undefined> => {
       try {
         const outdatedGroup = await Group.findById(id).populate('teacher');
-        const updatedGroup = await Group
-          .findByIdAndUpdate(id, omit(group, 'schedule'), { new: true, useFindAndModify: false })
-          .populate('teacher');
+        const updatedGroup = await Group.findByIdAndUpdate(id, omit(group, 'schedule'), {
+          new: true,
+          useFindAndModify: false,
+        }).populate('teacher');
 
         if (JSON.stringify(outdatedGroup?.teacher) !== JSON.stringify(updatedGroup?.teacher)) {
-          await Profile.findByIdAndUpdate((updatedGroup!.teacher as IUser)?.profile, {
-            $push: {
-              groups: updatedGroup as IGroup,
-            },
-          },
-          { new: true, useFindAndModify: false }
-          );
-
-          await Profile.findByIdAndUpdate((outdatedGroup!.teacher as IUser)?.profile,
+          await Profile.findByIdAndUpdate(
+            (updatedGroup!.teacher as IUser)?.profile,
             {
-              $pull: {
-                groups: { $in: [ updatedGroup!._id as any ] },
+              $push: {
+                groups: updatedGroup as IGroup,
               },
             },
-            { new: true, useFindAndModify: false },
+            { new: true, useFindAndModify: false }
+          );
+
+          await Profile.findByIdAndUpdate(
+            (outdatedGroup!.teacher as IUser)?.profile,
+            {
+              $pull: {
+                groups: { $in: [updatedGroup!._id as any] },
+              },
+            },
+            { new: true, useFindAndModify: false }
           );
         }
 
@@ -96,12 +110,12 @@ const resolvers = {
             path: 'course',
             populate: {
               path: 'words',
-            }
+            },
           })
           .populate('schedule')
           .populate('students')
           .execPopulate();
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
@@ -117,17 +131,25 @@ const resolvers = {
             path: 'profile',
             populate: {
               path: 'languages',
-            }
+            },
           })
           .populate({
             path: 'course',
             populate: {
               path: 'words',
-            }
+            },
           })
           .populate('schedule')
-          .populate('students');
-      } catch(e) {
+          .populate({
+            path: 'students',
+            populate: {
+              path: 'profile',
+              populate: {
+                path: 'languages',
+              },
+            },
+          });
+      } catch (e) {
         console.error(e);
         throw e;
       }
@@ -137,13 +159,13 @@ const resolvers = {
         const user = await User.findById(id).populate('profile');
 
         if (user?.profile.groups) {
-          const profile = await Profile.findById(user?.profile?._id)
-            .populate({
-              path: 'groups',
-              populate: [{
+          const profile = await Profile.findById(user?.profile?._id).populate({
+            path: 'groups',
+            populate: [
+              {
                 path: 'course',
                 populate: {
-                  path: 'words'
+                  path: 'words',
                 },
               },
               {
@@ -152,7 +174,7 @@ const resolvers = {
               {
                 path: 'students',
                 populate: {
-                  path: 'profile'
+                  path: 'profile',
                 },
               },
               {
@@ -160,14 +182,15 @@ const resolvers = {
                 populate: {
                   path: 'profile',
                 },
-              }
-            ]});
+              },
+            ],
+          });
 
           return profile?.groups || [];
         }
 
         return [];
-       } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }

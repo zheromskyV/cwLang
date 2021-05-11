@@ -81,6 +81,7 @@ export const dictionary: CommonModel = {
   favoriteWords: 'Избранные',
   addWord: 'Добавить слово к курсу',
   downloadFile: 'Скачать избранные слова',
+  wordsReport: 'Избранные слова',
 
   // students
   age: 'Возраст',
@@ -121,6 +122,30 @@ export const dictionary: CommonModel = {
   loadAnalytics: 'Загрузить данные',
   selectGroup: 'Выберите группу',
   myMarks: 'Мои оценки',
+
+  // testing
+  testingMark: 'Оценка:',
+  testingComment: 'Комментарий:',
+  selectStudent: 'Выберите студента',
+  testingReport: 'Отчет по успеваемости',
+  downloadReport: 'Скачать отчет по успеваемости',
+
+  // messages
+  askQuestionGiveFeedback: 'Задайте свой вопрос или оставьте комментарий',
+  sendDebtNotification: 'Отправить напоминание о задолженности',
+  send: 'Отправить',
+
+  // discounts
+  discount1: 'Занимается вместе с другом',
+  discount2: 'Занимается вместе с семьей',
+  discount3: 'Занимается больше трех лет',
+  finalDiscount: 'Итоговоя скидка',
+
+  // payment
+  toPay: 'К оплате',
+  totalToPay: 'Итого к опалте',
+  paymentPaid: 'Внесено средств',
+  paymentChange: 'Сдача',
 
   // not-found
   pageNotFound: 'Страница не найдена',
