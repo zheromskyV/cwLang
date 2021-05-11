@@ -24,4 +24,4 @@ extend type Mutation {
   updateGroup(id: String!, group: GroupInput!): GroupType!
   deleteGroup(id: String!): Void
 }
-`
+`;

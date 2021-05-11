@@ -10,13 +10,13 @@ export const studentMarks = async (_: void, { id }: { id: string }): Promise<num
 
     const profile = await Profile.findById(user?.profile._id).populate({
       path: 'marks',
-      options: { sort: { date: 1 }},
+      options: { sort: { date: 1 } },
     });
 
     const marks = profile?.marks?.map((mark) => mark.value);
 
-    return  marks || [];
-  } catch(e) {
+    return marks || [];
+  } catch (e) {
     console.error(e);
     throw e;
   }
@@ -26,20 +26,22 @@ const resolvers = {
   Query: {
     generalMarks: async (): Promise<number[]> => {
       try {
-        const marks = await Mark.aggregate([{
-          '$group': {
-            _id:'$value',
-            count: {
-              $sum: 1,
-            }
-          }
-        }]);
+        const marks = await Mark.aggregate([
+          {
+            $group: {
+              _id: '$value',
+              count: {
+                $sum: 1,
+              },
+            },
+          },
+        ]);
 
         const generalMarks = new Array(10).fill(0);
-        marks.forEach((mark) => generalMarks[mark._id - 1] = mark.count)
+        marks.forEach((mark) => (generalMarks[mark._id - 1] = mark.count));
 
         return generalMarks;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
@@ -50,7 +52,7 @@ const resolvers = {
         const group = await Group.findById(groupId).populate('students');
 
         if (group?.students) {
-          const marks = group.students.map(async(student) => ({
+          const marks = group.students.map(async (student) => ({
             fullname: `${student.name} ${student.surname}`,
             marks: await studentMarks(undefined, { id: String(student._id) }),
           }));
@@ -59,56 +61,56 @@ const resolvers = {
         }
 
         return [];
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    coursesAnalytics: async (): Promise<{ initialLang: ILanguage[], targetLang: ILanguage [] }> => {
+    coursesAnalytics: async (): Promise<{ initialLang: ILanguage[]; targetLang: ILanguage[] }> => {
       try {
         const initialLang = await Course.aggregate([
           {
-            '$group': {
+            $group: {
               _id: '$initialLang',
               count: {
                 $sum: 1,
-              }
-            }
+              },
+            },
           },
           {
-            '$project': {
+            $project: {
               name: '$_id',
               value: '$count',
-              _id: false
+              _id: false,
             },
-          }
+          },
         ]);
 
         const targetLang = await Course.aggregate([
           {
-            '$group': {
+            $group: {
               _id: '$targetLang',
               count: {
                 $sum: 1,
-              }
-            }
+              },
+            },
           },
           {
-            '$project': {
+            $project: {
               name: '$_id',
               value: '$count',
-              _id: false
+              _id: false,
             },
-          }
+          },
         ]);
 
         return { initialLang, targetLang };
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    languagesAnalytics: async (): Promise<{ student?: ILanguage[], teacher?: ILanguage [] }> => {
+    languagesAnalytics: async (): Promise<{ student?: ILanguage[]; teacher?: ILanguage[] }> => {
       try {
         const data: Record<string, ILanguage[]> = {};
 
@@ -123,27 +125,27 @@ const resolvers = {
           const languages = flatten(users.map((user) => user.profile.languages));
 
           const rating = await Language.aggregate([
-            { '$match': { '$or': languages } },
+            { $match: { $or: languages } },
             {
-              '$group': {
+              $group: {
                 _id: '$name',
-                'count': { '$avg': '$value' }
-              }
+                count: { $avg: '$value' },
+              },
             },
             {
-              '$project': {
+              $project: {
                 name: '$_id',
                 value: '$count',
-                _id: false
+                _id: false,
               },
-            }
+            },
           ]);
 
-           data[ROLES[i]] = rating;
-        };
+          data[ROLES[i]] = rating;
+        }
 
         return data;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }

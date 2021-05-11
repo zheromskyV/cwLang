@@ -13,7 +13,7 @@ const ScheduleSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Schedule = model<ISchedule>('Schedule', ScheduleSchema);

@@ -10,7 +10,7 @@ const MarkSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Mark = model<IMark>('Mark', MarkSchema);

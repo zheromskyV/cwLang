@@ -49,21 +49,23 @@ const resolvers = {
         const outdatedUser = await User.findById(id).populate('profile');
 
         if (outdatedUser) {
-          await Language.deleteMany({ _id: { $in: outdatedUser.profile.languages }});
+          await Language.deleteMany({ _id: { $in: outdatedUser.profile.languages } });
           const createdLanguages = await Language.insertMany(user.profile.languages);
 
-          await Profile.findByIdAndUpdate(outdatedUser.profile, {
-            ...user.profile,
-            languages: createdLanguages,
-          },
-          { new: true, useFindAndModify: false });
+          await Profile.findByIdAndUpdate(
+            outdatedUser.profile,
+            {
+              ...user.profile,
+              languages: createdLanguages,
+            },
+            { new: true, useFindAndModify: false }
+          );
         }
 
-        const updatedUser = await User.findByIdAndUpdate(
-          id,
-          omit(user, ['languages', 'profile']),
-          { new: true, useFindAndModify: false }
-        );
+        const updatedUser = await User.findByIdAndUpdate(id, omit(user, ['languages', 'profile']), {
+          new: true,
+          useFindAndModify: false,
+        });
 
         return User.findById(updatedUser?._id).populate({
           path: 'profile',
@@ -83,7 +85,7 @@ const resolvers = {
         path: 'profile',
         populate: {
           path: 'languages',
-        }
+        },
       });
     },
   },

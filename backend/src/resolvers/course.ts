@@ -2,27 +2,26 @@ import { Course, Group, Profile, User } from '../models';
 import { ICourse } from '../types';
 import { deleteGroup } from './group';
 
-export const getUserCourses = async(_: void, { id }: { id: String }): Promise<ICourse[]> => {
+export const getUserCourses = async (_: void, { id }: { id: String }): Promise<ICourse[]> => {
   try {
     const user = await User.findById(id);
 
-    const profile = await Profile.findById(user?.profile)
-      .populate({
-        path: 'groups',
+    const profile = await Profile.findById(user?.profile).populate({
+      path: 'groups',
+      populate: {
+        path: 'course',
         populate: {
-          path: 'course',
-          populate: {
-            path: 'words',
-          }
+          path: 'words',
         },
-      });
+      },
+    });
 
     if (profile?.groups) {
       return profile.groups.map((group) => group.course as ICourse);
     }
 
     return [];
-  } catch(e) {
+  } catch (e) {
     console.error(e);
     throw e;
   }
@@ -35,17 +34,19 @@ const resolvers = {
         const createdCourse = await (await Course.create(course)).populate('words').execPopulate();
 
         return createdCourse;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    updateCourse: async (_: void, { id, course }: { id: string, course: ICourse }): Promise<ICourse | undefined> => {
+    updateCourse: async (_: void, { id, course }: { id: string; course: ICourse }): Promise<ICourse | undefined> => {
       try {
-        const updatedCourse = (await Course.findByIdAndUpdate(id, course, { new: true, useFindAndModify: false }))?.populate('words').execPopulate();
+        const updatedCourse = (await Course.findByIdAndUpdate(id, course, { new: true, useFindAndModify: false }))
+          ?.populate('words')
+          .execPopulate();
 
         return updatedCourse;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
@@ -59,10 +60,10 @@ const resolvers = {
           match: { _id: course!._id },
         });
 
-        groups.forEach(async(group) => {
+        groups.forEach(async (group) => {
           await deleteGroup(undefined, { id: String(group._id) });
         });
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
@@ -71,8 +72,8 @@ const resolvers = {
   Query: {
     getCourses: async (): Promise<ICourse[]> => {
       try {
-        return Course.find().populate('words');;
-      } catch(e) {
+        return Course.find().populate('words');
+      } catch (e) {
         console.error(e);
         throw e;
       }

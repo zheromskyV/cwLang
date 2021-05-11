@@ -19,7 +19,7 @@ const CourseSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Course = model<ICourse>('Course', CourseSchema);

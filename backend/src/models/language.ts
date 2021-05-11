@@ -9,7 +9,7 @@ const LanguageSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Language = model<ILanguage>('Language', LanguageSchema);

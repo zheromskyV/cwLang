@@ -13,17 +13,5 @@ import user from './user';
 import word from './words';
 
 export default {
-  ...merge(
-    analytics,
-    course,
-    group,
-    login,
-    marks,
-    notification,
-    payment,
-    schedule,
-    student,
-    user,
-    word
-  ),
+  ...merge(analytics, course, group, login, marks, notification, payment, schedule, student, user, word),
 };

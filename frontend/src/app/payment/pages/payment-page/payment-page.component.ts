@@ -52,11 +52,11 @@ export class PaymentPageComponent implements OnInit {
     const debt = this.selectedStudent?.profile?.debt || 0;
     const discount = this.selectedStudent?.profile?.discount || 0;
 
-    return debt - debt * (discount / 100);
+    return +(debt - debt * (discount / 100)).toFixed(2);
   }
 
   calculatePaymentChange(): void {
-    this.paymentChange = this.payment - this.totalToPay;
+    this.paymentChange = +(this.payment - this.totalToPay).toFixed(2);
   }
 
   submit(): void {

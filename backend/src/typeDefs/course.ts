@@ -32,4 +32,4 @@ export default `
     updateCourse(id: String!, course: CourseInput!): CourseType!
     deleteCourse(id: String!): Void
   }
-`
+`;
