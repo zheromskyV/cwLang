@@ -25,7 +25,7 @@ const GroupSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Group = model<IGroup>('Group', GroupSchema);

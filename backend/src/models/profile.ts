@@ -35,7 +35,7 @@ const ProfileSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Profile = model<IProfile>('Profile', ProfileSchema);

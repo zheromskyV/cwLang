@@ -25,12 +25,12 @@ const resolvers = {
             }
           });
         }
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    sendQuestionToAdmin: async (_: void, { userId, message }: { userId: string, message: string }): Promise<void> => {
+    sendQuestionToAdmin: async (_: void, { userId, message }: { userId: string; message: string }): Promise<void> => {
       const user = await User.findById(userId).populate('profile');
 
       if (user) {

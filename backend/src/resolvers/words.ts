@@ -4,43 +4,53 @@ import { getUserCourses } from './course';
 
 const resolvers = {
   Mutation: {
-    createWord: async (_: void, { word, courseId }: { word: IWord, courseId: string }): Promise<IWord | null> => {
+    createWord: async (_: void, { word, courseId }: { word: IWord; courseId: string }): Promise<IWord | null> => {
       try {
         const createdWord = await Word.create(word);
 
-        await Course.findByIdAndUpdate(courseId, {
-          $addToSet: {
-            words: createdWord,
+        await Course.findByIdAndUpdate(
+          courseId,
+          {
+            $addToSet: {
+              words: createdWord,
+            },
           },
-        }, { new: true, useFindAndModify: false });
+          { new: true, useFindAndModify: false }
+        );
 
         return createdWord;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    addFavoriteWord: async(_: void, { id, wordId }: { id: String, wordId: string }): Promise<void> => {
+    addFavoriteWord: async (_: void, { id, wordId }: { id: String; wordId: string }): Promise<void> => {
       try {
         const user = await User.findById(id);
         const word = await Word.findById(wordId);
 
         if (user) {
-          await Profile.findByIdAndUpdate(user.profile, {
-            $addToSet: {
-              favoriteWords: word as IWord,
+          await Profile.findByIdAndUpdate(
+            user.profile,
+            {
+              $addToSet: {
+                favoriteWords: word as IWord,
+              },
             },
-          }, { new: true, useFindAndModify: false });
+            { new: true, useFindAndModify: false }
+          );
         }
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
-
     },
   },
   Query: {
-    getWords: async (_: void, { targetLang, initialLang }: { targetLang: string, initialLang: string }): Promise<IWord[]> => {
+    getWords: async (
+      _: void,
+      { targetLang, initialLang }: { targetLang: string; initialLang: string }
+    ): Promise<IWord[]> => {
       try {
         const words = await Word.find({
           targetLang,
@@ -48,17 +58,17 @@ const resolvers = {
         });
 
         return words;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
         throw e;
       }
     },
-    getAllUserWords: async(_: void, { id }: { id: String }): Promise<IWord[]> => {
+    getAllUserWords: async (_: void, { id }: { id: String }): Promise<IWord[]> => {
       const courses = await getUserCourses(undefined, { id });
 
       return courses.map((course) => course.words).flat();
     },
-    getFavoriteWords: async(_: void, { id }: { id: String }): Promise<IWord[] | undefined> => {
+    getFavoriteWords: async (_: void, { id }: { id: String }): Promise<IWord[] | undefined> => {
       const user = await User.findById(id).populate({
         path: 'profile',
         populate: {

@@ -12,12 +12,14 @@ export default {
         if (user) {
           const isCorrectPassword = await compare(password, user.password);
 
-          return isCorrectPassword ? User.findById(user._id).populate({
-            path: 'profile',
-            populate: {
-              path: 'languages',
-            }
-          }) : null;
+          return isCorrectPassword
+            ? User.findById(user._id).populate({
+                path: 'profile',
+                populate: {
+                  path: 'languages',
+                },
+              })
+            : null;
         }
 
         return null;

@@ -11,7 +11,7 @@ const WordSchema = new Schema(
   },
   {
     versionKey: false,
-  },
+  }
 );
 
 export const Word = model<IWord>('Word', WordSchema);

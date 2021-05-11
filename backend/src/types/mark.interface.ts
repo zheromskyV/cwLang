@@ -5,5 +5,4 @@ export interface IMark extends Document {
   date?: Date;
   value: number;
   message: string;
-};
-
+}
