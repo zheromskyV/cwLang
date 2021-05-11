@@ -10,6 +10,7 @@ import { CoursesStoreModule } from './courses/courses-store.module';
 import { GroupsStoreModule } from './groups/groups-store.module';
 import { MarksStoreModule } from './marks/marks-store.module';
 import { MessagesStoreModule } from './messages/messages-store.module';
+import { PaymentStoreModule } from './payment/payment-store.module';
 import { ScheduleStoreModule } from './schedule/schedule-store.module';
 import { StudentsStoreModule } from './students/students-store.module';
 import { TeachersStoreModule } from './teachers/teachers-store.module';
@@ -38,6 +39,7 @@ import { WordsStoreModule } from './words/words-store.module';
     GroupsStoreModule,
     MarksStoreModule,
     MessagesStoreModule,
+    PaymentStoreModule,
     ScheduleStoreModule,
     StudentsStoreModule,
     TeachersStoreModule,
