@@ -64,7 +64,6 @@ export class AdminAnalyticsComponent implements OnInit, OnDestroy {
         labels: this.languages.map((lang) => this.dictionary[lang]),
         datasets: [
           {
-            // label: this.dictionary.initialCoursesLangsAnalytics,
             data: this.mapLang(initialLang),
             ...this.pieOptions,
           },
@@ -77,7 +76,6 @@ export class AdminAnalyticsComponent implements OnInit, OnDestroy {
         labels: this.languages.map((lang) => this.dictionary[lang]),
         datasets: [
           {
-            // label: this.dictionary.targetCoursesLangsAnalytics,
             data: this.mapLang(targetLang),
             ...this.pieOptions,
           },

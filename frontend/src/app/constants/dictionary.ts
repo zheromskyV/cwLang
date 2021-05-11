@@ -118,6 +118,8 @@ export const dictionary: CommonModel = {
   studentsLangsAnalytics: 'Интересы в языках студентов',
   teachersLangsAnalytics: 'Интересы в языках преподавателей',
   generalMarks: 'Общее распредление оценок студентов',
+  loadAnalytics: 'Загрузить данные',
+  selectGroup: 'Выберите группу',
   myMarks: 'Мои оценки',
 
   // not-found

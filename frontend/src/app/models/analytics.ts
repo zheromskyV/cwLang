@@ -16,7 +16,7 @@ export type StudentMarksAnalytics = number[];
 
 export interface StudentMarksForTeacherPair {
   fullname: string;
-  marks: [];
+  marks: number[];
 }
 
 export type StudentMarksForTeacherAnalytics = StudentMarksForTeacherPair[];
