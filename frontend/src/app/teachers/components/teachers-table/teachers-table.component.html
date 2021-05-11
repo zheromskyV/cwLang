@@ -57,7 +57,7 @@
       <td>{{ dictionary[teacher.nativeLanguage] }}</td>
       <td>
         <p-rating 
-          [ngModel]="teacher.rating || 0"
+          [ngModel]="teacher?.profile.rating || 0"
           readonly="true"
           stars="5"
           [cancel]="false"

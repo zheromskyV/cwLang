@@ -122,6 +122,11 @@ export const dictionary: CommonModel = {
   selectGroup: 'Выберите группу',
   myMarks: 'Мои оценки',
 
+  // testing
+  testingMark: 'Оценка:',
+  testingComment: 'Комментарий:',
+  selectStudent: 'Выберите студента',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',

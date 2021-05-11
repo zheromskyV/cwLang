@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { dictionary } from 'src/app/constants/dictionary';
+import { Roles } from 'src/app/constants/roles.enum';
+import { RootState } from 'src/app/store/root.state';
+import * as fromAuth from '../../../store/auth/auth.selectors';
 
 @Component({
   selector: 'cwl-marks-page',
@@ -6,7 +13,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./marks-page.component.scss'],
 })
 export class MarksPageComponent implements OnInit {
-  constructor() {}
+  dictionary = dictionary;
 
-  ngOnInit(): void {}
+  role$: Observable<Roles>;
+
+  constructor(private readonly store: Store<RootState>) {}
+
+  ngOnInit(): void {
+    this.role$ = this.store.select(fromAuth.getUserRole);
+  }
 }
