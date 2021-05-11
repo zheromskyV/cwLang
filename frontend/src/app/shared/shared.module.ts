@@ -20,6 +20,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { RatingModule } from 'primeng/rating';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { EditDeleteControlsComponent } from './components/edit-delete-controls/edit-delete-controls.component';
 import { ModulePageComponent } from './components/module-page/module-page.component';
@@ -49,6 +50,7 @@ import { TableCaptionComponent } from './components/table-caption/table-caption.
     RatingModule,
     MultiSelectModule,
     CardModule,
+    CheckboxModule,
   ],
   exports: [
     EditDeleteControlsComponent,
@@ -75,6 +77,7 @@ import { TableCaptionComponent } from './components/table-caption/table-caption.
     RatingModule,
     MultiSelectModule,
     CardModule,
+    CheckboxModule,
   ],
 })
 export class SharedModule {}

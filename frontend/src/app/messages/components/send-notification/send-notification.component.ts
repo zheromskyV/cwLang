@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import { dictionary } from 'src/app/constants/dictionary';
 import { RootState } from 'src/app/store/root.state';
 import { UserInfo, Users, User } from 'src/app/models/user';
 import { GroupInfo, Groups } from 'src/app/models/group';
 import * as GroupsActions from '../../../store/groups/groups.actions';
-import * as MarksActions from '../../../store/marks/marks.actions';
 import * as fromGroups from '../../../store/groups/groups.selectors';
 import * as MessagesActions from '../../../store/messages/messages.actions';
 

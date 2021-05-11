@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.form {
+  width: 100%;
+  padding: 0 4rem;
+}
+
+.cell {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.field {
+  margin: 1rem 0;
+
+  input {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.buttons-container {
+  margin: 1.5rem 0;
+}
+
+:host ::ng-deep {
+  .p-button {
+    &.button {
+      width: 14rem;
+    }
+  }
+
+  .p-dropdown {
+    width: 100%;
+  }
+
+  cwl-module-page .container {
+    width: 55rem;
+  }
+}

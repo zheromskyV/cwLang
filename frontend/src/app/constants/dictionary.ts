@@ -135,6 +135,12 @@ export const dictionary: CommonModel = {
   sendDebtNotification: 'Отправить напоминание о задолженности',
   send: 'Отправить',
 
+  // discounts
+  discount1: 'Занимается вместе с другом',
+  discount2: 'Занимается вместе с семьей',
+  discount3: 'Занимается больше трех лет',
+  finalDiscount: 'Итоговоя скидка',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
