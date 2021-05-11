@@ -8,11 +8,13 @@ import { TeachersState } from './teachers/teachers.state';
 import { GroupsState } from './groups/groups.state';
 import { ScheduleState } from './schedule/schedule.state';
 import { AnalyticsState } from './analytics/analytics.state';
+import { MarksState } from './marks/marks.state';
 
 export interface RootState {
   [StoreFeature.Ui]: UiState;
   [StoreFeature.Auth]: AuthState;
   [StoreFeature.Words]: WordsState;
+  [StoreFeature.Marks]: MarksState;
   [StoreFeature.Groups]: GroupsState;
   [StoreFeature.Courses]: CoursesState;
   [StoreFeature.Students]: StudentsState;
