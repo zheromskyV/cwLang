@@ -55,6 +55,15 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: routerPaths.connect,
+    loadChildren: () => import('./messages/messages.module').then(({ MessagesModule }) => MessagesModule),
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: routerPaths.messages,
+    redirectTo: routerPaths.connect,
+  },
+  {
     path: routerPaths.notFound,
     loadChildren: () => import('./not-found/not-found.module').then(({ NotFoundModule }) => NotFoundModule),
     canActivate: [AuthGuardService],
