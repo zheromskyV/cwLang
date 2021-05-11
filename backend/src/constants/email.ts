@@ -11,4 +11,8 @@ export const TRANSPORTER = nodemailer.createTransport({
     user: DOMAIN_EMAIL,
     pass: 'mironicam',
   },
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  tls: { rejectUnauthorized: false },
 });

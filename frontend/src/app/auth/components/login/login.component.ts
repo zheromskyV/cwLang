@@ -45,10 +45,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       [this.formFields.login]: ['', [Validators.required, Validators.email]],
       [this.formFields.password]: ['', [Validators.required, Validators.minLength(MIN_PASSWORD_LENGTH)]],
     });
-
-    // this.store.dispatch(AuthActions.logIn({ email: 'vlad@admin.com', password: 'vladadmin' }));
-    // this.store.dispatch(AuthActions.logIn({ email: 'teacher1@teacher.com', password: 'teacher1' }));
-    // this.store.dispatch(AuthActions.logIn({ email: 'student1@student.com', password: 'student1' }));
   }
 
   get isFormValid(): boolean {

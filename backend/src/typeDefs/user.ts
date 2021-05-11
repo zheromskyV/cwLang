@@ -4,7 +4,7 @@ scalar Date
 type LanguageType {
   _id: String
   name: String
-  value: Int
+  value: Float
 }
 
 type ProfileType {
