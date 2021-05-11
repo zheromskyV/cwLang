@@ -109,6 +109,19 @@ export const dictionary: CommonModel = {
   selectStartRecur: 'Выберите дату начала',
   selectEndRecur: 'Выберите дату окончания',
 
+  // analytics
+  coursesAnalytics: 'Курсы',
+  langsAnalytics: 'Языки',
+  marksAnalytics: 'Оценки',
+  initialCoursesLangsAnalytics: 'Языки студентов',
+  targetCoursesLangsAnalytics: 'Языки изучения',
+  studentsLangsAnalytics: 'Интересы в языках студентов',
+  teachersLangsAnalytics: 'Интересы в языках преподавателей',
+  generalMarks: 'Общее распредление оценок студентов',
+  loadAnalytics: 'Загрузить данные',
+  selectGroup: 'Выберите группу',
+  myMarks: 'Мои оценки',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',

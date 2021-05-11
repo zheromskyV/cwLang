@@ -28,8 +28,15 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": [],
-            "allowedCommonJsDependencies": ["lodash", "zen-observable"]
+            "scripts": ["node_modules/chart.js/dist/Chart.js"],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "zen-observable",
+              "@fullcalendar/daygrid",
+              "@fullcalendar/timegrid",
+              "@fullcalendar/interaction",
+              "chart.js"
+            ]
           },
           "configurations": {
             "production": {

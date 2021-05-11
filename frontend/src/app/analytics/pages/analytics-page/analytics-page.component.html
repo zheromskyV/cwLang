@@ -1,0 +1,14 @@
+<cwl-module-page [header]="dictionary.analytics">
+  <div [ngSwitch]="role$ | async">
+    <div *ngSwitchCase="'admin'">
+      <cwl-admin-analytics></cwl-admin-analytics>
+    </div>
+    <div *ngSwitchCase="'teacher'">
+      <cwl-teacher-analytics></cwl-teacher-analytics>
+    </div>
+    <div *ngSwitchCase="'student'">
+      <cwl-student-analytics></cwl-student-analytics>
+    </div>
+    <div *ngSwitchDefault></div>
+  </div>
+</cwl-module-page>

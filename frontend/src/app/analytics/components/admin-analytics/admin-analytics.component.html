@@ -1,0 +1,36 @@
+<p-tabView>
+  <p-tabPanel [header]="dictionary.coursesAnalytics">
+    <div class="p-d-flex">
+      <div class="cell p-d-flex p-flex-column p-ai-center">
+        <p>{{ dictionary.initialCoursesLangsAnalytics }}</p>
+        <p-chart
+          class="cell"
+          type="pie"
+          [data]="coursesInitialData$ | async"
+        ></p-chart>
+      </div>
+      <div class="cell p-d-flex p-flex-column p-ai-center">
+        <p>{{ dictionary.targetCoursesLangsAnalytics }}</p>
+        <p-chart
+          class="cell"
+          type="pie"
+          [data]="coursesTargetData$ | async"
+        ></p-chart>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel [header]="dictionary.langsAnalytics">
+    <p-chart
+      type="radar"
+      [data]="langData$ | async"
+    ></p-chart>
+  </p-tabPanel>
+
+  <p-tabPanel [header]="dictionary.marksAnalytics">
+    <p-chart
+      type="bar"
+      [data]="marksData$ | async"
+    ></p-chart>
+  </p-tabPanel>
+</p-tabView>

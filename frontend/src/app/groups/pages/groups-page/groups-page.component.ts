@@ -10,8 +10,10 @@ import { Roles } from 'src/app/constants/roles.enum';
 import { User, UserInfo } from 'src/app/models/user';
 import { Rating } from 'src/app/models/rating';
 import * as GroupsActions from '../../../store/groups/groups.actions';
+import * as MarksActions from '../../../store/marks/marks.actions';
 import * as fromGroups from '../../../store/groups/groups.selectors';
 import * as fromAuth from '../../../store/auth/auth.selectors';
+
 @Component({
   selector: 'cwl-groups-page',
   templateUrl: './groups-page.component.html',
@@ -113,7 +115,7 @@ export class GroupsPageComponent implements OnInit {
   }
 
   saveRate(rating: Rating): void {
-    // TO DO: send rate
+    this.store.dispatch(MarksActions.addMark({ user: this.teacherToRate as User, mark: rating }));
 
     this.cancel();
   }
