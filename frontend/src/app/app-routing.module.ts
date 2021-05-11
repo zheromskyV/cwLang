@@ -64,6 +64,16 @@ const routes: Routes = [
     redirectTo: routerPaths.connect,
   },
   {
+    path: routerPaths.payment,
+    loadChildren: () => import('./payment/payment.module').then(({ PaymentModule }) => PaymentModule),
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: routerPaths.discounts,
+    loadChildren: () => import('./discounts/discounts.module').then(({ DiscountsModule }) => DiscountsModule),
+    canActivate: [AuthGuardService],
+  },
+  {
     path: routerPaths.notFound,
     loadChildren: () => import('./not-found/not-found.module').then(({ NotFoundModule }) => NotFoundModule),
     canActivate: [AuthGuardService],
