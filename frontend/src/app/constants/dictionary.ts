@@ -141,6 +141,12 @@ export const dictionary: CommonModel = {
   discount3: 'Занимается больше трех лет',
   finalDiscount: 'Итоговоя скидка',
 
+  // payment
+  toPay: 'К оплате',
+  totalToPay: 'Итого к опалте',
+  paymentPaid: 'Внесено средств',
+  paymentChange: 'Сдача',
+
   // not-found
   pageNotFound: 'Страница не найдена',
   goToHome: 'Вернуться домой',
