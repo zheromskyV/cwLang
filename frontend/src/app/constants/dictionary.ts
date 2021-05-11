@@ -110,6 +110,14 @@ export const dictionary: CommonModel = {
   selectEndRecur: 'Выберите дату окончания',
 
   // analytics
+  coursesAnalytics: 'Курсы',
+  langsAnalytics: 'Языки',
+  marksAnalytics: 'Оценки',
+  initialCoursesLangsAnalytics: 'Языки студентов',
+  targetCoursesLangsAnalytics: 'Языки изучения',
+  studentsLangsAnalytics: 'Интересы в языках студентов',
+  teachersLangsAnalytics: 'Интересы в языках преподавателей',
+  generalMarks: 'Общее распредление оценок студентов',
   myMarks: 'Мои оценки',
 
   // not-found

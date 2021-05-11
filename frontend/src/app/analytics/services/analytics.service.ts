@@ -16,7 +16,6 @@ import {
   LanguagesAnalytics,
   StudentMarksAnalytics,
   StudentMarksForTeacherAnalytics,
-  StudentMarksForTeacherPair,
 } from 'src/app/models/analytics';
 import { Group } from 'src/app/models/group';
 import { User } from 'src/app/models/user';

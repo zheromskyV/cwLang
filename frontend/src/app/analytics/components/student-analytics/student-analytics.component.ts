@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 import { RootState } from 'src/app/store/root.state';
+import { dictionary } from 'src/app/constants/dictionary';
 import { User } from 'src/app/models/user';
 import * as AnalyticsActions from '../../../store/analytics/analytics.actions';
 import * as fromAnalytics from '../../../store/analytics/analytics.selectors';
 import * as fromAuth from '../../../store/auth/auth.selectors';
-import { dictionary } from 'src/app/constants/dictionary';
 
 @Component({
   selector: 'cwl-student-analytics',
