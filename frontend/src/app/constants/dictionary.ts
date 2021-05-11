@@ -81,6 +81,7 @@ export const dictionary: CommonModel = {
   favoriteWords: 'Избранные',
   addWord: 'Добавить слово к курсу',
   downloadFile: 'Скачать избранные слова',
+  wordsReport: 'Избранные слова',
 
   // students
   age: 'Возраст',
@@ -126,6 +127,8 @@ export const dictionary: CommonModel = {
   testingMark: 'Оценка:',
   testingComment: 'Комментарий:',
   selectStudent: 'Выберите студента',
+  testingReport: 'Отчет по успеваемости',
+  downloadReport: 'Скачать отчет по успеваемости',
 
   // messages
   askQuestionGiveFeedback: 'Задайте свой вопрос или оставьте комментарий',

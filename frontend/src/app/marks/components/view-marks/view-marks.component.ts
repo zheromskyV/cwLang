@@ -10,6 +10,7 @@ import { Mark, Marks } from 'src/app/models/marks';
 import * as MarksActions from '../../../store/marks/marks.actions';
 import * as fromMarks from '../../../store/marks/marks.selectors';
 import * as fromAuth from '../../../store/auth/auth.selectors';
+import { PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'cwl-view-marks',
@@ -18,6 +19,9 @@ import * as fromAuth from '../../../store/auth/auth.selectors';
 })
 export class ViewMarksComponent implements OnInit {
   dictionary = dictionary;
+  icons = {
+    download: PrimeIcons.DOWNLOAD,
+  };
 
   marks$: Observable<Marks>;
 
@@ -37,5 +41,9 @@ export class ViewMarksComponent implements OnInit {
 
   getComment({ message }: Mark): string {
     return `${dictionary.testingComment} ${message}`;
+  }
+
+  downloadFile(): void {
+    this.store.dispatch(MarksActions.downloadMarks());
   }
 }

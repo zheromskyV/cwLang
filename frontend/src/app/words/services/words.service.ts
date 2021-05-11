@@ -8,6 +8,7 @@ import { Word, WordInfo, Words } from 'src/app/models/word';
 import { Languages } from 'src/app/constants/languages.enum';
 import { User } from 'src/app/models/user';
 import { Course } from 'src/app/models/course';
+import { dictionary } from 'src/app/constants/dictionary';
 
 @Injectable({
   providedIn: 'root',
@@ -83,7 +84,7 @@ export class WordsService {
 
   downloadFavorites(favoriteWords: Words): Observable<never> {
     const words = favoriteWords.map((word) => `${word.target} - ${word.initial}`);
-    const content = `"Избранные слова"\r\n\r\n${words.join('\r\n')}`;
+    const content = `"${dictionary.wordsReport}"\r\n\r\n${words.join('\r\n')}`;
 
     const link = document.createElement('a');
     link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
