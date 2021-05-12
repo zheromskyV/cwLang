@@ -1,0 +1,66 @@
+<form 
+  class="form p-d-flex p-flex-column p-ai-center"
+  novalidate
+>
+  <h4>{{ dictionary.sendDebtNotification }}</h4>
+  <div class="cell p-grid p-form-grid">
+    <p-dropdown
+      class="p-col-12 p-md-6"
+      [options]="(groups$ | async) || []"
+      [(ngModel)]="selectedGroup"
+      [ngModelOptions]="{ standalone: true }"
+      optionLabel="_id"
+      [filter]="true"
+      filterBy="course.title"
+      [showClear]="true"
+      [placeholder]="dictionary.selectGroup"
+    >
+      <ng-template pTemplate="selectedItem">
+        <div class="select-item select-item-value" *ngIf="selectedGroup">
+          <div>{{ selectedGroup?.course.title }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template let-group pTemplate="item">
+        <div class="select-item">
+          <div>{{ group.course.title }} ({{ dictionary[group.course.targetLang] }} {{ group.course.level }})</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+
+    <p-dropdown
+      class="p-col-12 p-md-6"
+      [options]="students"
+      [(ngModel)]="selectedStudent"
+      [ngModelOptions]="{ standalone: true }"
+      [disabled]="!selectedGroup"
+      optionLabel="_id"
+      [filter]="true"
+      filterBy="course.title"
+      [showClear]="true"
+      [placeholder]="dictionary.selectStudent"
+    >
+      <ng-template pTemplate="selectedItem">
+        <div class="select-item select-item-value" *ngIf="selectedStudent">
+          <div>{{ selectedStudent.surname }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template let-student pTemplate="item">
+        <div class="select-item">
+          <div>{{ student.surname }} {{ student.name }}</div>
+        </div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+
+  <div class="buttons-container p-d-flex p-jc-around">
+    <p-button 
+      [label]="dictionary.send"
+      [icon]="icons.send"
+      [disabled]="!isFormValid"
+      (click)="submit()"
+      styleClass="button p-button"
+    ></p-button>
+  </div>
+</form>

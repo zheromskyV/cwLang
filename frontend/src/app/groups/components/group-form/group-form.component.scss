@@ -1,0 +1,63 @@
+@import '~src/styles/style-import';
+
+:host {
+  display: block;
+}
+
+.form {
+  width: 45rem;
+  margin: 1rem 7rem 3rem;
+}
+
+.section {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  &.schedule-section {
+    margin-top: 1rem;
+  }
+}
+
+.field input {
+  height: 2.5rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.buttons-container {
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 0 2rem;
+}
+
+:host ::ng-deep {
+  .p-button {
+    &.button {
+      width: 14rem;
+    }
+  }
+
+  .p-dropdown {
+    width: 100%;
+  }
+
+  .multiselect-custom {
+    .p-multiselect-label {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .select-item-value {
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      display: inline-flex;
+      margin-right: 0.5rem;
+      background-color: var(--primary-color);
+      color: var(--primary-color-text);
+    }
+
+    .item-placeholder {
+      padding: 0.25rem;
+    }
+  }
+}

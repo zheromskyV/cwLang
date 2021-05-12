@@ -1,0 +1,47 @@
+<p-table
+  #table
+  [value]="students | slice:0" 
+  dataKey="_id"
+  [rowHover]="true"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="['name', 'surname', 'email']"
+>
+  <ng-template pTemplate="caption">
+    <cwl-table-caption [table]="table"></cwl-table-caption>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="name">
+        {{ dictionary.name }}
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="surname">
+        {{ dictionary.surname }}
+        <p-sortIcon field="surname"></p-sortIcon>
+      </th>
+      <th>
+        {{ dictionary.status }}
+      </th>
+      <th pSortableColumn="birthday">
+        {{ dictionary.age }}
+        <p-sortIcon field="birthday"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email">
+        {{ dictionary.email }}
+        <p-sortIcon field="email"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-student>
+    <tr>
+      <td>{{ student.name }}</td>
+      <td>{{ student.surname }}</td>
+      <td>{{ getStatus(student) }}</td>
+      <td>{{ getAge(student) }}</td>
+      <td class="wb-all">{{ student.email }}</td>
+    </tr>
+  </ng-template>
+</p-table>

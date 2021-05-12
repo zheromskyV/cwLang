@@ -1,0 +1,54 @@
+@import '~src/styles/style-import';
+
+:host {
+  display: block;
+}
+
+.form {
+  width: 35rem;
+  margin: 0 2rem;
+}
+
+.word-section {
+  width: 100%;
+}
+
+.field {
+  margin: 1rem 0;
+
+  input {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.dropdowns {
+  .initial-lang,
+  .target-lang {
+    padding: 0 0.5rem 0 0;
+  }
+}
+
+.lang-section {
+  margin: 1rem 0;
+}
+
+.buttons-container {
+  margin: 1.5rem 0;
+
+  p-button:not(:last-child) {
+    margin-right: 2rem;
+  }
+}
+
+:host ::ng-deep {
+  .p-button {
+    &.button {
+      width: 14rem;
+    }
+  }
+
+  .p-dropdown {
+    width: 100%;
+  }
+}

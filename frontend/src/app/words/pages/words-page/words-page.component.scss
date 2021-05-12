@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.download-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+:host ::ng-deep .tabview-custom {
+  position: relative;
+
+  i,
+  .panel-header {
+    vertical-align: middle;
+  }
+
+  .panel-header {
+    margin: 0 0.5rem;
+  }
+}

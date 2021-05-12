@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "diagnostics": true,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es5", "es2015.core", "es6", "es7"],
+    "moduleResolution": "node",
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "pretty": true,
+    "resolveJsonModule": true
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules/**/*"]
+}

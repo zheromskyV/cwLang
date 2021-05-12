@@ -1,0 +1,141 @@
+<form 
+  class="form p-d-flex p-flex-column p-jc-start"
+  [class.non-editable]="!isEditable"
+  [formGroup]="formGroup"
+  novalidate
+>
+  <div class="info-section">
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.email"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.login"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.login"
+        [formControlName]="formFields.login"
+      />
+    </div>
+  
+    <div class="field p-inputgroup" *ngIf="!isProfilePage">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.password"></i>
+      </span>
+      <input
+        pPassword
+        type="password"
+        autocomplete="off"
+        [placeholder]="dictionary.password"
+        [id]="formFields.password"
+        [formControlName]="formFields.password"
+      />
+    </div>
+
+    <div class="field dropdowns p-grid p-formgrid">
+      <p-dropdown 
+        class="role p-col-12 p-md-4" 
+        [options]="roles" 
+        optionLabel="label"
+        optionValue="value"
+        [placeholder]="dictionary.role"
+        [id]="formFields.role"
+        [formControlName]="formFields.role"
+      ></p-dropdown>
+
+      <p-dropdown 
+        class="nativeLang p-col-12 p-md-4" 
+        [options]="languages" 
+        optionLabel="label"
+        optionValue="value"
+        [placeholder]="dictionary.nativeLang"
+        [id]="formFields.nativeLang"
+        [formControlName]="formFields.nativeLang"
+      ></p-dropdown>
+
+      <p-calendar
+        class="birthday p-col-12 p-md-4" 
+        dateFormat="dd-mm-yy"
+        [placeholder]="dictionary.birthday"
+        [id]="formFields.birthday"
+        [formControlName]="formFields.birthday"
+      ></p-calendar>
+    </div>
+
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.name"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.name"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.name"
+        [formControlName]="formFields.name"
+      />
+    </div>
+
+    <div class="field p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <i [class]="icons.surname"></i>
+      </span>
+      <input
+        pInputText
+        type="text"
+        [placeholder]="dictionary.surname"
+        autocomplete="off"
+        class="p-inputtext"
+        [id]="formFields.surname"
+        [formControlName]="formFields.surname"
+      />
+    </div>
+
+    <div class="field about-field" *ngIf="isAboutSectionShown">
+      <p>{{ dictionary.about }}</p>
+      <textarea 
+        pInputTextarea         
+        [id]="formFields.about"
+        [formControlName]="formFields.about"
+        rows="5"
+      ></textarea>
+    </div>
+  </div>
+
+  <ng-container *ngIf="isLanguageSectionShown">
+    <p-divider></p-divider>
+    <div class="lang-section p-grid p-formgrid p-text-center">
+      <div *ngFor="let lang of languages" class="lang p-field p-col-12 p-md-4">
+        <span>{{ lang.label }}</span>
+        <p-knob
+          [id]="formFields.langs[lang.value]"
+          [formControlName]="formFields.langs[lang.value]"
+          [min]="0"
+          [max]="100"
+          [step]="1"
+        ></p-knob>
+      </div>
+    </div>
+    <p-divider></p-divider>
+  </ng-container>
+
+  <div class="buttons-container p-d-flex p-jc-end" *ngIf="isEditable">
+    <p-button 
+      [label]="isProfilePage ? dictionary.save : dictionary.signUp"
+      [icon]="isProfilePage ? icons.save : icons.signUp"
+      [disabled]="!isFormValid"
+      (click)="submit()"
+      styleClass="button p-button"
+    ></p-button>
+
+    <p-button 
+      [label]="isProfilePage ? dictionary.cancel : dictionary.back"
+      [icon]="isProfilePage ? icons.cancel : icons.back"
+      (click)="back()"
+      styleClass="button p-button-secondary"
+    ></p-button>
+  </div>
+</form>

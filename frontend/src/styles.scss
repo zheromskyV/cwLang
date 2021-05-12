@@ -1,0 +1,21 @@
+@import '~@fullcalendar/core/main.min.css';
+@import '~@fullcalendar/daygrid/main.min.css';
+@import '~@fullcalendar/timegrid/main.min.css';
+
+@import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+@import '~primeflex/primeflex.css';
+
+@import './styles/style-import';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: $font-family;
+  background-color: $page-background-color;
+  margin: 0;
+}

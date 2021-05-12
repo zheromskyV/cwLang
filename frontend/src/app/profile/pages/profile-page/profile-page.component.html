@@ -1,0 +1,9 @@
+<cwl-module-page [header]="dictionary.myProfile">
+  <cwl-status-bar
+    *ngIf="isStatusSectionAvailable"
+    [debt]="debt"
+    [discount]="discount"
+  ></cwl-status-bar>
+
+  <cwl-profile></cwl-profile>
+</cwl-module-page>

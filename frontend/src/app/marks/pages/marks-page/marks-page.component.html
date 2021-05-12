@@ -1,0 +1,11 @@
+<cwl-module-page [header]="dictionary.testing">
+  <div [ngSwitch]="role$ | async">
+    <div *ngSwitchCase="'teacher'">
+      <cwl-add-mark-form></cwl-add-mark-form>
+    </div>
+    <div *ngSwitchCase="'student'">
+      <cwl-view-marks></cwl-view-marks>
+    </div>
+    <div *ngSwitchDefault></div>
+  </div>
+</cwl-module-page>

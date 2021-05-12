@@ -1,0 +1,26 @@
+@import '~src/styles/style-import';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 50rem;
+  padding: 3rem;
+  margin-top: 4rem;
+
+  @extend %std-tile;
+}
+
+.header {
+  text-align: center;
+  color: $text-color;
+  margin: 2rem 0;
+}
+
+.not-found-img {
+  width: 13rem;
+  opacity: 0.7;
+}

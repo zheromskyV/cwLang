@@ -1,0 +1,5 @@
+<cwl-module-page [header]="dictionary.students">
+  <cwl-students-table
+    [students]="(students$ | async) || []"
+  ></cwl-students-table>
+</cwl-module-page>

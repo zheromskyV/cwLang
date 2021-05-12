@@ -1,0 +1,25 @@
+@import '~src/styles/style-import';
+
+:host {
+  display: block;
+}
+
+.cards-container {
+  margin: 2rem 5rem;
+}
+
+.card {
+  margin: 1.5rem;
+}
+
+.download-btn {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+
+:host ::ng-deep {
+  .p-card {
+    background-color: rgba($color: $border-focus-color, $alpha: 0.06);
+  }
+}

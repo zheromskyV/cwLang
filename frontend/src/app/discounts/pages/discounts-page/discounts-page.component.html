@@ -1,0 +1,102 @@
+<cwl-module-page [header]="dictionary.discounts">
+  <form 
+    class="form p-d-flex p-flex-column p-ai-center"
+    novalidate
+  >
+    <div class="cell p-grid p-form-grid">
+      <p-dropdown
+        class="p-col-12 p-md-6"
+        [options]="(groups$ | async) || []"
+        [(ngModel)]="selectedGroup"
+        [ngModelOptions]="{ standalone: true }"
+        optionLabel="_id"
+        [filter]="true"
+        filterBy="course.title"
+        [showClear]="true"
+        [placeholder]="dictionary.selectGroup"
+      >
+        <ng-template pTemplate="selectedItem">
+          <div class="select-item select-item-value" *ngIf="selectedGroup">
+            <div>{{ selectedGroup?.course.title }}</div>
+          </div>
+        </ng-template>
+
+        <ng-template let-group pTemplate="item">
+          <div class="select-item">
+            <div>{{ group.course.title }} ({{ dictionary[group.course.targetLang] }} {{ group.course.level }})</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+
+      <p-dropdown
+        class="p-col-12 p-md-6"
+        [options]="students"
+        [(ngModel)]="selectedStudent"
+        [ngModelOptions]="{ standalone: true }"
+        [disabled]="!selectedGroup"
+        optionLabel="_id"
+        [filter]="true"
+        filterBy="course.title"
+        [showClear]="true"
+        [placeholder]="dictionary.selectStudent"
+      >
+        <ng-template pTemplate="selectedItem">
+          <div class="select-item select-item-value" *ngIf="selectedStudent">
+            <div>{{ selectedStudent.surname }}</div>
+          </div>
+        </ng-template>
+
+        <ng-template let-student pTemplate="item">
+          <div class="select-item">
+            <div>{{ student.surname }} {{ student.name }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+
+    <div class="cell">
+      <div class="p-field-checkbox">
+        <p-checkbox
+          [(ngModel)]="discount1"
+          [ngModelOptions]="{ standalone: true }"
+          binary="true"
+          inputId="discount1"
+          (onChange)="calculateDiscount()"
+        ></p-checkbox>
+        <label for="discount1">{{ dictionary.discount1 }}</label>
+      </div>
+      <div class="p-field-checkbox">
+        <p-checkbox
+          [(ngModel)]="discount2"
+          [ngModelOptions]="{ standalone: true }"
+          binary="true"
+          inputId="discount2"
+          (onChange)="calculateDiscount()"
+        ></p-checkbox>
+        <label for="discount2">{{ dictionary.discount2 }}</label>
+      </div>
+      <div class="p-field-checkbox">
+        <p-checkbox
+          [(ngModel)]="discount3"
+          [ngModelOptions]="{ standalone: true }"
+          binary="true"
+          inputId="discount3"
+          (onChange)="calculateDiscount()"
+        ></p-checkbox>
+        <label for="discount3">{{ dictionary.discount3 }}</label>
+      </div>
+    </div>
+
+    <p class="finalDiscount">{{ dictionary.finalDiscount }}: {{ finalDiscount }}%</p>
+
+    <div class="buttons-container p-d-flex p-jc-around">
+      <p-button 
+        [label]="dictionary.save"
+        [icon]="icons.save"
+        [disabled]="!isFormValid"
+        (click)="submit()"
+        styleClass="button p-button"
+      ></p-button>
+    </div>
+  </form>
+</cwl-module-page>

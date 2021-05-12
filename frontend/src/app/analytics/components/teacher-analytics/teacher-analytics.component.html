@@ -1,0 +1,41 @@
+<div class="controls cell p-grid p-form-grid">
+  <p-dropdown
+    class="p-col-12 p-md-4"
+    [options]="(groups$ | async) || []"
+    [(ngModel)]="selectedGroup"
+    [ngModelOptions]="{ standalone: true }"
+    optionLabel="_id"
+    [filter]="true"
+    filterBy="course.title"
+    [showClear]="true"
+    [placeholder]="dictionary.selectGroup"
+  >
+    <ng-template pTemplate="selectedItem">
+      <div class="select-item select-item-value" *ngIf="selectedGroup">
+        <div>{{ selectedGroup?.course.title }}</div>
+      </div>
+    </ng-template>
+
+    <ng-template let-group pTemplate="item">
+      <div class="select-item">
+        <div>{{ group.course.title }} ({{ dictionary[group.course.targetLang] }} {{ group.course.level }})</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+
+  <p-button 
+    [label]="dictionary.loadAnalytics"
+    [icon]="icons.load"
+    [disabled]="!selectedGroup"
+    (click)="loadData()"
+    styleClass="p-button-primary p-button-outlined"
+    class="button p-col-12 p-md-4"
+  ></p-button>
+</div>
+
+<p-chart
+  class="chart"
+  type="line"
+  [data]="data$ | async"
+  [options]="OPTIONS"
+></p-chart>

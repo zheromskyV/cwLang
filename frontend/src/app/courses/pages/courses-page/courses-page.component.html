@@ -1,0 +1,55 @@
+<cwl-module-page [header]="dictionary.courses">
+  <div *ngIf="isAdminView" class="toolbar p-d-flex p-jc-end">
+    <p-button 
+      styleClass="p-button-success"
+      [icon]="icons.add"
+      [label]="dictionary.add"
+      (click)="addCourse()"
+    ></p-button>
+  </div>
+
+  <cwl-courses-table
+    [courses]="(courses$ | async) || []"
+    [role]="role"
+    (editCourse)="editCourse($event)"
+    (deleteCourse)="deleteCourse($event)"
+    (addWordToCourse)="addWordToCourse($event)"
+  ></cwl-courses-table>
+
+  <p-dialog
+    *ngIf="isAdminView"
+    [(visible)]="formDialog"
+    [header]="dictionary.course"
+    styleClass="p-fluid form-dialog"
+    [modal]="true"
+    (onHide)="cancel()"
+  >
+    <ng-template pTemplate="content">
+      <cwl-course-form
+        [course]="currentCourse"
+        (saveCourse)="saveCourse($event)"
+        (cancelCourse)="cancel()"
+      ></cwl-course-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    *ngIf="isTeacherView"
+    [(visible)]="formWordDialog"
+    [header]="dictionary.addWord"
+    styleClass="form-dialog"
+    [modal]="true"
+    (onHide)="cancel()"
+  >
+    <ng-template pTemplate="content">
+      <cwl-word-form
+        [initialLang]="currentCourse.initialLang"
+        [targetLang]="currentCourse.targetLang"
+        (saveWord)="saveWord($event)"
+        (cancelWord)="cancel()"
+      ></cwl-word-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog></p-confirmDialog>
+</cwl-module-page>

@@ -1,0 +1,54 @@
+<cwl-module-page [header]="dictionary.groups">
+  <div *ngIf="isAdminView" class="toolbar p-d-flex p-jc-end">
+    <p-button
+      styleClass="p-button-success"
+      [icon]="icons.add"
+      [label]="dictionary.add"
+      (click)="addGroup()"
+    ></p-button>
+  </div>
+
+  <cwl-groups-table
+    [groups]="(groups$ | async) || []"
+    [role]="role"
+    (editGroup)="editGroup($event)"
+    (deleteGroup)="deleteGroup($event)"
+    (rateTeacher)="rateTeacher($event)"
+  ></cwl-groups-table>
+
+  <p-dialog
+    *ngIf="isAdminView"
+    [(visible)]="formDialog"
+    [header]="dictionary.group"
+    styleClass="form-dialog"
+    [modal]="true"
+    (onHide)="cancel()"
+  >
+    <ng-template pTemplate="content">
+      <cwl-group-form
+        [group]="currentGroup"
+        (saveGroup)="saveGroup($event)"
+        (cancelGroup)="cancel()"
+      ></cwl-group-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    *ngIf="isStudentView"
+    [(visible)]="formTeacherDialog"
+    [header]="dictionary.rateTeacher"
+    styleClass="form-dialog"
+    [modal]="true"
+    (onHide)="cancel()"
+  >
+    <ng-template pTemplate="content">
+      <cwl-rate-teacher
+        [teacher]="teacherToRate"
+        (saveRate)="saveRate($event)"
+        (cancelRate)="cancel()"
+      ></cwl-rate-teacher>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog></p-confirmDialog>
+</cwl-module-page>

@@ -1,0 +1,51 @@
+<p-table
+  #table
+  [value]="words | slice:0" 
+  dataKey="_id"
+  [rowHover]="true"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="['initial', 'target']"
+>
+  <ng-template pTemplate="caption">
+    <cwl-table-caption [table]="table"></cwl-table-caption>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="initialLang">
+          {{ dictionary.wordsInitialLang }}
+          <p-sortIcon field="initialLang"></p-sortIcon>
+        </th>
+        <th pSortableColumn="initial">
+          {{ dictionary.wordsInitial }}
+          <p-sortIcon field="initial"></p-sortIcon>
+        </th>
+        <th pSortableColumn="target">
+          {{ dictionary.wordsTarget }}
+          <p-sortIcon field="target"></p-sortIcon>
+        </th>
+        <th pSortableColumn="targetLang">
+          {{ dictionary.wordsTargetLang }}
+          <p-sortIcon field="targetLang"></p-sortIcon>
+        </th>
+        <th *ngIf="withFavorites" style="width: 5rem"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-word>
+      <tr>
+        <td>{{ dictionary[word.initialLang] }}</td>
+        <td>{{ word.initial }}</td>
+        <td>{{ word.target }}</td>
+        <td>{{ dictionary[word.targetLang] }}</td>
+        <td *ngIf="withFavorites">
+          <p-button 
+            styleClass="p-button-rounded p-button-outlined p-button-warning"
+            [icon]="icons.favorite"
+            (click)="addToFavorites(word)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+</p-table>

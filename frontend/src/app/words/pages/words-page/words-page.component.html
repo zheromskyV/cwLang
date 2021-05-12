@@ -1,0 +1,35 @@
+<cwl-module-page [header]="dictionary.learning">
+  <p-tabView styleClass="tabview-custom">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <i [class]="icons.table"></i>
+        <span class="panel-header">{{ dictionary.yourWords }}</span>
+      </ng-template>
+
+      <cwl-words-table
+        [words]="(studentWords$ | async) || []"
+        [withFavorites]="true"
+        (onAddToFavorites)="addToFavorites($event)"
+      ></cwl-words-table>
+    </p-tabPanel>
+
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <i [class]="icons.favorite"></i>
+        <span class="panel-header">{{ dictionary.favoriteWords }}</span>
+      </ng-template>
+
+      <cwl-words-table
+        [words]="(favoriteWords$ | async) || []"
+      ></cwl-words-table>
+
+      <p-button 
+        styleClass="p-button-warning p-button-outlined"
+        [icon]="icons.download"
+        [label]="dictionary.downloadFile"
+        (click)="downloadFile()"
+        class="download-btn"
+      ></p-button>
+    </p-tabPanel>
+  </p-tabView>
+</cwl-module-page>

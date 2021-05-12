@@ -1,0 +1,17 @@
+<div class="cards-container">
+  <p-card
+    *ngFor="let mark of marks$ | async"
+    class="card"
+    [header]="getMark(mark)"
+  >
+    {{ getComment(mark) }}
+  </p-card>
+</div>
+
+<p-button 
+  styleClass="p-button-warning p-button-outlined"
+  [icon]="icons.download"
+  [label]="dictionary.downloadReport"
+  (click)="downloadFile()"
+  class="download-btn"
+></p-button>

@@ -1,0 +1,61 @@
+@import '~src/styles/style-import';
+
+:host {
+  display: block;
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.content-wrapper {
+  width: 100%;
+  padding: 2rem;
+}
+
+// ---
+// primeng style overrides
+// ---
+:host ::ng-deep {
+  input,
+  .p-link,
+  .pi-star,
+  .p-button,
+  .fc-button,
+  .p-dropdown,
+  .p-calendar,
+  .p-inputtextarea,
+  .p-tabview-nav-link {
+    &:focus,
+    &:active {
+      box-shadow: none !important;
+    }
+  }
+
+  .p-focus {
+    box-shadow: none !important;
+  }
+
+  input {
+    border: 1px solid $border-color;
+    outline: none;
+    padding: 0.4rem;
+
+    &:focus {
+      border: 1px solid $border-focus-color;
+    }
+
+    &:disabled {
+      color: $disabled-text-color;
+    }
+
+    &:not(.fluid) {
+      width: 100%;
+    }
+  }
+
+  .p-md-4 {
+    padding: 0;
+  }
+}

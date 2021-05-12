@@ -1,0 +1,15 @@
+ <cwl-registration
+  [isProfilePage]="true"
+  [isEditable]="isEditable"
+  [userInfo]="userInfo$ | async"
+  (stopEditing)="onStopEditing()"
+></cwl-registration>
+
+<div class="buttons-container p-d-flex p-jc-end" *ngIf="!isEditable">
+  <p-button 
+    [label]="dictionary.edit"
+    [icon]="icons.edit"
+    (click)="onEdit()"
+    styleClass="button p-button"
+  ></p-button>
+</div>

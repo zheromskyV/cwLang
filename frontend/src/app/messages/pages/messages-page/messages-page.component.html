@@ -1,0 +1,11 @@
+<cwl-module-page [header]="dictionary.connect">
+  <div [ngSwitch]="role$ | async">
+    <div *ngSwitchCase="'admin'">
+      <cwl-send-notification></cwl-send-notification>
+    </div>
+    <div *ngSwitchCase="'student'">
+      <cwl-send-question></cwl-send-question>
+    </div>
+    <div *ngSwitchDefault></div>
+  </div>
+</cwl-module-page>

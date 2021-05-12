@@ -1,0 +1,117 @@
+<form 
+  class="form p-d-flex p-flex-column p-ai-center"
+  [formGroup]="formGroup"
+  novalidate
+>
+  <div class="form-wrapper">
+    <div class="info-section">
+      <div class="field p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i [class]="icons.title"></i>
+        </span>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="dictionary.courseTitle"
+          autocomplete="off"
+          class="p-inputtext"
+          [id]="formFields.title"
+          [formControlName]="formFields.title"
+        />
+      </div>
+
+      <div class="field dropdowns p-grid p-formgrid">
+        <p-dropdown 
+          class="initial-lang p-col-12 p-md-4" 
+          [options]="languages" 
+          optionLabel="label"
+          optionValue="value"
+          [placeholder]="dictionary.courseInitialLang"
+          [id]="formFields.initialLang"
+          [formControlName]="formFields.initialLang"
+        ></p-dropdown>
+
+        <p-dropdown 
+          class="target-lang p-col-12 p-md-4" 
+          [options]="languages" 
+          optionLabel="label"
+          optionValue="value"
+          [placeholder]="dictionary.courseTargetLang"
+          [id]="formFields.targetLang"
+          [formControlName]="formFields.targetLang"
+        ></p-dropdown>
+
+        <p-dropdown 
+          class="lang-level p-col-12 p-md-4" 
+          [options]="languageLevels" 
+          optionLabel="label"
+          optionValue="value"
+          [placeholder]="dictionary.courseLevel"
+          [id]="formFields.level"
+          [formControlName]="formFields.level"
+        ></p-dropdown>
+      </div>
+
+      <div class="field">
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          spinnerMode="horizontal"
+          [incrementButtonIcon]="icons.increment"
+          incrementButtonClass="p-button-success"
+          [decrementButtonIcon]="icons.decrement"
+          decrementButtonClass="p-button-danger"
+          [step]="0.5"
+          mode="currency"
+          currency="USD"
+          [min]="0"
+          [id]="formFields.price"
+          [formControlName]="formFields.price"
+        ></p-inputNumber>
+      </div>
+
+      <div class="field about-field">
+        <p>{{ dictionary.courseInfo }}</p>
+        <textarea 
+          pInputTextarea         
+          [id]="formFields.info"
+          [formControlName]="formFields.info"
+          rows="5"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="words-section p-d-flex p-flex-column p-ai-center">
+    <p-button 
+      [label]="dictionary.loadWords"
+      [icon]="icons.load"
+      [disabled]="!isLanguagesSelected"
+      (click)="loadWords()"
+      styleClass="button p-button-warning"
+    ></p-button>
+    <cwl-words-selection-list
+      [(sourceWords)]="sourceWords"
+      [(targetWords)]="targetWords"
+    ></cwl-words-selection-list>
+  </div>
+
+  <div class="form-wrapper">
+    <div class="buttons-container p-d-flex p-jc-around">
+      <p-button 
+        [label]="dictionary.save"
+        [icon]="icons.save"
+        [disabled]="!isFormValid"
+        (click)="save()"
+        styleClass="button p-button"
+      ></p-button>
+  
+      <p-button 
+        [label]="dictionary.cancel"
+        [icon]="icons.cancel"
+        (click)="cancel()"
+        styleClass="button p-button-secondary"
+      ></p-button>
+    </div>
+  </div>
+</form>

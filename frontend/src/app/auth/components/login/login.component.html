@@ -1,0 +1,47 @@
+<form class="form p-d-flex p-flex-column p-jc-start" [formGroup]="formGroup" novalidate>
+  <div class="field p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i [class]="icons.login"></i>
+    </span>
+    <input
+      pInputText
+      type="text"
+      autocomplete="off"
+      class="p-inputtext"
+      [placeholder]="dictionary.login"
+      [id]="formFields.login"
+      [formControlName]="formFields.login"
+    />
+  </div>
+
+  <div class="field p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i [class]="icons.password"></i>
+    </span>
+    <input
+      pPassword
+      type="password"
+      autocomplete="off"
+      [placeholder]="dictionary.password"
+      [id]="formFields.password"
+      [formControlName]="formFields.password"
+    />
+  </div>
+
+  <div class="buttons-container p-d-flex p-jc-between">
+    <p-button 
+      [label]="dictionary.signIn"
+      [icon]="icons.signIn"
+      [disabled]="!isFormValid"
+      (click)="signIn()"
+      styleClass="button p-button"
+    ></p-button>
+
+    <p-button 
+      [label]="dictionary.signUp"
+      [icon]="icons.signUp"
+      (click)="signUp()"
+      styleClass="button p-button-secondary"
+    ></p-button>
+  </div>
+</form>

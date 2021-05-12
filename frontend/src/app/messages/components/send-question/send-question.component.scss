@@ -1,0 +1,28 @@
+@import '~src/styles/style-import';
+
+:host {
+  display: block;
+  width: 100%;
+  padding: 0 4rem;
+}
+
+.about-field {
+  width: 100%;
+
+  textarea {
+    resize: none;
+    width: 100%;
+  }
+}
+
+.buttons-container {
+  margin: 1.5rem 0;
+}
+
+:host ::ng-deep {
+  .p-button {
+    &.button {
+      width: 14rem;
+    }
+  }
+}

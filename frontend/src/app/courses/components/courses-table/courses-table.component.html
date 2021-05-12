@@ -1,0 +1,85 @@
+<p-table
+  #table
+  [value]="courses | slice:0" 
+  dataKey="_id"
+  [rowHover]="true"
+  [rows]="5"
+  [paginator]="true"
+  [globalFilterFields]="['title']"
+>
+  <ng-template pTemplate="caption">
+    <cwl-table-caption [table]="table"></cwl-table-caption>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th pSortableColumn="title">
+        {{ dictionary.courseTitle }}
+        <p-sortIcon field="title"></p-sortIcon>
+      </th>
+      <th pSortableColumn="initialLang">
+        {{ dictionary.courseInitialLang }}
+        <p-sortIcon field="initialLang"></p-sortIcon>
+      </th>
+      <th pSortableColumn="targetLang">
+        {{ dictionary.courseTargetLang }}
+        <p-sortIcon field="targetLang"></p-sortIcon>
+      </th>
+      <th pSortableColumn="level">
+        {{ dictionary.courseLevel }}
+        <p-sortIcon field="level"></p-sortIcon>
+      </th>
+      <th pSortableColumn="price">
+        {{ dictionary.coursePrice }}
+        <p-sortIcon field="price"></p-sortIcon>
+      </th>
+      <th *ngIf="areControlsVisible" [style]="{ 'width': isTeacherView ? '5rem' : '8rem' }"></th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-course let-expanded="expanded">
+    <tr>
+      <td>
+        <p-button 
+          styleClass="p-button-text p-button-rounded p-button-plain"
+          [pRowToggler]="course"
+          [icon]="expanded ? icons.collapse : icons.expand"
+        ></p-button>
+      </td>
+      <td>{{ course.title }}</td>
+      <td>{{ dictionary[course.initialLang] }}</td>
+      <td>{{ dictionary[course.targetLang] }}</td>
+      <td>{{ course.level }}</td>
+      <td>{{ course.price }}</td>
+      <td *ngIf="areControlsVisible">
+        <cwl-edit-delete-controls
+          *ngIf="isAdminView"
+          [data]="course"
+          (onEdit)="edit($event)"
+          (onDelete)="delete($event)"
+        ></cwl-edit-delete-controls>
+        <p-button 
+          *ngIf="isTeacherView"
+          styleClass="p-button-rounded p-button-success"
+          [icon]="icons.add"
+          (click)="addWord(course)"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="rowexpansion" let-course>
+    <tr class="inner-data">
+      <td [attr.colspan]="areControlsVisible ? '7' : '6'">
+        <div>
+          <p>{{ course.info }}</p>
+          <cwl-words-table
+            *ngIf="course.words.length"
+            [words]="course.words"
+          ></cwl-words-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
